@@ -185,16 +185,12 @@ bool HasCycle(Node* node) {
    Node* node1 = node;
    Node* node2 = node;
    do {
-      if(node1==nullptr) {
-         return false;
-      } else {
-         node1 = node1->next_;
-      }
       if(node2==nullptr || node2->next_==nullptr) {
          return false;
       } else {
          node2 = node2->next_->next_;
       }
+      node1 = node1->next_;
    } while (node1!= node2);
    return true;
 }
@@ -246,11 +242,7 @@ Node* FindMiddle(Node* node) {
       } else {
          node2 = node2->next_->next_;
       }
-      if(node1==nullptr) {
-         return node1;
-      } else {
-         node1 = node1->next_;
-      }
+      node1 = node1->next_;
    } while (node1!= node2);
    return nullptr;
 }

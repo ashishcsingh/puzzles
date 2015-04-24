@@ -6,6 +6,7 @@
  */
 
 #include "arrays.h"
+#include "log.h"
 
 #include <cstdlib>
 #include <ctime>
@@ -13,6 +14,7 @@
 #include <set>
 #include <vector>
 #include <iostream>
+#include <map>
 
 namespace arrays {
 using namespace std;
@@ -628,6 +630,166 @@ using namespace std;
             return FindInRotatedSortedArray(data, start, mid - 1, find);
          }
       }
+   }
+   /*
+    * What: Merges two sorted arrays into the first array
+    * How: Start from back and place the largest number.
+    */
+   void Merge(int A[], int m, int B[], int n) {
+      int loc = m + n - 1;
+      --m;
+      --n;
+      for(;m >= 0 && n >= 0;) {
+          if(A[m] > B[n]) {
+              A[loc] = A[m];
+              --m;
+          } else {
+              A[loc] = B[n];
+              --n;
+          }
+          --loc;
+      }
+      for(;n>=0;--n){
+          A[loc] = B[n];
+          --loc;
+      }
+   }
+
+   /*
+    * What: Reverses the passed num
+    * How:  mod and divide by 10 and handle negative
+    */
+   int ReverseNum(int x) {
+       int ret = 0;
+       bool negative = false;
+       if (x < 0) {
+           negative = true;
+           x *= -1;
+       }
+       while(x > 0) {
+           ret *= 10;
+           ret += x%10;
+           x /= 10;
+       }
+       return negative?-ret:ret;
+   }
+
+   /*
+    * What: Print K Max repeated elements in input
+    * How: map<digit,count>
+    *      set -1 to count when looking for the highest elemt
+    */
+   void KMaxRepeatedElements(const std::vector<int>& input, int k, std::vector<int>& out) {
+      map<int,int> digitCountMap;
+      for(auto elem: input) {
+         digitCountMap[elem]++;
+      }
+      int max = 0, maxElem;
+      for(int i=0; i<k; ++i) {
+         max = 0;
+         for(auto p: digitCountMap) {
+            if(max < p.second) {
+               max = p.second;
+               maxElem = p.first;
+            }
+         }
+         out.push_back(maxElem);
+         digitCountMap[maxElem] = -1;
+      }
+   }
+
+   /*
+    * What: KShortestDistance(Points, k)
+    * How: compute x*x + y*y + z*z
+    *      store distance in another vector
+    *      Find min K then set to INT_MAX at that index
+    */
+   void KShortestDistance(const vector<Point>& points, int k, vector<Point>& out) {
+      vector<long> distance(points.size());
+      for(int i=0; i<points.size(); ++i) {
+         distance[i] = points[i].x*points[i].x +
+               points[i].y * points[i].y +
+               points[i].z*points[i].z;
+      }
+      for(int j=0; j<k; ++j) {
+         long min = INT_MAX, minIndex = 0;
+         for(int i=0; i<distance.size(); ++i) {
+            if(min > distance[i]) {
+               min = distance[i];
+               minIndex = i;
+            }
+         }
+         distance[minIndex] = INT_MAX;
+         out.push_back(points[minIndex]);
+      }
+   }
+
+   /*
+    * What: comparator()
+    * How:
+    */
+   bool comparator(int i, int j) {
+      return abs(i) < abs(j);
+   }
+   /*
+    * What: Closest pair sum to zero
+    * How: Sort by abs()
+    *       When add consecutive #s and find the smallest sum
+    */
+   void PairSumClosestToZero(std::vector<int>& input, std::pair<int, int>& output) {
+      sort(input.begin(), input.end(), comparator);
+      int min = INT_MAX;
+      for(int i=0; i<input.size(); i+=2) {
+         int sum = input[i] + input[i+1];
+         if(min > sum) {
+            min = sum;
+            output.first = input[i];
+            output.second = input[i+1];
+         }
+      }
+   }
+
+   /*
+    * What: Gets all leaf employees reporting to this manager
+    * How: Using DFS keep populating employees
+    */
+   void ExtractEmployees(map<int, vector<int> >& employeeManagerMap,
+         int reportee, vector<int>& employees) {
+      if(employeeManagerMap.count(reportee) > 0) {
+         for(auto m: employeeManagerMap[reportee]) {
+            ExtractEmployees(employeeManagerMap, m, employees);
+         }
+         employees.push_back(reportee);
+      }
+   }
+
+   /*
+    * What: vector<pair<e,m> >, get all e for m reporting directly
+    * How:  map<int,vector<int> >, push_back(e) in map[m]
+    *       For reporteeDirect = map[m]
+    *       For  reporteeIndirect push_back all map[e] and discard 0
+    *
+    */
+   void GetEmployeesForManager(std::vector<std::pair<int,int> >& employeeManagers,
+         int manager, std::vector<int>& reporteeDirect, std::vector<int>& reporteeIndirect) {
+      // map[m] = e(s)
+      map<int, vector<int> > employeeManagerMap;
+      for(auto em : employeeManagers) {
+         if(em.second <= 0) {
+            Log(INFO, "Skipping bad managers Ids: "
+                  + to_string(em.second) + " for "+to_string(em.first));
+            continue;
+         }
+         employeeManagerMap[em.second].push_back(em.first);
+      }
+      // Direct
+      reporteeDirect = employeeManagerMap[manager];
+      // Indirect
+      for(auto em: reporteeDirect) {
+         ExtractEmployees(employeeManagerMap, em, reporteeIndirect);
+      }
+      set<int> s(reporteeIndirect.begin(), reporteeIndirect.end());
+      reporteeIndirect.assign(s.begin(), s.end());
    }
 }
 

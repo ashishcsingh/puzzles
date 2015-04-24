@@ -267,6 +267,95 @@ void Test_FindInRotatedSortedArray() {
    cout<<"Done Test_FindInRotatedSortedArray()"<<endl;
 }
 
+void Test_Merge() {
+   cout<<"Start Test_Merge()"<<endl;
+   int A[] = {-1, 0, 0, 3, 3, 3};
+   int B[] = {3, 4, 7};
+   Merge(A, 3, B, 3);
+   for(int i=0; i<6; ++i) {
+      cout<<A[i]<<" ";
+   }
+   cout<<endl<<"Done Test_Merge()"<<endl;
+}
+
+void Test_ReverseNum() {
+   cout<<"Start Test_ReverseNum()"<<endl;
+   cout<<"ReverseNum(-23) : "<<ReverseNum(-23)<<endl;
+   cout<<"ReverseNum(23) : "<<ReverseNum(23)<<endl;
+   cout<<"ReverseNum(-2334) : "<<ReverseNum(-2334)<<endl;
+   cout<<"Done Test_ReverseNum()"<<endl;
+}
+
+void Test_KMaxRepeatedElements() {
+   cout<<"Start Test_KMaxRepeatedElements()"<<endl;
+   vector<int> input;
+   vector<int> output;
+   input.push_back(1);
+   input.push_back(1);
+
+   input.push_back(2);
+   input.push_back(2);
+   input.push_back(2);
+
+   input.push_back(3);
+   input.push_back(3);
+   KMaxRepeatedElements(input, 2, output);
+   cout<<" Max K=2 elements : "<<endl;
+   for(auto i: output) {
+      cout<<i<<endl;
+   }
+   cout<<"Done Test_KMaxRepeatedElements()"<<endl;
+}
+
+void Test_KShortestDistance() {
+   cout<<"Start Test_KShortestDistance()"<<endl;
+   vector<Point> input, output;
+   for(int i=1; i<6; ++i) {
+      Point p = {i, i, i};
+      input.push_back(p);
+   }
+   KShortestDistance(input, 2, output);
+   for(Point p: output) {
+      cout<<"Output "<<p.x<<" "<<p.y<<" "<<p.z<<endl;
+   }
+   cout<<"Done Test_KShortestDistance()"<<endl;
+}
+
+void Test_PairSumClosestToZero() {
+   cout<<"Start Test_PairSumClosestToZero()"<<endl;
+   int in[] = {-1, -2, -5, -6, 9, 8};
+   vector<int> input(in, in + 6);
+   pair<int, int> output;
+   PairSumClosestToZero(input, output);
+   cout<<"Output "<<output.first<<" "<<output.second<<endl;
+   cout<<"Done Test_PairSumClosestToZero()"<<endl;
+}
+
+void Test_GetEmployeesForManager() {
+   cout<<"Start Test_GetEmployeesForManager()"<<endl;
+   vector<pair<int, int> > emPairs;
+   for(int i=0; i<10; ++i) {
+      pair<int, int> em {i, i+2};
+      emPairs.push_back(em);
+      em = {i, i+1};
+      emPairs.push_back(em);
+   }
+   vector<int> direct;
+   vector<int> indirect;
+   GetEmployeesForManager(emPairs, 5, direct, indirect);
+   cout<<"Direct reportees : ";
+   for(auto em: direct) {
+      cout<<em<<" ";
+   }
+   cout<<endl;
+   cout<<"Indirect reportees : ";
+   for(auto em: indirect) {
+      cout<<em<<" ";
+   }
+   cout<<endl;
+   cout<<"Done Test_GetEmployeesForManager()"<<endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -288,8 +377,14 @@ void Test_Arrays() {
    Test_BuildParenthesis();
    Test_EightQueens();
    Test_MergeSortLargeAToB();
-#endif
    Test_FindInRotatedSortedArray();
+   Test_Merge();
+   Test_ReverseNum();
+   Test_KMaxRepeatedElements();
+   Test_KShortestDistance();
+#endif
+   Test_PairSumClosestToZero();
+   Test_GetEmployeesForManager();
 }
 }
 

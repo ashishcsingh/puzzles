@@ -39,5 +39,15 @@ const static int MAX_QUEENS = 8;
 void EightQueens(int row, std::vector<int>& col, std::vector<std::vector<int>>& results);
 void MergeSortLargeAToB(int A[], int lenA, int B[], int lenB);
 int FindInRotatedSortedArray(int [], int start, int end, int find);
+int ReverseNum(int x);
+void Merge(int A[], int m, int B[], int n) ;
+void KMaxRepeatedElements(const std::vector<int>& input, int k, std::vector<int>& out);
+struct Point {
+   int x, y, z;
+};
+void KShortestDistance(const std::vector<Point>& points, int k, std::vector<Point>& out);
+void PairSumClosestToZero(std::vector<int>& input, std::pair<int, int>& output);
+void GetEmployeesForManager(std::vector<std::pair<int,int> >& employeeManagers,
+      int manager, std::vector<int>& reporteeDirect, std::vector<int>& reporteeIndirect);
 }
 #endif /* MAXNOY_ARRAYS_H_ */

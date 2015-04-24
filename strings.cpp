@@ -4,6 +4,8 @@
 #include <vector>
 #include <cassert>
 
+#include "log.h"
+
 namespace strings {
 using namespace std;
 
@@ -379,7 +381,7 @@ void Trie::Push(const char* str) {
       head_ = new TNode();
    }
    node = head_;
-   while(true) {
+   while(str!=nullptr) {
       char c = *(str++);
       if(c == '\0') {
          node->word_ = true;
@@ -400,7 +402,7 @@ void Trie::Push(const char* str) {
 
 bool Trie::Exists(const char* str) const {
    TNode* node = head_;
-   while(true) {
+   while(str!=nullptr) {
       char c = *(str++);
       //Positive returns
       if(c == '\0') {
@@ -444,7 +446,7 @@ string CompressString(const string& str) {
    if(ret.length() < str.length()) {
       return ret;
    } else {
-      return ret;
+      return str;
    }
 }
 
@@ -599,4 +601,162 @@ int FindInSortedStringsWithSpace(const vector<string>& strV, int start, int end,
       return FindInSortedStringsWithSpace(strV, mid + 1, end, find);
    }
 }
+
+/*
+ * What: Checks if Palidrom
+ * How: check if first and last are same
+ *      first++ and last--
+ */
+bool IsPalindrome(string s) {
+    int i = 0;
+    int j = s.length() - 1;
+    while(i < j) {
+        if(s[i]!=s[j]) {
+            return false;
+        }
+        ++i;
+        --j;
+    }
+    return true;
+}
+
+/*
+ * What: Finds the longest palndrome
+ * How: N2 complexity to test
+ */
+string LongestPalindrome(string s) {
+   int max = 1;
+   string longest = s;
+   int limit = 1000;
+   if(limit > s.length()) {
+      limit = s.length();
+   }
+   for(int i=0; i<limit; ++i) {
+       for(int j=limit-1; j>=i && max < (j - i + 1); --j) {
+           string temp = s.substr(i, j - i + 1);
+           if(IsPalindrome(temp)) {
+               max = j - i + 1;
+               longest = temp;
+           }
+       }
+   }
+   return longest;
+}
+
+/*
+ * What: FromRoman(string)
+ * How: while i: 0 to length-1
+ *      if map[i+1] < map[i]
+ *         sum += map[i]
+ *      else
+ *         sum -= map[i] + map[i+1]
+ *         i++;
+ *      i++;
+ *    III -> 3
+ *    IX -> 9
+ *    X -> 10
+ *    XI -> 11
+ *    MCI -> 1101 = M + C + I
+ *    MCD -> 1400 = M + CD
+ */
+map<char, int> Roman::romanMap_;
+map<int, char> Roman::romanRMap_;
+void Roman::init() {
+   romanMap_['I'] = 1;
+   romanMap_['V'] = 5;
+   romanMap_['X'] = 10;
+   romanMap_['L'] = 50;
+   romanMap_['C'] = 100;
+   romanMap_['D'] = 500;
+   romanMap_['M'] = 1000;
+
+   for(auto p: romanMap_) {
+      romanRMap_[p.second] = p.first;
+   }
+}
+
+int Roman::FromRoman(string roman) {
+   init();
+   int i = 0;
+   int sum = 0;
+   while(i < roman.length()) {
+      if(i == roman.length()-1 ||
+            romanMap_[roman[i]] > romanMap_[roman[i+1]]) {
+         sum += romanMap_[roman[i]];
+         i+=1;
+      } else {
+         sum -= romanMap_[roman[i]];
+         sum += romanMap_[roman[i+1]];
+         i+=2;
+      }
+   }
+   return sum;
+}
+
+static bool RomanFives(char c) {
+   return c == 'V' || c == 'L' || c == 'D';
+}
+/*
+ * What: ToRoman() will convert a number to roman string
+ * How:  if(highest romanMap_[] * 4 > number &&
+ *             highest romanMap_[] < number) {
+ *         return number/highest romanMap_[] * higest romanMap_[] + ...
+ */
+string Roman::ToRoman(int number) {
+   init();
+   if(number == 0) {
+      return "";
+   }
+   // The last element is the highest, check if 4*MAX < number < MAX
+   for (map<int,char>::reverse_iterator rItr = romanRMap_.rbegin();
+         rItr!=romanRMap_.rend(); ++rItr) {
+      Log(TRIVIA, "Roman loop : " + to_string(rItr->first) + " " + rItr->second);
+      if(rItr->first == number) {
+         string prefix;
+         prefix += rItr->second;
+         Log(VERBOSE, "Roman 4th rule prefix: " + prefix);
+         return prefix;
+      }
+      // 2nd Roman rule, "I", "X", "C", and "M" can be repeated three times in succession
+      else if(!RomanFives(rItr->second) && rItr->first * 4 > number && rItr->first < number) {
+         string prefix;
+         int count = number / rItr->first;
+         int diff = number - count * rItr->first;
+         for(int i=0; i<count; ++i) {
+            prefix += rItr->second;
+         }
+         return prefix + ToRoman(diff);
+      }
+      //3rd Roman rule, RomanFives (like IV, XL, CD)
+      else if(RomanFives(rItr->second) && romanRMap_.rend() != next(rItr, 1) &&
+            rItr->first > number && next(rItr, 1)->first < number) {
+         string prefix;
+         prefix += next(rItr, 1)->second;
+         prefix += rItr->second;
+         Log(VERBOSE, "Roman 3rd rule 1prefix: " + prefix);
+         int diff = rItr->first - next(rItr, 1)->first - number;
+         Log(VERBOSE, "Roman 3rd rule 1diff: " +  to_string(diff));
+         return prefix + ToRoman(diff);
+      }
+      //3rd Roman rule, !RomanFives (like IX, XC, CM)
+      else if(!RomanFives(rItr->second) && romanRMap_.rend() != next(rItr, 2) &&
+            rItr->first * 0.9 < number && rItr->first > number) {
+         string prefix;
+         prefix += next(rItr, 2)->second;
+         prefix += rItr->second;
+         Log(VERBOSE, "Roman 3rd rule 2prefix: " + prefix);
+         int diff = rItr->first - next(rItr, 2)->first - number;
+         Log(VERBOSE, "Roman 3rd rule 2diff: " + to_string(diff));
+         return prefix + ToRoman(diff);
+      }
+      else if(rItr->first < number) {
+         string prefix;
+         prefix += rItr->second;
+         int diff = number - rItr->first;
+         return prefix + ToRoman(diff);
+      }
+   }
+   return "ERROR";
+}
+
 }

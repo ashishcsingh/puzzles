@@ -11,6 +11,7 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <map>
 
 namespace strings {
 using namespace std;
@@ -74,5 +75,17 @@ using namespace std;
  bool CheckPattern(const string& pat, const string& match);
  void KeepAnagramsTogether(vector<string>& strV);
  int FindInSortedStringsWithSpace(const vector<string>& strV,  int start, int end, const string& find);
+ string LongestPalindrome(string s);
+ bool IsPalindrome(string s);
+
+ class Roman {
+ public:
+    static int FromRoman(string roman);
+    static string ToRoman(int roman);
+    static void init();
+ private:
+    static map<char, int> romanMap_;
+    static map<int, char> romanRMap_;
+ };
 }
 #endif /* MAXNOY_STRINGS_H_ */

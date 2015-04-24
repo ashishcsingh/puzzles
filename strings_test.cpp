@@ -274,6 +274,31 @@ void Test_FindInSortedStringsWithSpace() {
    cout<<"Done Test_FindInSortedStringsWithSpace"<<endl;
 }
 
+void Test_LongestPalindrome() {
+   cout<<"Start Test_LongestPalindrome"<<endl;
+   string s("baalaabassdfd");
+   cout<<LongestPalindrome(s)<<endl;
+   cout<<"Done Test_LongestPalindrome"<<endl;
+}
+
+void Test_FromRoman() {
+   cout<<"Start Test_FromRoman"<<endl;
+   cout<<"IV "<<Roman::FromRoman("IV")<<endl;
+   cout<<"V "<<Roman::FromRoman("V")<<endl;
+   cout<<"VI "<<Roman::FromRoman("VI")<<endl;
+   cout<<"CV "<<Roman::FromRoman("CV")<<endl;
+   cout<<"Done Test_FromRoman"<<endl;
+}
+
+void Test_ToRoman() {
+   cout<<"Start Test_ToRoman"<<endl;
+   cout<<"IV "<<Roman::ToRoman(4)<<endl;
+   cout<<"V "<<Roman::ToRoman(5)<<endl;
+   cout<<"VI "<<Roman::ToRoman(6)<<endl;
+   //cout<<"CV "<<Roman::ToRoman(105)<<endl;
+   cout<<"Done Test_ToRoman"<<endl;
+}
+
 void Test_Strings() {
 #ifdef TEST_DONE
    Test_Reverse();
@@ -297,9 +322,12 @@ void Test_Strings() {
    Test_IsRotatedSubstring();
    Test_PrintPermutations();
    Test_CheckPattern();
-#endif
    Test_KeepAnagramsTogether();
    Test_FindInSortedStringsWithSpace();
+#endif
+   Test_LongestPalindrome();
+   Test_FromRoman();
+   Test_ToRoman();
 }
 
 }

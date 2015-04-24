@@ -9,8 +9,8 @@ int main() {
    graphs::Test_Graphs();
    linkedlist::Test_LinkedLists();
    logics::Test_Logics();
+   arrays::Test_Arrays();
 #endif
    strings::Test_Strings();
-   //arrays::Test_Arrays();
    return 0;
 }
