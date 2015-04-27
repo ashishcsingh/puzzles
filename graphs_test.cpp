@@ -380,6 +380,12 @@ void Test_MatchTree() {
    cout<<"Done testing Test_MatchTree()"<<endl;
 }
 
+void Test_CountNodesInBST() {
+   cout<<"Start testing Test_CountNodesInBST()"<<endl;
+   BNode** bnode = Test_Insert2();
+   cout<<"CountNodesInBST(bnode, 2, 20) : "<<CountNodesInBST(*bnode, 1, 22)<<endl;
+   cout<<"Done testing Test_CountNodesInBST()"<<endl;
+}
 
 void Test_Graphs() {
 #ifdef TEST_DONE
@@ -405,9 +411,11 @@ void Test_Graphs() {
    Test_SortedArrayToBst();
    Test_SortedArrayToBst2();
    Test_NextSuccessor();
-#endif
    Test_PathToNodes();
    Test_MatchTree();
+#endif
+
+   Test_CountNodesInBST();
 }
 
 }

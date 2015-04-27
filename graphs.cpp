@@ -281,22 +281,21 @@ void PreOrder(BNode* node) {
    }
 }
 
-void PostOrder(BNode* node) {
-   if(node) {
-      PreOrder(node->left_);
-      cout<<node->data_<<" ";
-      PreOrder(node->right_);
-   }
-}
-
 void InOrder(BNode* node) {
    if(node) {
-      PreOrder(node->left_);
-      PreOrder(node->right_);
+      InOrder(node->left_);
       cout<<node->data_<<" ";
+      InOrder(node->right_);
    }
 }
 
+void PostOrder(BNode* node) {
+   if(node) {
+      PostOrder(node->left_);
+      PostOrder(node->right_);
+      cout<<node->data_<<" ";
+   }
+}
 
 /*
  * Finds the minimum width
@@ -654,6 +653,25 @@ bool PathToNodes(GNode* src, GNode* dest) {
    return false;
 }
 
+
+/*
+ * What: In between start and end find count of nodes
+ * How:  think leaf node, count is if current data is in range.
+ *       Then a node with only one left node.
+ *       currentNode + leftNode;
+ *       similarly current + leftNode + rightNode
+ */
+int CountNodesInBST(BNode* root, int start, int end) {
+   if(root==nullptr) {
+      return 0;
+   }
+   int count = 0;
+   if(root->data_ >= start && root->data_ <= end) {
+      count++;
+   }
+   count+= CountNodesInBST(root->left_, start, end) + CountNodesInBST(root->right_, start, end);
+   return count;
+}
 
 }
 

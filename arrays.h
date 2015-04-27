@@ -49,5 +49,12 @@ void KShortestDistance(const std::vector<Point>& points, int k, std::vector<Poin
 void PairSumClosestToZero(std::vector<int>& input, std::pair<int, int>& output);
 void GetEmployeesForManager(std::vector<std::pair<int,int> >& employeeManagers,
       int manager, std::vector<int>& reporteeDirect, std::vector<int>& reporteeIndirect);
+void EvenIndicesAsMax(std::vector<int>& input);
+void NegativePositiveOrganizer(std::vector<int>& input);
+std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights, int src, int dest);
+void PrintDigonalMatrix(std::vector<std::vector<int> >& data);
+int Median(int a, int b, int c);
+int Median(int a, int b, int c, int min, int max);
+
 }
 #endif /* MAXNOY_ARRAYS_H_ */

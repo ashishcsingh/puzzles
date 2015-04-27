@@ -15,6 +15,7 @@
 #include <vector>
 #include <iostream>
 #include <map>
+#include <list>
 
 namespace arrays {
 using namespace std;
@@ -754,12 +755,12 @@ using namespace std;
     * How: Using DFS keep populating employees
     */
    void ExtractEmployees(map<int, vector<int> >& employeeManagerMap,
-         int reportee, vector<int>& employees) {
+         int reportee, set<int>& employees) {
       if(employeeManagerMap.count(reportee) > 0) {
          for(auto m: employeeManagerMap[reportee]) {
             ExtractEmployees(employeeManagerMap, m, employees);
          }
-         employees.push_back(reportee);
+         employees.insert(reportee);
       }
    }
 
@@ -785,11 +786,162 @@ using namespace std;
       // Direct
       reporteeDirect = employeeManagerMap[manager];
       // Indirect
+      set<int> reporteeIndirectSet;
       for(auto em: reporteeDirect) {
-         ExtractEmployees(employeeManagerMap, em, reporteeIndirect);
+         ExtractEmployees(employeeManagerMap, em, reporteeIndirectSet);
       }
-      set<int> s(reporteeIndirect.begin(), reporteeIndirect.end());
-      reporteeIndirect.assign(s.begin(), s.end());
+      reporteeIndirect.assign(reporteeIndirectSet.begin(), reporteeIndirectSet.end());
+   }
+
+   /*
+    * What: Given an array Of integers build a new array of integers
+    *       such that every 2nd element of the array is
+    *       greater than its left and right element.
+    *  How: Take 3 elements and check 1,2,3 that 2nd is bigger
+    *       Do it till the end with +2 increments
+    */
+   void EvenIndicesAsMax(std::vector<int>& input) {
+      for(int i=1; i<input.size() - 1; i+=2) {
+         if(input[i-1] > input[i]) {
+            swap(input[i-1], input[i]);
+         }
+         if(input[i] < input[i+1]) {
+            swap(input[i], input[i+1]);
+         }
+      }
+   }
+
+   /*
+    * What: Even indices set to negatives
+    *       Odd indices set to positives
+    * How:  From left to right
+    *       For even indices incrementing +2
+    *       Place negative values with i incrementor incremeting with +1
+    *       Similarly do positive numbers with odd indices
+    */
+   void NegativePositiveOrganizer(std::vector<int>& input) {
+      int even = 0, odd = 1;
+      while(1) {
+         while(even < input.size() && input[even] < 0) {
+            even += 2;
+         }
+         while(odd < input.size() && input[odd] > 0) {
+            odd += 2;
+         }
+         if(even < input.size() && odd < input.size()) {
+            swap(input[even], input[odd]);
+         } else {
+            break;
+         }
+      }
+   }
+
+   /* What: Finds the shortest path from src to dest nodes
+    *       weights contain adjencency matrix with weights
+    *       For not connected nodes add high cost
+    * How:  distance[] and previous[] maintains the cost to move from source
+    *       previous nodes details.
+    *       Take out unvisited node from src with lowest distance cost
+    *       update distance[] and previous[] for any traversal via a neighbor node
+    *       Keep exploring till you visited all the nodes
+    *       When computing path from dest node in previous[],
+    *       keep exploring all the nodes till source
+    *       Reverse the constructed path
+    */
+   std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights, int src, int dest) {
+      // Initialize weights, previous and distance
+      int length = weights.size();
+      vector<int> distance(length, INT_MAX), previous (length, -1);
+      list<int> unvisited;
+      unvisited.push_back(src);
+      distance[src] = 0;
+      for(int v=0; v<length; ++v) {
+         unvisited.push_back(v);
+         distance[v] = weights[src][v];
+      }
+      unvisited.remove(src);
+      // Algorithm
+      while(!unvisited.empty()) {
+         // Find the closest node
+         int min = INT_MAX, u = -1, v;
+         for(auto v: unvisited) {
+            if(min > distance[v]) {
+               min = distance[v];
+               u = v;
+            }
+         }
+         // Update distance cost
+         for(v=0; v<length; ++v) {
+            int distUToV = distance[u] + weights[u][v];
+            if(distance[v] > distUToV) {
+               previous[v] = u;
+               distance[v] = distUToV;
+            }
+         }
+         unvisited.remove(u);
+      }
+      // Get path from previous array
+      vector<int> path;
+      int prev = dest;
+      for(int i=0; i<length; ++i) {
+         path.push_back(prev);
+         if (prev == src) {
+            break;
+         }
+         prev = previous[prev];
+      }
+      // Reverse path
+      int i = 0, j = path.size() - 1;
+      while(i < j) {
+         swap(path[i], path[j]);
+         ++i;
+         --j;
+      }
+      return path;
+   }
+   /*
+    * What: Prints digonal values in a NxN matrix
+    *       1,2,3
+    *       4,5,6
+    *       7,8,9
+    *     print:
+    *       1
+    *       2,4
+    *       3,5,7
+    *       6,8
+    *       9
+    *  How: for(k:0 to 2*(n-1)) {
+    *          for(i:0 to k) {
+    *           if(valid bounds)
+    *            print a[i][k-1]
+    */
+   void PrintDigonalMatrix(std::vector<std::vector<int> >& data) {
+      int sizeI = data.size() - 1;
+      for(int k=0; k<=2*sizeI; ++k){
+         for(int i=0; i<=k; ++i) {
+            if(i <= sizeI && (k - i) <= sizeI) {
+               cout<<data[i][k - i]<<", ";
+            }
+         }
+         cout<<endl;
+      }
+   }
+
+   /*
+    * What: Median(a,b,c)
+    * How:
+    */
+   int Median(int a, int b, int c) {
+      if((a<=b && b<=c) || (a>=b && b>=c)) {
+         return b;
+      } else if((a<=c && c<=b) || (c<=a && b<=c)) {
+         return c;
+      }
+      return a;
+   }
+
+   int Median(int a, int b, int c, int min, int max) {
+      return a^b^c^min^max;
    }
 }
 

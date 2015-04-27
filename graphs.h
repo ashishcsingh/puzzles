@@ -71,6 +71,8 @@ struct GNode {
 
 bool PathToNodes(GNode* src, GNode* dest);
 
+int CountNodesInBST(BNode* root, int start, int end);
+
 #endif /* MAXNOY_BTREE_H_ */
 
 }

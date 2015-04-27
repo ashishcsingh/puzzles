@@ -64,7 +64,10 @@ using namespace std;
     };
     void Push(const char* str);
     bool Exists(const char* str) const;
+    // Pass "t o" to match two etc.
+    int CountMatches(const char* str) const;
  private:
+    int countMatches_(const char* str, int loc, TNode* node) const;
     TNode* head_{nullptr};
  };
 
@@ -87,5 +90,7 @@ using namespace std;
     static map<char, int> romanMap_;
     static map<int, char> romanRMap_;
  };
+ string Numeronym(const string& str);
+ void OrganizeAlphaNumStr(string& str);
 }
 #endif /* MAXNOY_STRINGS_H_ */

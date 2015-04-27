@@ -423,6 +423,54 @@ bool Trie::Exists(const char* str) const {
 }
 
 /*
+ * What: Counts matched strings to the passed pattern
+ * How:  Converts to lower case and returns count
+ */
+int Trie::CountMatches(const char* str) const {
+   char loweredStr[strlen(str) + 1];
+   int pos = 0;
+   while(str!=nullptr) {
+      char c = *(str + pos);
+      loweredStr[pos] = c;
+      if(loweredStr[pos] == '\0') {
+         break;
+      }
+      // Skip space for lower conversion
+      if(loweredStr[pos]!=' ') {
+         loweredStr[pos] = tolower(loweredStr[pos]);
+      }
+      // Check invalid chars
+      if((loweredStr[pos]<'a' || loweredStr[pos]>'z') &&
+            loweredStr[pos]!=' ') {
+         return -1;
+      }
+      ++pos;
+   }
+   return countMatches_(loweredStr, 0, head_);
+}
+
+/*
+ * What: private method to count matches
+ */
+int Trie::countMatches_(const char* str, int loc, TNode* node) const {
+   int count = 0;
+   // Termination conditions
+   if(node == nullptr) {
+      return 0;
+   }
+   if(str[loc] == '\0' && node->word_) {
+      return 1;
+   }
+   // consider space and the current char as progression and match
+   for (int i=0; i<MaxChars; ++i) {
+      if(str[loc] == ' ' || str[loc] == ('a'+i)) {
+         count += countMatches_(str, loc + 1, node->child_[i]);
+      }
+   }
+   return count;
+}
+
+/*
  * What: aaabbbcccdd =>a3b2c3d2
  * How: if(str[i] == str[i-1]) count++
  */
@@ -757,6 +805,37 @@ string Roman::ToRoman(int number) {
       }
    }
    return "ERROR";
+}
+
+/*
+ * What: house=> h3e
+ * How: first + middle + last
+ */
+string Numeronym(const string& str) {
+   if(str.length() < 3) {
+      return str;
+   }
+   string ret;
+   ret+= str[0];
+   ret+= str.length() - 2 + '0';
+   ret+= str[str.length()-1];
+   return ret;
+}
+
+/*
+ * What: a1b2c3
+ *       abc123
+ */
+void OrganizeAlphaNumStr(string& str) {
+   int len = str.length();
+   int times = len / 2;
+   for(int i=0; i<times; ++i) {
+      for(int j=0; j<len-1; ++j) {
+         if(isalpha(str[j+1]) && isdigit(str[j])) {
+            swap(str[j], str[j+1]);
+         }
+      }
+   }
 }
 
 }

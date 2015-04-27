@@ -119,6 +119,8 @@ void Test_Trie() {
    assert(t.Exists("Zebra"));
    assert(t.Exists("Human") == false);
    assert(t.Exists("Air"));
+   cout<<"count match of -Air- : "<<t.CountMatches("Air")<<endl;
+   cout<<"count match of -A r- : "<<t.CountMatches("A r")<<endl;
    cout<<"Done testing Test_Trie()"<<endl;
 }
 
@@ -299,6 +301,24 @@ void Test_ToRoman() {
    cout<<"Done Test_ToRoman"<<endl;
 }
 
+void Test_Numeronym() {
+   cout<<"Start Test_Numeronym"<<endl;
+   cout<<"Numeronym(hello): "<<Numeronym("hello")<<endl;
+   cout<<"Numeronym(house): "<<Numeronym("house")<<endl;
+   cout<<"Numeronym(de): "<<Numeronym("de")<<endl;
+   cout<<"Numeronym(sdfdfdfdf): "<<Numeronym("sdfdfdfdf")<<endl;
+   cout<<"Done Test_Numeronym"<<endl;
+}
+
+void Test_OrganizeAlphaNumStr() {
+   cout<<"Start Test_OrganizeAlphaNumStr"<<endl;
+   string str("a1b2c3d4");
+   cout<<"Before : "<<str<<endl;
+   OrganizeAlphaNumStr(str);
+   cout<<"After : "<<str<<endl;
+   cout<<"Done Test_OrganizeAlphaNumStr"<<endl;
+}
+
 void Test_Strings() {
 #ifdef TEST_DONE
    Test_Reverse();
@@ -309,7 +329,6 @@ void Test_Strings() {
    Test_Atoi();
    Test_Itoa();
    Test_WordSeperator();
-   Test_Trie();
    Test_RemoveSpaces();
    Test_PrintMatrixWords();
    Test_UniqueCharacters();
@@ -324,10 +343,13 @@ void Test_Strings() {
    Test_CheckPattern();
    Test_KeepAnagramsTogether();
    Test_FindInSortedStringsWithSpace();
-#endif
    Test_LongestPalindrome();
    Test_FromRoman();
    Test_ToRoman();
+   Test_Numeronym();
+   Test_Trie();
+   Test_OrganizeAlphaNumStr();
+#endif
 }
 
 }

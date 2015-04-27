@@ -356,6 +356,59 @@ void Test_GetEmployeesForManager() {
    cout<<"Done Test_GetEmployeesForManager()"<<endl;
 }
 
+void Test_EvenIndicesAsMax() {
+   cout<<"Start Test_EvenIndicesAsMax()"<<endl;
+   int data[] = {1,4,5,2,3};
+   vector<int> input(data, data+sizeof(data)/sizeof(int));
+   EvenIndicesAsMax(input);
+   for(auto i: input) {
+      cout<<i<<"";
+   }
+   cout<<endl;
+   cout<<"Done Test_EvenIndicesAsMax()"<<endl;
+}
+
+void Test_NegativePositiveOrganizer() {
+   cout<<"Start Test_NegativePositiveOrganizer()"<<endl;
+   int data[] = {-5, -2, 5, 2, 4, 7, 1, 8, 0, -8};
+   vector<int> input (data, data + sizeof(data)/sizeof(int));
+   NegativePositiveOrganizer(input);
+   for(auto i: input) {
+      cout<<i<<" ";
+   }
+   cout<<endl;
+   cout<<"Done Test_NegativePositiveOrganizer()"<<endl;
+}
+
+void Test_ShortestPathDjkstras() {
+   cout<<"Start Test_ShortestPathDjkstras()"<<endl;
+   cout<<"Done Test_ShortestPathDjkstras()"<<endl;
+}
+
+
+void Test_PrintDigonalMatrix() {
+   cout<<"Start Test_PrintDigonalMatrix()"<<endl;
+   vector<vector<int>> data;
+   int k = 1;
+   for(int i=0; i<3; ++i) {
+      data.push_back(vector<int>());
+      for(int j=0; j<3; ++j) {
+         data[i].push_back(k);
+         ++k;
+      }
+   }
+   PrintDigonalMatrix(data);
+   cout<<"Done Test_PrintDigonalMatrix()"<<endl;
+}
+
+void Test_Median() {
+   cout<<"Start Test_Median()"<<endl;
+   int a = 1, b = 2, c = 3;
+   cout<<Median(a, b, c)<<endl;
+   cout<<Median(a, b, c, 1, 3)<<endl;
+   cout<<"Done Test_Median()"<<endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -382,9 +435,14 @@ void Test_Arrays() {
    Test_ReverseNum();
    Test_KMaxRepeatedElements();
    Test_KShortestDistance();
-#endif
    Test_PairSumClosestToZero();
    Test_GetEmployeesForManager();
+   Test_EvenIndicesAsMax();
+   Test_NegativePositiveOrganizer();
+   Test_ShortestPathDjkstras();
+   Test_PrintDigonalMatrix();
+#endif
+   Test_Median();
 }
 }
 
