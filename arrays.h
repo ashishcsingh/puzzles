@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <string>
+#include <mutex>
 
 namespace arrays {
 int FindMissingNumber(int array[], int arrayLength, int length);
@@ -55,6 +56,23 @@ std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights, in
 void PrintDigonalMatrix(std::vector<std::vector<int> >& data);
 int Median(int a, int b, int c);
 int Median(int a, int b, int c, int min, int max);
+void MatrixFillDistanceFromG(std::vector<std::vector<char> >& data);
+int MaxRepeatVal(const std::vector<int>& data);
+
+class QueueUsingArray {
+public:
+   bool Enqueue(int data);
+   int Dequeue();
+   ~QueueUsingArray();
+   QueueUsingArray(int length);
+private:
+   std::mutex mutex_;
+   int* data_{nullptr};
+   int front_{0}, back_{0};
+   int length_{0};
+};
+
+void ClosestNumbers(const std::vector<std::vector<int>>& in, std::vector<int>& out);
 
 }
 #endif /* MAXNOY_ARRAYS_H_ */

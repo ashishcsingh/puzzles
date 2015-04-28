@@ -1,5 +1,6 @@
 CC = g++
 CFLAGS = -Wall -g -std=c++0x
+LOG =
 LDFLAGS = -g
 SOURCES = arrays.cpp arrays_test.cpp graphs.cpp graphs_test.cpp dynamic.cpp\
 			 linkedlist.cpp linkedlist_test.cpp logics.cpp logics_test.cpp\
@@ -14,7 +15,7 @@ $(EXECUTABLE):	$(OBJECTS)
 			$(CC) $(LDFLAGS) $(OBJECTS) -o $@
 
 %.o:	%.cpp
-			$(CC) -c $(CFLAGS) $< -o $@
+			$(CC) -c $(CFLAGS) $(LOG) $< -o $@
 
 clean:
 			rm *.o $(EXECUTABLE)

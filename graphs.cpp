@@ -618,6 +618,44 @@ bool ChildTree(BNode* parent, BNode* child) {
    return false;
 }
 
+
+/*
+ * What: If all the nodes are at the same place for both the trees
+ * How:
+ */
+bool MatchTree2(BNode* parent, BNode* child) {
+   if(parent == nullptr && child == nullptr) {
+      return true;
+   }
+   if(parent==nullptr || child==nullptr) {
+      return false;
+   }
+   if(parent->data_ == child->data_) {
+      return MatchTree2(parent->left_, child->left_) &&
+            MatchTree2(parent->right_, child->right_);
+   }
+   return false;
+}
+
+/*
+ * What: Checks if the parent Tree contains Child Tree
+ * How:  compare parent's current data with child
+ *       return exact match
+ *       else recursively call for left and right
+ */
+bool ChildTree2(BNode* parent, BNode* child) {
+   if(child == nullptr) {
+      return true;
+   }
+   if(parent == nullptr) {
+      return false;
+   }
+   if(parent->data_ == child->data_) {
+      return MatchTree(parent, child);
+   }
+   return ChildTree2(parent->left_, child) || ChildTree2(parent->right_, child);
+}
+
 /*
  * What: Test if in a graph src has a path to dest.
  * How: Use DFS, if a neighbor is dest then return true

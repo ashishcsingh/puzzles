@@ -838,4 +838,35 @@ void OrganizeAlphaNumStr(string& str) {
    }
 }
 
+/*
+ * What: Filters out words that can not be built from alphas
+ * http://www.careercup.com/question?id=6486723970203648
+ * How: construct Anagram and subract counts from that.
+ *       For any negative value in anagram map remove that word
+ */
+void Scribble(std::list<string>& words, const std::vector<char>& alphas) {
+   map<char, int> mapAlpha;
+   for(auto c: alphas) {
+      ++mapAlpha[c];
+   }
+   for(list<string>::iterator itr = words.begin(); itr!=words.end(); ++itr) {
+      map<char, int> testMap = mapAlpha;
+      Log(VERBOSE, "[Scribble] Process word"+ *itr);
+      for(char c: *itr) {
+         --testMap[c];
+      }
+      for(auto p: testMap) {
+         if(p.second < 0) {
+            // Remove word
+            //words.remove(word);
+            Log(VERBOSE, "[Scribble] Remove word"+ *itr);
+            auto prevItr = itr;
+            ++itr;
+            words.erase(prevItr);
+            break;
+         }
+      }
+   }
+}
+
 }

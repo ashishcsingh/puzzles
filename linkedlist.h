@@ -2,6 +2,7 @@
 #define _MAXNOY_LINKEDLIST_H
 
 #include <stack>
+#include <list>
 
 namespace linkedlist {
 using namespace std;
@@ -25,6 +26,7 @@ using namespace std;
    bool StackGrowsUp();
    bool HeapGrowsUp();
    bool IsPalindrom(Node* head);
+   void InsertDataInSortedCircularList(Node** root, int data);
 
    class QueueUsingTwoStacks {
       public:
@@ -76,5 +78,14 @@ using namespace std;
       Node* head_{nullptr};
       Node* back_{nullptr};
    };
+
+   struct NodeWithWeight {
+      int id_{0};
+      int parent_{0};
+      int weight_{0};
+      NodeWithWeight(int id, int parent, int weight):
+         id_{id}, parent_{parent}, weight_{weight} {}
+   };
+   void PrintSubTreeWeights(const std::list<NodeWithWeight>& nodes);
 }
 #endif

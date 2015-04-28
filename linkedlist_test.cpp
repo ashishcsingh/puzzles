@@ -2,6 +2,8 @@
 
 #include<cassert>
 #include<iostream>
+#include <cstdlib>
+#include <ctime>
 
 namespace linkedlist {
 
@@ -262,6 +264,35 @@ void Test_QueueUsingTwoStacks() {
    cout<<"Done testing Test_QueueUsingTwoStacks()"<<endl;
 }
 
+void Test_InsertDataInSortedCircularList() {
+   cout<<"Start testing Test_InsertDataInSortedCircularList()"<<endl;
+   Node** root = new (Node*);
+   *root = nullptr;
+   srand(time(NULL));
+   int length = 100;
+   for(int i=0; i<100; ++i) {
+      InsertDataInSortedCircularList(root, rand()%length);
+   }
+   Node* node = *root;
+   for(int i=0; i<length; ++i) {
+      cout<<node->data_<<", ";
+      node = node->next_;
+   }
+   cout<<endl;
+   cout<<"Done testing Test_InsertDataInSortedCircularList()"<<endl;
+}
+
+void Test_PrintSubTreeWeights() {
+   cout<<"Start testing Test_PrintSubTreeWeights()"<<endl;
+   list<NodeWithWeight> nodes;
+   nodes.push_back(NodeWithWeight(0,0,0));
+   for(int i=0; i<10; ++i) {
+      nodes.push_back(NodeWithWeight(i+1,i,i+1));
+   }
+   PrintSubTreeWeights(nodes);
+   cout<<"Done testing Test_PrintSubTreeWeights()"<<endl;
+}
+
 void Test_LinkedLists() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -277,9 +308,11 @@ void Test_LinkedLists() {
    Test_SumLinkedListReverse();
    Test_Reverse();
    Test_SumLinkedList();
-#endif
    Test_IsPalindrom();
    Test_QueueUsingTwoStacks();
+   Test_InsertDataInSortedCircularList();
+#endif
+   Test_PrintSubTreeWeights();
 }
 
 }

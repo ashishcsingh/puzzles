@@ -5,11 +5,16 @@
  *      Author: acs
  */
 
-#include"linkedlist.h"
+#include "linkedlist.h"
+#include "log.h"
+
 #include<iostream>
 #include<cctype>
 #include<cassert>
 #include<stack>
+#include<map>
+#include<set>
+#include<vector>
 
 namespace linkedlist {
 using namespace std;
@@ -452,6 +457,111 @@ int DistanceFromLoop(Node* head) {
    return k;
 }
 
+/*
+ * What: Maintain and insert data in sorted way to circular list
+ *       List is always circular
+ * How:  if first element is bigger than insert the new at the start
+ *       else till next data is found bigger loop around
+ *       when next is bigger and current is smaller insert
+ */
+void InsertDataInSortedCircularList(Node** root, int data) {
+   Log(VERBOSE, "[InsertDataInSortedCircularList] To insert " + to_string(data));
+   Node* dataNode = new Node(data);
+   // First element when root is null
+   if(*root==nullptr) {
+      *root = dataNode;
+      dataNode->next_ = dataNode;
+      Log(VERBOSE, "[InsertDataInSortedCircularList] Inserted "+to_string(data)+" at root");
+      return;
+   }
+   // start has bigger values then insert at start
+   if((*root)->data_ >= data) {
+      dataNode->next_ = *root;
+      (*root)->next_ = dataNode;
+      *root = dataNode;
+      Log(VERBOSE, "[InsertDataInSortedCircularList] Inserted "+to_string(data)+" at start");
+      return;
+   }
+   Node* node = *root;
+   while(node!=nullptr) {
+      // next is bigger than data and current is smaller then insert between
+      if(node->next_->data_ >= data) {
+         dataNode->next_ = node->next_;
+         node->next_ = dataNode;
+         Log(VERBOSE, "[InsertDataInSortedCircularList] Inserted "+to_string(data)+" between ");
+         return;
+      } else if(node->next_== *root) {
+         // Insert at the end
+         dataNode->next_ = node->next_;
+         node->next_ = dataNode;
+         Log(VERBOSE, "[InsertDataInSortedCircularList] Inserted "+to_string(data)+" at end ");
+         return;
+      } else {
+         node = node->next_;
+      }
+   }
+   Log(ERROR, "[InsertDataInSortedCircularList] Loop not found");
+}
+
+/*
+ * What: Gets all leaf ids populated in children
+ */
+void GetAllSubChildren(map<int, vector<int>>& parentChildren, int id, set<int>& children) {
+   children.insert(id);
+   children.insert(parentChildren[id].begin(), parentChildren[id].end());
+   Log(VERBOSE, "[GetAllSubChildren] Processing "+to_string(id));
+   for(auto i : children) {
+      if(parentChildren.count(i) > 0) {
+         vector<int>& grandChildren = parentChildren[i];
+         for(auto gChild: grandChildren) {
+            if (children.count(gChild) == 0) {
+               Log(VERBOSE, "[GetAllSubChildren] Processing grand of "+to_string(gChild));
+               GetAllSubChildren(parentChildren, gChild, children);
+            }
+         }
+      }
+   }
+}
+
+
+/*
+ * What: PrintSubTreeWeights
+ * http://www.careercup.com/question?id=5648527329853440
+ * How: Using map<int,vector<int>> build parentChildren hierarchy
+ */
+void PrintSubTreeWeights(const list<NodeWithWeight>& nodes) {
+   // Populate parent to children relation
+   Log(VERBOSE, "[PrintSubTreeWeights] Nodes with length "+to_string(nodes.size()));
+   map<int,vector<int>> parentChildren;
+   for(auto& node: nodes) {
+      parentChildren[node.parent_].push_back(node.id_);
+   }
+   Log(VERBOSE, "[PrintSubTreeWeights] Map with length "+to_string(parentChildren.size()));
+   // For each node get all its subtrees' id
+   for(auto& node: nodes) {
+      set<int> children;
+      Log(VERBOSE, "[PrintSubTreeWeights] Getting children"
+            " for id "+to_string(node.id_));
+      // Getting all children
+      GetAllSubChildren(parentChildren, node.id_, children);
+      children.insert(node.id_);
+      Log(VERBOSE, "[PrintSubTreeWeights] Got "+to_string(children.size())+" children"
+            " for id "+to_string(node.id_));
+      int weight = 0;
+      // Then get weight of each sub children
+      for(auto id: children) {
+         // Get weight by looping into nodes
+         for(auto& nodeI: nodes) {
+            if(nodeI.id_ == id) {
+               weight+= nodeI.weight_;
+               Log(VERBOSE, "[PrintSubTreeWeights] Got weight"
+                     " for id "+to_string(nodeI.weight_)+" for "+to_string(nodeI.id_));
+            }
+         }
+      }
+      cout<<"Node : "<<node.id_<<" sub-tree weight: "<<weight<<endl;
+   }
+}
 
 }
 

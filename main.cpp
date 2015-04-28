@@ -6,11 +6,11 @@
 
 int main() {
 #ifdef TEST_DONE
-   linkedlist::Test_LinkedLists();
    logics::Test_Logics();
    graphs::Test_Graphs();
 #endif
+   //linkedlist::Test_LinkedLists();
    arrays::Test_Arrays();
-   strings::Test_Strings();
+   //strings::Test_Strings();
    return 0;
 }

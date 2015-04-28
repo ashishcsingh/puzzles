@@ -20,7 +20,9 @@ enum LOG_LEVEL {
    LOG_SIZE
 };
 
+#ifndef GLOBAL_LOG_LEVEL
 #define GLOBAL_LOG_LEVEL INFO
+#endif
 
 void Log(LOG_LEVEL level, std::string msg);
 

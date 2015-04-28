@@ -319,6 +319,21 @@ void Test_OrganizeAlphaNumStr() {
    cout<<"Done Test_OrganizeAlphaNumStr"<<endl;
 }
 
+void Test_Scribble() {
+   cout<<"Start Test_Scribble"<<endl;
+   list<string> words;
+   words.push_back("stop");
+   words.push_back("act");
+   words.push_back("cac");
+   vector<char> alphas{'a','c','t'};
+   Scribble(words, alphas);
+   cout<<"Left words"<<endl;
+   for(auto word: words) {
+      cout<<word<<endl;
+   }
+   cout<<"Done Test_Scribble"<<endl;
+}
+
 void Test_Strings() {
 #ifdef TEST_DONE
    Test_Reverse();
@@ -350,6 +365,7 @@ void Test_Strings() {
    Test_Trie();
    Test_OrganizeAlphaNumStr();
 #endif
+   Test_Scribble();
 }
 
 }

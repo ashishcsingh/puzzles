@@ -16,6 +16,8 @@
 #include <iostream>
 #include <map>
 #include <list>
+#include <climits>
+#include <utility>
 
 namespace arrays {
 using namespace std;
@@ -249,7 +251,7 @@ using namespace std;
    /*
     * What: N Input of # ranging from 0 - 9
     *    Find sum of max N digits
-    * What: Count n*# from 9 to 0
+    * How: Count n*# from 9 to 0
     *
     */
    long SumNLargest(int* data, int size, int n) {
@@ -417,7 +419,8 @@ using namespace std;
       return out;
    }
    /*
-    * What: Returns combinations of set.
+    * What: Returns combinations of set
+    *       AKA combinations
     * How:  2 power set.size() combinations
     *       For 3 ints : 000 to 111 iterate whenever '1' then replace with element[i]
     */
@@ -561,6 +564,8 @@ using namespace std;
    /*
     * What: Merge sorted array A and B and store into A
     * How:  Use merge sort and keep on storing into A
+    *    Better means exist below in another method
+    *    that is by placing large elements first and also with O(1) memory
     */
    void MergeSortLargeAToB(int a[], int lenA, int b[], int lenB) {
       int c[lenA];
@@ -591,6 +596,30 @@ using namespace std;
       }
       for(int i=0; i<lenA; ++i) {
          a[i] = c[i];
+      }
+   }
+
+   /*
+    * What: Merges two sorted arrays into the first array
+    * How: Start from back and place the largest number.
+    */
+   void Merge(int A[], int m, int B[], int n) {
+      int loc = m + n - 1;
+      --m;
+      --n;
+      for(;m >= 0 && n >= 0;) {
+          if(A[m] > B[n]) {
+              A[loc] = A[m];
+              --m;
+          } else {
+              A[loc] = B[n];
+              --n;
+          }
+          --loc;
+      }
+      for(;n>=0;--n){
+          A[loc] = B[n];
+          --loc;
       }
    }
 
@@ -630,29 +659,6 @@ using namespace std;
          } else {
             return FindInRotatedSortedArray(data, start, mid - 1, find);
          }
-      }
-   }
-   /*
-    * What: Merges two sorted arrays into the first array
-    * How: Start from back and place the largest number.
-    */
-   void Merge(int A[], int m, int B[], int n) {
-      int loc = m + n - 1;
-      --m;
-      --n;
-      for(;m >= 0 && n >= 0;) {
-          if(A[m] > B[n]) {
-              A[loc] = A[m];
-              --m;
-          } else {
-              A[loc] = B[n];
-              --n;
-          }
-          --loc;
-      }
-      for(;n>=0;--n){
-          A[loc] = B[n];
-          --loc;
       }
    }
 
@@ -942,6 +948,210 @@ using namespace std;
 
    int Median(int a, int b, int c, int min, int max) {
       return a^b^c^min^max;
+   }
+
+
+   /*
+    * What: Helper of MatrixFillDistaceFromG
+    *       update value @x,y and floodfill around
+    */
+   void UpdateMatrixDistanceFromG(vector<vector<char>>& data, int x, int y, char value) {
+      int length = data.size() - 1;
+      Log(VERBOSE, "[UpdateMatrixDistanceFromG] Setting @"+to_string(x)+
+            " "+to_string(y)+" data: "+to_string(value));
+      if(length < x || length < y || x < 0 || y < 0) {
+         return;
+      }
+      if(data[x][y] == 'G') {
+         Log(VERBOSE, "[UpdateMatrixDistanceFromG] Found G");
+         if(y-1>=0 && data[x][y-1] != 'G') {
+            UpdateMatrixDistanceFromG(data, x, y - 1, 1);
+         }
+         if(y+1 <=length && data[x][y+1]!= 'G') {
+            UpdateMatrixDistanceFromG(data, x, y + 1, 1);
+         }
+         if(x-1 >=0 && data[x-1][y] != 'G') {
+            UpdateMatrixDistanceFromG(data, x-1, y, 1);
+         }
+         if(x+1 <= length && data[x+1][y] != 'G') {
+            UpdateMatrixDistanceFromG(data, x+1, y, 1);
+         }
+      } else if(data[x][y] == 'B') {
+         Log(VERBOSE, "[UpdateMatrixDistanceFromG] Found B");
+         return;
+      } else if(data[x][y] > value) {
+         Log(VERBOSE, "[UpdateMatrixDistanceFromG] Setting value: "+to_string(value));
+         data[x][y] = value;
+         UpdateMatrixDistanceFromG(data, x, y - 1, value + 1);
+         UpdateMatrixDistanceFromG(data, x, y + 1, value + 1);
+         UpdateMatrixDistanceFromG(data, x - 1, y, value + 1);
+         UpdateMatrixDistanceFromG(data, x + 1, y, value + 1);
+      }
+   }
+
+   /*
+    * What: MatrixFillDistanceFromG
+    *       In Matrix fill distance from G
+    *       Matrix contains B=block, G=guard, 0=rooms
+    *       http://www.careercup.com/question?id=4716965625069568
+    * How:  Initialize all 0 to CHAR_MAX
+    *
+    */
+   void MatrixFillDistanceFromG(std::vector<std::vector<char>>& data) {
+      /*
+       * If size is greater than B (66) then it will fail
+       * Therefore returning
+       */
+      if(data.size() > 'B') {
+         return;
+      }
+      // initialize and find all the Gs
+      vector<pair<int,int>> allGs;
+      int length = data.size();
+      Log(VERBOSE, "[MatrixFillDistanceFromG] Data received of length " + to_string(length));
+      for(int i=0; i<length; ++i) {
+         for(int j=0; j<length; ++j) {
+            switch(data[i][j]) {
+            case '0':
+               data[i][j] = CHAR_MAX;
+               break;
+            case 'G':
+               allGs.push_back(make_pair(i, j));
+               break;
+            case 'B':
+               break;
+            default:
+               Log(ERROR, "Invalid data "+ to_string(data[i][j]));
+               return;
+            }
+         }
+      }
+      Log(VERBOSE, "[MatrixFillDistanceFromG] done initilization");
+      for(auto p: allGs) {
+         UpdateMatrixDistanceFromG(data, p.first, p.second, 0);
+      }
+   }
+   /*
+    * What: Finds max repeat val in sorted array
+    * http://www.careercup.com/question?id=5104572540387328
+    * How:  when data[i] == data[i-1]
+    *          set repeatCount++;
+    *       if(repeatCount > maxRepeatCount) maxRepeatVal...
+    */
+   int MaxRepeatVal(const std::vector<int>& data) {
+      if(data.size() < 1) {
+         Log(ERROR, "[MaxRepeatVal] Array size is 0");
+         return -1;
+      }
+      if(data.size() == 1) {
+         return data[0];
+      }
+      int maxRepeatCount = 0, maxRepeatVal, repeatCount = 1, repeatVal;
+      for(int i=1; i<data.size(); ++i) {
+         if(data[i] == data[i-1]) {
+            ++repeatCount;
+            repeatVal = data[i];
+         } else {
+            repeatVal = 1;
+            repeatVal = data[i];
+         }
+         if(repeatCount > maxRepeatCount) {
+            maxRepeatCount = repeatCount;
+            maxRepeatVal = repeatVal;
+         }
+      }
+      return maxRepeatVal;
+   }
+
+   /*
+    * What: QueueUsingArray
+    *       Thread safe
+    *       http://www.careercup.com/question?id=5154240347504640
+    */
+   bool QueueUsingArray::Enqueue(int data) {
+      if(((front_ + 1) % length_) == back_) {
+         Log(ERROR, "[Enqueue] Queue full");
+         return false;
+      }
+      lock_guard<mutex> lock(mutex_);
+      data_[front_ % length_] = data;
+      front_ = (front_ + 1) % length_;
+      return true;
+   }
+   int QueueUsingArray::Dequeue() {
+      if(back_ == front_) {
+         Log(ERROR, "[Dequeue] Queue empty");
+         return -1;
+      }
+      lock_guard<mutex> lock(mutex_);
+      int ret = data_[back_];
+      back_ = (back_ + 1) % length_;
+      return ret;
+   }
+   QueueUsingArray::~QueueUsingArray() {
+      delete[] data_;
+   }
+   QueueUsingArray::QueueUsingArray(int length) {
+      data_ = new int[length + 1];
+      length_ = length + 1;
+   }
+
+   int DiffNumbers(const vector<vector<int>>&in, const vector<int>& minIndex) {
+      int len = in.size();
+      int min = INT_MAX, max = INT_MIN;
+      // Among all the arrays, find min and max @minIndex[i]
+      for(int i=0; i<len; ++i) {
+         if(min > in[i][minIndex[i]]) {
+            min = in[i][minIndex[i]];
+         }
+         if(max < in[i][minIndex[i]]) {
+            max = in[i][minIndex[i]];
+         }
+      }
+      // the range that covers all the elements @minIndex
+      return abs(max - min);
+   }
+
+   int minimumArray(const vector<vector<int>>&in, const vector<int>& minIndex) {
+      int length = in.size();
+      int minArray = 0;
+      int min = INT_MAX;
+      // Among all the arrays find the lowest minIndex
+      for(int i=0; i<length; ++i) {
+         if(min > in[i][minIndex[i]]) {
+            min = in[i][minIndex[i]];
+            minArray = i;
+         }
+      }
+      return minArray;
+   }
+
+   void ClosestNumbers(const std::vector<std::vector<int>>& in, std::vector<int>& out) {
+      if(in.size()<1) {
+         return;
+      }
+      int countInArray = in[0].size();
+      int countArrays = in.size();
+      out.resize(countArrays);
+      vector<int> minIndex(countArrays, 0);
+      vector<int> bestMinIndex;
+      int bestMinDiff = INT_MAX;
+      int diffNumbers, minArray;
+      // While tracking best closest range explore through all the elements
+      for(int i=0; i<countInArray; ++i) {
+         diffNumbers = DiffNumbers(in, minIndex);
+         if(diffNumbers < bestMinDiff) {
+            bestMinIndex = minIndex;
+            bestMinDiff = diffNumbers;
+         }
+         // Find the lowest minIndex and increment it
+         minArray = minimumArray(in, minIndex);
+         minIndex[minArray]++;
+      }
+      // Copy values to output
+      for(int i=0; i<countArrays; ++i) {
+         out[i] = in[i][bestMinIndex[i]];
+      }
    }
 }
 

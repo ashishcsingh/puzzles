@@ -409,6 +409,58 @@ void Test_Median() {
    cout<<"Done Test_Median()"<<endl;
 }
 
+void Test_MatrixFillDistanceFromG() {
+   cout<<"Start Test_MatrixFillDistanceFromG()"<<endl;
+   vector<vector<char>> data = { {'0', '0', '0'},
+         {'B', 'G', 'G'},
+         {'B', '0', '0'}
+   };
+   cout<<"Before"<<endl;
+   for(int i=0; i<data.size(); ++i) {
+      for(int j=0; j<data.size(); ++j){
+         cout<<data[i][j]<<", ";
+      }
+      cout<<endl;
+   }
+   MatrixFillDistanceFromG(data);
+   cout<<"After"<<endl;
+   for(int i=0; i<data.size(); ++i) {
+      for(int j=0; j<data.size(); ++j){
+         if(data[i][j]=='B' || data[i][j]=='G') {
+            cout<<data[i][j]<<", ";
+         } else {
+            cout<<to_string(data[i][j])<<", ";
+         }
+      }
+      cout<<endl;
+   }
+   cout<<"Done Test_MatrixFillDistanceFromG()"<<endl;
+}
+
+void Test_MaxRepeatVal() {
+   cout<<"Start Test_MaxRepeatVal()"<<endl;
+   vector<int> data {1,2,3,4,4,5,6};
+   cout<<"MaxRepeatVal: "<<MaxRepeatVal(data)<<endl;
+   cout<<"Done Test_MaxRepeatVal()"<<endl;
+}
+
+void Test_QueueUsingArray() {
+   cout<<"Start Test_QueueUsingArray()"<<endl;
+   QueueUsingArray q(5);
+   for(int i=1; i<5; ++i) {
+      cout<<"Enqueing "<<i<<" : "<<q.Enqueue(i)<<endl;
+   }
+   //q.Dequeue();
+   //q.Enqueue(6);
+   //q.Dequeue();
+   //q.Enqueue(7);
+   cout<<endl;
+   for(int i=1; i<5; ++i) {
+      cout<<"Dequeing : "<<q.Dequeue()<<endl;
+   }
+   cout<<"Done Test_QueueUsingArray()"<<endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -441,8 +493,11 @@ void Test_Arrays() {
    Test_NegativePositiveOrganizer();
    Test_ShortestPathDjkstras();
    Test_PrintDigonalMatrix();
-#endif
    Test_Median();
+   Test_MatrixFillDistanceFromG();
+   Test_MaxRepeatVal();
+#endif
+   Test_QueueUsingArray();
 }
 }
 

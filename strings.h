@@ -12,6 +12,7 @@
 #include <vector>
 #include <set>
 #include <map>
+#include <list>
 
 namespace strings {
 using namespace std;
@@ -92,5 +93,6 @@ using namespace std;
  };
  string Numeronym(const string& str);
  void OrganizeAlphaNumStr(string& str);
+ void Scribble(std::list<string>& words, const std::vector<char>& alphas);
 }
 #endif /* MAXNOY_STRINGS_H_ */
