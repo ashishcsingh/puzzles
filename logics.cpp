@@ -12,11 +12,13 @@ namespace logics {
 using namespace std;
 
 int GCD(int a, int b) {
-   while(1) {
-       if (a == 0) return b;
-       b %= a;
-       if (b == 0) return a;
-       a %= b;
+   while (1) {
+      if (a == 0)
+         return b;
+      b %= a;
+      if (b == 0)
+         return a;
+      a %= b;
    }
    return 0;
 }
@@ -28,13 +30,14 @@ int GCD(int a, int b) {
  *      count of all 1 steps + 2 steps + 3 steps
  */
 int CountStairSteps(int n) {
-   if(n < 0) {
+   if (n < 0) {
       return 0;
    }
-   if(n == 0) {
+   if (n == 0) {
       return 1;
    }
-   return CountStairSteps(n-1) + CountStairSteps(n-2) + CountStairSteps(n-3);
+   return CountStairSteps(n - 1) + CountStairSteps(n - 2)
+         + CountStairSteps(n - 3);
 }
 
 /*
@@ -42,17 +45,18 @@ int CountStairSteps(int n) {
  * How:  Store in steps[] and use it
  */
 int CountStairStepsDynamic_(int n, map<int, int>& steps) {
-   if(n < 0) {
+   if (n < 0) {
       return 0;
    }
-   if(n == 0) {
+   if (n == 0) {
       return 1;
    }
-   if(steps[n]!=0) {
+   if (steps[n] != 0) {
       return steps[n];
    }
-   steps[n] = CountStairStepsDynamic_(n-1, steps) + CountStairStepsDynamic_(n-2, steps)
-         + CountStairStepsDynamic_(n-3, steps);
+   steps[n] = CountStairStepsDynamic_(n - 1, steps)
+         + CountStairStepsDynamic_(n - 2, steps)
+         + CountStairStepsDynamic_(n - 3, steps);
    return steps[n];
 }
 
@@ -67,22 +71,24 @@ int CountStairStepsDynamic(int n) {
  */
 struct Point {
    int x_, y_;
-   Point(int x, int y): x_(x), y_(y) {}
+   Point(int x, int y) :
+         x_(x), y_(y) {
+   }
 };
 bool CountRobotMovesPossible(int x, int y, vector<Point>& paths) {
    Point point(x, y);
    paths.push_back(point);
    bool success = false;
-   if(x==0 && y==0) {
+   if (x == 0 && y == 0) {
       return true;
    }
-   if(x >=1) {
-      success = CountRobotMovesPossible(x-1, y, paths);
+   if (x >= 1) {
+      success = CountRobotMovesPossible(x - 1, y, paths);
    }
-   if(!success && y >=1) {
-      success = CountRobotMovesPossible(x, y-1, paths);
+   if (!success && y >= 1) {
+      success = CountRobotMovesPossible(x, y - 1, paths);
    }
-   if(!success) {
+   if (!success) {
       paths.pop_back();
    }
    return success;

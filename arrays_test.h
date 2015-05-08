@@ -8,5 +8,3 @@ namespace arrays {
 void Test_Arrays();
 }
 
-
-

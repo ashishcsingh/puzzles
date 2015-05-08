@@ -12,12 +12,7 @@
 #include <string>
 
 enum LOG_LEVEL {
-   DEBUG = 0,
-   TRIVIA,
-   VERBOSE,
-   INFO,
-   ERROR,
-   LOG_SIZE
+   DEBUG = 0, TRIVIA, VERBOSE, INFO, ERROR, LOG_SIZE
 };
 
 #ifndef GLOBAL_LOG_LEVEL

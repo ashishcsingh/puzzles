@@ -9,7 +9,7 @@
 #define MAXNOY_LINKEDLIST_TEST_H_
 
 namespace linkedlist {
-   void Test_LinkedLists();
+void Test_LinkedLists();
 }
 
 #endif /* MAXNOY_LINKEDLIST_TEST_H_ */

@@ -9,7 +9,7 @@
 #define MAXNOY_GRAPHS_TEST_H_
 
 namespace graphs {
-   void Test_Graphs();
+void Test_Graphs();
 }
 
 #endif /* MAXNOY_GRAPHS_TEST_H_ */

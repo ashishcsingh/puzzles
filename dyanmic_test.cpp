@@ -8,15 +8,15 @@
 
 namespace dymamic {
 int FactorialRecurse(int n) {
-   if(n <=1) {
+   if (n <= 1) {
       return 1;
    }
-   return n * FactorialRecurse(n-1);
+   return n * FactorialRecurse(n - 1);
 }
 
 int Fibonacci(int n) {
    int first = 1, second = 0, next;
-   for(int i=0; i<n; ++i) {
+   for (int i = 0; i < n; ++i) {
       next = first + second;
       first = second;
       second = next;
@@ -24,6 +24,4 @@ int Fibonacci(int n) {
    return next;
 }
 }
-
-
 

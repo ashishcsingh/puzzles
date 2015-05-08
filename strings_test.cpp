@@ -15,76 +15,75 @@ namespace strings {
 using namespace std;
 
 void Test_Reverse() {
-   cout<<"Started testing Test_Reverse()"<<endl;
+   cout << "Started testing Test_Reverse()" << endl;
    char str[10] = "Hello";
    str[6] = '\0';
    Reverse(str);
-   cout<<"Reverse of Hello : "<<str<<endl;
-   cout<<"Done testing Test_Reverse()"<<endl;
+   cout << "Reverse of Hello : " << str << endl;
+   cout << "Done testing Test_Reverse()" << endl;
 }
 
 void Test_StripWhitespace() {
-   cout<<"Started testing Test_StripWhitespace()"<<endl;
+   cout << "Started testing Test_StripWhitespace()" << endl;
    char str[] = "Hello World";
    StripWhitespace(str);
-   cout<<"StripWhitespace of \"Hello World\" : "<<str<<endl;
-   cout<<"Done testing Test_StripWhitespace()"<<endl;
+   cout << "StripWhitespace of \"Hello World\" : " << str << endl;
+   cout << "Done testing Test_StripWhitespace()" << endl;
 }
 
 void Test_RemoveDuplicate() {
-   cout<<"Started testing Test_RemoveDuplicate()"<<endl;
+   cout << "Started testing Test_RemoveDuplicate()" << endl;
    char str[] = "Hello World";
    RemoveDuplicate(str);
-   cout<<"RemoveDuplicate of \"Hello World\" : "<<str<<endl;
-   cout<<"Done testing Test_RemoveDuplicate()"<<endl;
+   cout << "RemoveDuplicate of \"Hello World\" : " << str << endl;
+   cout << "Done testing Test_RemoveDuplicate()" << endl;
 }
 
 void Test_FindFirstUnique() {
-   cout<<"Started testing Test_FindFirstUnique()"<<endl;
+   cout << "Started testing Test_FindFirstUnique()" << endl;
    // Positive testing
-   char str[] {"hehewoo"};
-   cout<<"Setting str = " << str<<endl;
+   char str[] { "hehewoo" };
+   cout << "Setting str = " << str << endl;
    char ret = FindFirstUnique(str);
-   assert(ret=='w');
-   cout<<"FindFirstUnique(str) returns "<<ret<<endl;
+   assert(ret == 'w');
+   cout << "FindFirstUnique(str) returns " << ret << endl;
    // Negative testing
-   char str2[] {};
-   assert(FindFirstUnique(str2)=='\0');
-   cout<<"Done testing Test_FindFirstUnique()"<<endl;
+   char str2[] { };
+   assert(FindFirstUnique(str2) == '\0');
+   cout << "Done testing Test_FindFirstUnique()" << endl;
 }
 
-
 void Test_FindFirstUniqueUnicode() {
-   cout<<"Started testing Test_FindFirstUniqueUnicode()"<<endl;
+   cout << "Started testing Test_FindFirstUniqueUnicode()" << endl;
    // Positive testing
    wchar_t str[] { 0x0061, 0x8161, 0x0061, 0 };
-   wcout<<"Setting str = " << str<<endl;
+   wcout << "Setting str = " << str << endl;
    wchar_t ret = FindFirstUniqueUnicode(str);
-   assert(ret==0x8161);
-   cout<<"FindFirstUnique(str) returns "<<ret<<endl;
-   cout<<"Done testing Test_FindFirstUnique()"<<endl;
+   assert(ret == 0x8161);
+   cout << "FindFirstUnique(str) returns " << ret << endl;
+   cout << "Done testing Test_FindFirstUnique()" << endl;
 }
 
 void Test_Atoi() {
-   cout<<"Started testing Test_Atoi()"<<endl;
-   cout<<"Integer string 1234 should be "<<Atoi("1234")<<endl;
-   cout<<"Integer string -1234 should be "<<Atoi("-1234")<<endl;
+   cout << "Started testing Test_Atoi()" << endl;
+   cout << "Integer string 1234 should be " << Atoi("1234") << endl;
+   cout << "Integer string -1234 should be " << Atoi("-1234") << endl;
    assert(Atoi("1234") == 1234);
    assert(Atoi("-1234") == -1234);
-   cout<<"Done testing Test_Atoi()"<<endl;
+   cout << "Done testing Test_Atoi()" << endl;
 }
 
 void Test_Itoa() {
-   cout<<"Started testing Test_Itoa()"<<endl;
-   cout<<"Integer string 1234 should be "<<Itoa(1234)<<endl;
-   cout<<"Integer string -1234 should be "<<Itoa(-1234)<<endl;
+   cout << "Started testing Test_Itoa()" << endl;
+   cout << "Integer string 1234 should be " << Itoa(1234) << endl;
+   cout << "Integer string -1234 should be " << Itoa(-1234) << endl;
    //assert(Itoa(1234) == "1234");
    //assert(Itoa(-1234) == "-1234");
-   cout<<"Done testing Test_Itoa()"<<endl;
+   cout << "Done testing Test_Itoa()" << endl;
 }
 
 void Test_WordSeperator() {
-   cout<<"Started testing Test_WordSeperator()"<<endl;
+   cout << "Started testing Test_WordSeperator()" << endl;
    set<string> dict;
    dict.insert("peanut");
    dict.insert("pea");
@@ -92,22 +91,22 @@ void Test_WordSeperator() {
    dict.insert("is");
    dict.insert("great");
    string test = "xpeanutbutterisgreat";
-   cout<<"Input string : "<<test<<endl;
+   cout << "Input string : " << test << endl;
    WordSeperator(test, dict);
-   cout<<"Output string : "<<test<<endl;
-   cout<<"Done testing Test_WordSeperator()"<<endl;
+   cout << "Output string : " << test << endl;
+   cout << "Done testing Test_WordSeperator()" << endl;
 }
 
 void Test_RemoveSpaces() {
-   cout<<"Started testing Test_RemoveSpaces()"<<endl;
+   cout << "Started testing Test_RemoveSpaces()" << endl;
    string str = "test is fun ";
    RemoveSpaces(str);
    assert(str.find(" ") == string::npos);
-   cout<<"Done testing Test_RemoveSpaces()"<<endl;
+   cout << "Done testing Test_RemoveSpaces()" << endl;
 }
 
 void Test_Trie() {
-   cout<<"Started testing Test_Trie()"<<endl;
+   cout << "Started testing Test_Trie()" << endl;
    Trie t;
    t.Push("Airplane");
    t.Push("Aircraft");
@@ -119,14 +118,14 @@ void Test_Trie() {
    assert(t.Exists("Zebra"));
    assert(t.Exists("Human") == false);
    assert(t.Exists("Air"));
-   cout<<"count match of -Air- : "<<t.CountMatches("Air")<<endl;
-   cout<<"count match of -A r- : "<<t.CountMatches("A r")<<endl;
-   cout<<"Done testing Test_Trie()"<<endl;
+   cout << "count match of -Air- : " << t.CountMatches("Air") << endl;
+   cout << "count match of -A r- : " << t.CountMatches("A r") << endl;
+   cout << "Done testing Test_Trie()" << endl;
 }
 
 void Test_PrintMatrixWords() {
-   cout<<"Started testing Test_PrintMatrixWords()"<<endl;
-   string matrix[] = {"ate","sad", "kit", "amo"};
+   cout << "Started testing Test_PrintMatrixWords()" << endl;
+   string matrix[] = { "ate", "sad", "kit", "amo" };
    Trie t;
    t.Push("at");
    t.Push("ate");
@@ -139,106 +138,112 @@ void Test_PrintMatrixWords() {
    t.Push("ask");
    t.Push("aim");
    PrintMatrixWords(matrix, t, 4);
-   cout<<"Done testing Test_PrintMatrixWords()"<<endl;
+   cout << "Done testing Test_PrintMatrixWords()" << endl;
 }
 
-
 void Test_UniqueCharacters() {
-   cout<<"Started testing Test_UniqueCharacters()"<<endl;
+   cout << "Started testing Test_UniqueCharacters()" << endl;
    string test = "aaabbcde";
-   cout<<"UniqueCharacters of "<<test<<" "<<UniqueCharacters(test)<<endl;
-   cout<<"Done testing Test_UniqueCharacters()"<<endl;
+   cout << "UniqueCharacters of " << test << " " << UniqueCharacters(test)
+         << endl;
+   cout << "Done testing Test_UniqueCharacters()" << endl;
 }
 
 void Test_UniqueCharactersNoSpace() {
-   cout<<"Started testing Test_UniqueCharactersNoSpace()"<<endl;
+   cout << "Started testing Test_UniqueCharactersNoSpace()" << endl;
    string test = "aaabbcde";
-   cout<<"UniqueCharacters of "<<test<<" "<<UniqueCharactersNoSpace(test)<<endl;
+   cout << "UniqueCharacters of " << test << " "
+         << UniqueCharactersNoSpace(test) << endl;
    test = "abcde";
-   cout<<"UniqueCharacters of "<<test<<" "<<UniqueCharactersNoSpace(test)<<endl;
-   cout<<"Done testing Test_UniqueCharactersNoSpace()"<<endl;
+   cout << "UniqueCharacters of " << test << " "
+         << UniqueCharactersNoSpace(test) << endl;
+   cout << "Done testing Test_UniqueCharactersNoSpace()" << endl;
 }
 
-
 void Test_UniqueCharactersCheck() {
-   cout<<"Started testing Test_UniqueCharactersCheck()"<<endl;
+   cout << "Started testing Test_UniqueCharactersCheck()" << endl;
    string test = "aaabbcde";
-   cout<<"UniqueCharacters of "<<test<<" "<<UniqueCharactersCheck(test)<<endl;
+   cout << "UniqueCharacters of " << test << " " << UniqueCharactersCheck(test)
+         << endl;
    test = "abcde";
-   cout<<"UniqueCharacters of "<<test<<" "<<UniqueCharactersCheck(test)<<endl;
-   cout<<"Done testing Test_UniqueCharactersCheck()"<<endl;
+   cout << "UniqueCharacters of " << test << " " << UniqueCharactersCheck(test)
+         << endl;
+   cout << "Done testing Test_UniqueCharactersCheck()" << endl;
 }
 
 void Test_ReverseString() {
-   cout<<"Started testing Test_ReverseString()"<<endl;
+   cout << "Started testing Test_ReverseString()" << endl;
    char test[] = "abcdef\0";
-   cout<<"ReverseString "<<test<<" : ";
+   cout << "ReverseString " << test << " : ";
    ReverseString(test);
-   cout<<test<<endl;
-   cout<<"Done testing Test_ReverseString()"<<endl;
+   cout << test << endl;
+   cout << "Done testing Test_ReverseString()" << endl;
 }
 
 void Test_Anagram() {
-   cout<<"Started testing Test_Anagram()"<<endl;
-   cout<<" Is Anagram(\"hahaha\", \"hahaha\") "<<Anagram("hahaha", "hahaha")<<endl;
-   cout<<" Is Anagram(\"hahahaba\", \"ha\") "<<Anagram("hahahaba", "ha")<<endl;
-   cout<<"Done testing Test_Anagram()"<<endl;
+   cout << "Started testing Test_Anagram()" << endl;
+   cout << " Is Anagram(\"hahaha\", \"hahaha\") " << Anagram("hahaha", "hahaha")
+         << endl;
+   cout << " Is Anagram(\"hahahaba\", \"ha\") " << Anagram("hahahaba", "ha")
+         << endl;
+   cout << "Done testing Test_Anagram()" << endl;
 }
 
 void Test_ReplaceSpaces() {
-   cout<<"Started testing Test_ReplaceSpaces()"<<endl;
-   cout<<"ReplaceSpaces \"a b\" : ";
+   cout << "Started testing Test_ReplaceSpaces()" << endl;
+   cout << "ReplaceSpaces \"a b\" : ";
    char test[] = "a b";
    int length = 3;
    char* newTest = new char[length + 2];
    strncpy(newTest, test, length);
    ReplaceSpaces(newTest, length);
    newTest[length + 3] = '\0';
-   cout<<newTest<<endl;
-   cout<<"Done testing Test_ReplaceSpaces()"<<endl;
+   cout << newTest << endl;
+   cout << "Done testing Test_ReplaceSpaces()" << endl;
 }
 
 void Test_CompressString() {
-   cout<<"Started testing Test_CompressString()"<<endl;
+   cout << "Started testing Test_CompressString()" << endl;
    string test = "aaaabbbbccc";
-   cout<<" Compress of "<<test<<" "<<CompressString(test)<<endl;
+   cout << " Compress of " << test << " " << CompressString(test) << endl;
    test = "abcde";
-   cout<<" Compress of "<<test<<" "<<CompressString(test)<<endl;
+   cout << " Compress of " << test << " " << CompressString(test) << endl;
    test = "aabbbbcccddda";
-   cout<<" Compress of "<<test<<" "<<CompressString(test)<<endl;
-   cout<<"Done testing Test_CompressString()"<<endl;
+   cout << " Compress of " << test << " " << CompressString(test) << endl;
+   cout << "Done testing Test_CompressString()" << endl;
 }
 
 void Test_IsRotatedSubstring() {
-   cout<<"Started testing Test_IsRotatedSubstring()"<<endl;
+   cout << "Started testing Test_IsRotatedSubstring()" << endl;
    string str1 = "abcd";
    string str2 = "cdab";
-   cout<<"IsRotatedSubstring("<<str1<<","<<str2<<") : "<<IsRotatedSubstring(str1, str2)<<endl;
+   cout << "IsRotatedSubstring(" << str1 << "," << str2 << ") : "
+         << IsRotatedSubstring(str1, str2) << endl;
    str2 = "cdabe";
-   cout<<"IsRotatedSubstring("<<str1<<","<<str2<<") : "<<IsRotatedSubstring(str1, str2)<<endl;
-   cout<<"Done testing Test_IsRotatedSubstring()"<<endl;
+   cout << "IsRotatedSubstring(" << str1 << "," << str2 << ") : "
+         << IsRotatedSubstring(str1, str2) << endl;
+   cout << "Done testing Test_IsRotatedSubstring()" << endl;
 }
 
 void Test_PrintPermutations() {
-   cout<<"Started testing Test_PrintPermutations()"<<endl;
+   cout << "Started testing Test_PrintPermutations()" << endl;
    char a[] = "ABC";
    PrintPermutations(a, 0, 2);
-   cout<<"Started testing Test_PrintPermutations()"<<endl;
+   cout << "Started testing Test_PrintPermutations()" << endl;
 }
 
-
 void Test_CheckPattern() {
-   cout<<"Started testing Test_CheckPattern()"<<endl;
-   assert(CheckPattern("a+b", "aaaab")==true);
-   assert(CheckPattern("a*b", "aaaab")==true);
-   assert(CheckPattern("ab", "ab")==true);
-   assert(CheckPattern("ab+c", "abbbbbc")==true);
-   assert(CheckPattern("a+b", "b")==false);
-   cout<<"Done testing Test_CheckPattern()"<<endl;
+   cout << "Started testing Test_CheckPattern()" << endl;
+   assert(CheckPattern("a+b", "aaaab") == true);
+   assert(CheckPattern("a*b", "aaaab") == true);
+   assert(CheckPattern("ab", "ab") == true);
+   assert(CheckPattern("ab+c", "abbbbbc") == true);
+   assert(CheckPattern("a+b", "b") == false);
+   cout << "Done testing Test_CheckPattern()" << endl;
 }
 
 void Test_KeepAnagramsTogether() {
-   cout<<"Start Test_KeepAnagramsTogether()"<<endl;
+   cout << "Start Test_KeepAnagramsTogether()" << endl;
    vector<string> testV;
    testV.push_back("cat");
    testV.push_back("act");
@@ -249,20 +254,20 @@ void Test_KeepAnagramsTogether() {
    testV.push_back("kutta");
    testV.push_back("chat");
    testV.push_back("hat");
-   cout<<"Before performing : "<<endl;
-   for(auto str: testV) {
-      cout<<str<<endl;
+   cout << "Before performing : " << endl;
+   for (auto str : testV) {
+      cout << str << endl;
    }
    KeepAnagramsTogether(testV);
-   cout<<"After performing : "<<endl;
-   for(auto str: testV) {
-      cout<<str<<endl;
+   cout << "After performing : " << endl;
+   for (auto str : testV) {
+      cout << str << endl;
    }
-   cout<<"Done Test_KeepAnagramsTogether()"<<endl;
+   cout << "Done Test_KeepAnagramsTogether()" << endl;
 }
 
 void Test_FindInSortedStringsWithSpace() {
-   cout<<"Start Test_FindInSortedStringsWithSpace"<<endl;
+   cout << "Start Test_FindInSortedStringsWithSpace" << endl;
    vector<string> strV;
    strV.push_back("Aello");
    strV.push_back("");
@@ -271,67 +276,69 @@ void Test_FindInSortedStringsWithSpace() {
    strV.push_back("");
    strV.push_back("");
    strV.push_back("Zpace");
-   cout<<"Borld exists : "<<FindInSortedStringsWithSpace(strV, 0, 6, "Borld")<<endl;
-   cout<<"jojo does not exist : "<<FindInSortedStringsWithSpace(strV, 0, 6, "jojo")<<endl;
-   cout<<"Done Test_FindInSortedStringsWithSpace"<<endl;
+   cout << "Borld exists : "
+         << FindInSortedStringsWithSpace(strV, 0, 6, "Borld") << endl;
+   cout << "jojo does not exist : "
+         << FindInSortedStringsWithSpace(strV, 0, 6, "jojo") << endl;
+   cout << "Done Test_FindInSortedStringsWithSpace" << endl;
 }
 
 void Test_LongestPalindrome() {
-   cout<<"Start Test_LongestPalindrome"<<endl;
+   cout << "Start Test_LongestPalindrome" << endl;
    string s("baalaabassdfd");
-   cout<<LongestPalindrome(s)<<endl;
-   cout<<"Done Test_LongestPalindrome"<<endl;
+   cout << LongestPalindrome(s) << endl;
+   cout << "Done Test_LongestPalindrome" << endl;
 }
 
 void Test_FromRoman() {
-   cout<<"Start Test_FromRoman"<<endl;
-   cout<<"IV "<<Roman::FromRoman("IV")<<endl;
-   cout<<"V "<<Roman::FromRoman("V")<<endl;
-   cout<<"VI "<<Roman::FromRoman("VI")<<endl;
-   cout<<"CV "<<Roman::FromRoman("CV")<<endl;
-   cout<<"Done Test_FromRoman"<<endl;
+   cout << "Start Test_FromRoman" << endl;
+   cout << "IV " << Roman::FromRoman("IV") << endl;
+   cout << "V " << Roman::FromRoman("V") << endl;
+   cout << "VI " << Roman::FromRoman("VI") << endl;
+   cout << "CV " << Roman::FromRoman("CV") << endl;
+   cout << "Done Test_FromRoman" << endl;
 }
 
 void Test_ToRoman() {
-   cout<<"Start Test_ToRoman"<<endl;
-   cout<<"IV "<<Roman::ToRoman(4)<<endl;
-   cout<<"V "<<Roman::ToRoman(5)<<endl;
-   cout<<"VI "<<Roman::ToRoman(6)<<endl;
+   cout << "Start Test_ToRoman" << endl;
+   cout << "IV " << Roman::ToRoman(4) << endl;
+   cout << "V " << Roman::ToRoman(5) << endl;
+   cout << "VI " << Roman::ToRoman(6) << endl;
    //cout<<"CV "<<Roman::ToRoman(105)<<endl;
-   cout<<"Done Test_ToRoman"<<endl;
+   cout << "Done Test_ToRoman" << endl;
 }
 
 void Test_Numeronym() {
-   cout<<"Start Test_Numeronym"<<endl;
-   cout<<"Numeronym(hello): "<<Numeronym("hello")<<endl;
-   cout<<"Numeronym(house): "<<Numeronym("house")<<endl;
-   cout<<"Numeronym(de): "<<Numeronym("de")<<endl;
-   cout<<"Numeronym(sdfdfdfdf): "<<Numeronym("sdfdfdfdf")<<endl;
-   cout<<"Done Test_Numeronym"<<endl;
+   cout << "Start Test_Numeronym" << endl;
+   cout << "Numeronym(hello): " << Numeronym("hello") << endl;
+   cout << "Numeronym(house): " << Numeronym("house") << endl;
+   cout << "Numeronym(de): " << Numeronym("de") << endl;
+   cout << "Numeronym(sdfdfdfdf): " << Numeronym("sdfdfdfdf") << endl;
+   cout << "Done Test_Numeronym" << endl;
 }
 
 void Test_OrganizeAlphaNumStr() {
-   cout<<"Start Test_OrganizeAlphaNumStr"<<endl;
+   cout << "Start Test_OrganizeAlphaNumStr" << endl;
    string str("a1b2c3d4");
-   cout<<"Before : "<<str<<endl;
+   cout << "Before : " << str << endl;
    OrganizeAlphaNumStr(str);
-   cout<<"After : "<<str<<endl;
-   cout<<"Done Test_OrganizeAlphaNumStr"<<endl;
+   cout << "After : " << str << endl;
+   cout << "Done Test_OrganizeAlphaNumStr" << endl;
 }
 
 void Test_Scribble() {
-   cout<<"Start Test_Scribble"<<endl;
+   cout << "Start Test_Scribble" << endl;
    list<string> words;
    words.push_back("stop");
    words.push_back("act");
    words.push_back("cac");
-   vector<char> alphas{'a','c','t'};
+   vector<char> alphas { 'a', 'c', 't' };
    Scribble(words, alphas);
-   cout<<"Left words"<<endl;
-   for(auto word: words) {
-      cout<<word<<endl;
+   cout << "Left words" << endl;
+   for (auto word : words) {
+      cout << word << endl;
    }
-   cout<<"Done Test_Scribble"<<endl;
+   cout << "Done Test_Scribble" << endl;
 }
 
 void Test_Strings() {

@@ -25,26 +25,26 @@ using namespace std;
  * 3. *head is now the new node
  */
 void Insert(Node** head, int data) {
-  Node* node = new Node(data);
-  node->next_ = *head;
-  *head = node;
-  return;
+   Node* node = new Node(data);
+   node->next_ = *head;
+   *head = node;
+   return;
 }
 
 /*
  * Print all the nodes starting head
  */
 void Print(Node** head) {
-   if(head==nullptr || *head==nullptr) {
+   if (head == nullptr || *head == nullptr) {
       return;
    }
    Node* node = *head;
-   std::cout<<"Printing nodes :";
-   while(node) {
-      std::cout<<" "<<node->data_;
+   std::cout << "Printing nodes :";
+   while (node) {
+      std::cout << " " << node->data_;
       node = node->next_;
    }
-   std::cout<<std::endl;
+   std::cout << std::endl;
 }
 
 /*
@@ -67,20 +67,20 @@ void QueueUsingTwoStacks::Enque(int e) {
  *        here.
  */
 int QueueUsingTwoStacks::Deque() {
-   if(deq_.empty()) {
-      if(!enq_.empty()) {
-         for(int i=0; i<enq_.size(); ++i) {
+   if (deq_.empty()) {
+      if (!enq_.empty()) {
+         for (int i = 0; i < enq_.size(); ++i) {
             deq_.push(enq_.top());
             enq_.pop();
          }
       }
    }
-   if(!deq_.empty()) {
+   if (!deq_.empty()) {
       int ret = deq_.top();
       deq_.pop();
       return ret;
    }
-   cerr<<"Queue empty"<<endl;
+   cerr << "Queue empty" << endl;
    return -1;
 }
 
@@ -100,24 +100,23 @@ int QueueUsingTwoStacks::Deque() {
 void Split(Node* head, int pivot, Node** lt, Node** gt) {
    *lt = nullptr;
    *gt = nullptr;
-   if(!head) {
+   if (!head) {
       return;
    }
    Node* node = head;
    Node* lNode = nullptr;
    Node* gNode = nullptr;
-   while(node!=nullptr) {
-      if(node->data_ < pivot) {
-         if(*lt==nullptr) {
+   while (node != nullptr) {
+      if (node->data_ < pivot) {
+         if (*lt == nullptr) {
             *lt = node;
             lNode = node;
          } else {
             lNode->next_ = node;
             lNode = lNode->next_;
          }
-      }
-      else {
-         if(*gt==nullptr) {
+      } else {
+         if (*gt == nullptr) {
             *gt = node;
             gNode = node;
          } else {
@@ -148,8 +147,8 @@ bool Delete(Node** head, int deleteMe) {
    }
    Node* node = *head;
    //Either *head is nullptr or non null with non deleteMe
-   while(node && node->next_) {
-      if(node->next_->data_ == deleteMe) {
+   while (node && node->next_) {
+      if (node->next_->data_ == deleteMe) {
          Node* temp = node->next_;
          node->next_ = node->next_->next_;
          delete temp;
@@ -165,11 +164,11 @@ bool Delete(Node** head, int deleteMe) {
  * 3. Stop at end.
  */
 void Clear(Node** head) {
-   if (head==nullptr || *head==nullptr) {
+   if (head == nullptr || *head == nullptr) {
       return;
    }
    Node* node = *head;
-   while(node!=nullptr) {
+   while (node != nullptr) {
       Node* temp = node;
       node = node->next_;
       delete temp;
@@ -184,19 +183,19 @@ void Clear(Node** head) {
  * 3. If it doesn't then stop
  */
 bool HasCycle(Node* node) {
-   if(node==nullptr || node->next_==nullptr) {
+   if (node == nullptr || node->next_ == nullptr) {
       return false;
    }
    Node* node1 = node;
    Node* node2 = node;
    do {
-      if(node2==nullptr || node2->next_==nullptr) {
+      if (node2 == nullptr || node2->next_ == nullptr) {
          return false;
       } else {
          node2 = node2->next_->next_;
       }
       node1 = node1->next_;
-   } while (node1!= node2);
+   } while (node1 != node2);
    return true;
 }
 
@@ -206,7 +205,7 @@ bool HasCycle(Node* node) {
 bool StackGrowsUp() {
    int a = 5;
    int b = 6;
-   if(&a < &b) {
+   if (&a < &b) {
       return true;
    } else {
       return false;
@@ -219,7 +218,7 @@ bool StackGrowsUp() {
 bool HeapGrowsUp() {
    int* a = new int(5);
    int* b = new int(6);
-   if(a < b) {
+   if (a < b) {
       return true;
    } else {
       return false;
@@ -236,19 +235,19 @@ bool HeapGrowsUp() {
  * Returns: nullptr when there is a loop else the middle
  */
 Node* FindMiddle(Node* node) {
-   if(node==nullptr || node->next_==nullptr) {
+   if (node == nullptr || node->next_ == nullptr) {
       return nullptr;
    }
    Node* node1 = node;
    Node* node2 = node;
    do {
-      if(node2==nullptr || node2->next_==nullptr) {
+      if (node2 == nullptr || node2->next_ == nullptr) {
          return node1;
       } else {
          node2 = node2->next_->next_;
       }
       node1 = node1->next_;
-   } while (node1!= node2);
+   } while (node1 != node2);
    return nullptr;
 }
 
@@ -259,7 +258,7 @@ Node* FindMiddle(Node* node) {
  */
 int Length(Node* node) {
    int len = 0;
-   while(node) {
+   while (node) {
       ++len;
       node = node->next_;
    }
@@ -279,16 +278,16 @@ int Length(Node* node) {
  *      9. When both stack-empty and end then return true
  */
 bool IsPalindrom(Node* head) {
-   if(head==nullptr || head->next_==nullptr) {
+   if (head == nullptr || head->next_ == nullptr) {
       return true;
    }
    Node* first = head;
    Node* second = head;
    stack<int> s;
    do {
-      if(second) {
+      if (second) {
          // Progress
-         if(second->next_) {
+         if (second->next_) {
             second = second->next_->next_;
          } else {
             // Odd break
@@ -301,19 +300,19 @@ bool IsPalindrom(Node* head) {
       }
       s.push(first->data_);
       first = first->next_;
-   } while(true);
+   } while (true);
    // Now check stack with the other half
-   while(true) {
+   while (true) {
       // Positive end condition
-      if(first==nullptr && s.empty()) {
+      if (first == nullptr && s.empty()) {
          return true;
       }
       // Negative end condition
-      if(first==nullptr || s.empty()) {
+      if (first == nullptr || s.empty()) {
          return false;
       }
       // Negative condition
-      if(s.top() != first->data_) {
+      if (s.top() != first->data_) {
          return false;
       }
       s.pop();
@@ -326,19 +325,19 @@ int SumLinkedList(Node* l1, Node* l2) {
    int len2 = Length(l2);
    Node* temp1 = l1;
    Node* temp2 = l2;
-   if(len1 < len2) {
-      for(int i=0; i<len1; ++i) {
+   if (len1 < len2) {
+      for (int i = 0; i < len1; ++i) {
          temp1 = temp1->next_;
       }
-      for(int i=0; i<len2 - len1; ++i) {
+      for (int i = 0; i < len2 - len1; ++i) {
          temp1->next_ = new Node(0);
          temp1 = temp1->next_;
       }
-   } else if(len1 > len2) {
-      for(int i=0; i<len2; ++i) {
+   } else if (len1 > len2) {
+      for (int i = 0; i < len2; ++i) {
          temp2 = temp2->next_;
       }
-      for(int i=0; i<len1 - len2; ++i) {
+      for (int i = 0; i < len1 - len2; ++i) {
          temp2->next_ = new Node(0);
          temp2 = temp2->next_;
       }
@@ -353,12 +352,12 @@ int SumLinkedList(Node* l1, Node* l2) {
  * How:    base->next = prev after stepping node, prev
  */
 void Reverse(Node** head) {
-   if(head==nullptr || *head==nullptr) {
+   if (head == nullptr || *head == nullptr) {
       return;
    }
    Node* node = *head;
    Node *prev = nullptr, *base = nullptr;
-   while(node) {
+   while (node) {
       base = node;
       node = node->next_;
       // The important action for each iteration
@@ -367,7 +366,6 @@ void Reverse(Node** head) {
    }
    *head = prev;
 }
-
 
 /*
  * What:  SumLinkedListReverse(Node* l1, Node* l2)
@@ -381,18 +379,18 @@ void Reverse(Node** head) {
 int SumLinkedListReverse(Node* l1, Node* l2) {
    stack<int> s;
    int sum = 0, carry = 0;
-   while(l1!=nullptr || l2!=nullptr) {
+   while (l1 != nullptr || l2 != nullptr) {
       sum = carry;
       carry = 0;
-      if(l1) {
+      if (l1) {
          sum = l1->data_;
          l1 = l1->next_;
       }
-      if(l2) {
+      if (l2) {
          sum += l2->data_;
          l2 = l2->next_;
       }
-      if(sum > 9) {
+      if (sum > 9) {
          carry = 1;
          sum = sum % 10;
       }
@@ -400,7 +398,7 @@ int SumLinkedListReverse(Node* l1, Node* l2) {
    }
    s.push(carry);
    sum = 0;
-   while(!s.empty()) {
+   while (!s.empty()) {
       sum *= 10;
       sum += s.top();
       s.pop();
@@ -418,29 +416,29 @@ int SumLinkedListReverse(Node* l1, Node* l2) {
  *
  */
 int DistanceFromLoop(Node* head) {
-   if(head==nullptr) {
+   if (head == nullptr) {
       return 0;
    }
    Node *slow = head, *fast = head;
    // Initialize slow and fast with 1 and 2 jumps
-   if(slow) {
+   if (slow) {
       slow = slow->next_;
    } else {
       return 0;
    }
-   if(fast->next_) {
+   if (fast->next_) {
       fast = fast->next_->next_;
    } else {
       return 0;
    }
    // Detect loop
-   while(slow!=fast) {
-      if(slow) {
+   while (slow != fast) {
+      if (slow) {
          slow = slow->next_;
       } else {
          return 0;
       }
-      if(fast && fast->next_) {
+      if (fast && fast->next_) {
          fast = fast->next_->next_;
       } else {
          return 0;
@@ -449,7 +447,7 @@ int DistanceFromLoop(Node* head) {
    // Find distance from start
    slow = head;
    int k = 0;
-   while(slow!=fast) {
+   while (slow != fast) {
       slow = slow->next_;
       fast = fast->next_;
       ++k;
@@ -465,36 +463,45 @@ int DistanceFromLoop(Node* head) {
  *       when next is bigger and current is smaller insert
  */
 void InsertDataInSortedCircularList(Node** root, int data) {
-   Log(VERBOSE, "[InsertDataInSortedCircularList] To insert " + to_string(data));
+   Log(VERBOSE,
+         "[InsertDataInSortedCircularList] To insert " + to_string(data));
    Node* dataNode = new Node(data);
    // First element when root is null
-   if(*root==nullptr) {
+   if (*root == nullptr) {
       *root = dataNode;
       dataNode->next_ = dataNode;
-      Log(VERBOSE, "[InsertDataInSortedCircularList] Inserted "+to_string(data)+" at root");
+      Log(VERBOSE,
+            "[InsertDataInSortedCircularList] Inserted " + to_string(data)
+                  + " at root");
       return;
    }
    // start has bigger values then insert at start
-   if((*root)->data_ >= data) {
+   if ((*root)->data_ >= data) {
       dataNode->next_ = *root;
       (*root)->next_ = dataNode;
       *root = dataNode;
-      Log(VERBOSE, "[InsertDataInSortedCircularList] Inserted "+to_string(data)+" at start");
+      Log(VERBOSE,
+            "[InsertDataInSortedCircularList] Inserted " + to_string(data)
+                  + " at start");
       return;
    }
    Node* node = *root;
-   while(node!=nullptr) {
+   while (node != nullptr) {
       // next is bigger than data and current is smaller then insert between
-      if(node->next_->data_ >= data) {
+      if (node->next_->data_ >= data) {
          dataNode->next_ = node->next_;
          node->next_ = dataNode;
-         Log(VERBOSE, "[InsertDataInSortedCircularList] Inserted "+to_string(data)+" between ");
+         Log(VERBOSE,
+               "[InsertDataInSortedCircularList] Inserted " + to_string(data)
+                     + " between ");
          return;
-      } else if(node->next_== *root) {
+      } else if (node->next_ == *root) {
          // Insert at the end
          dataNode->next_ = node->next_;
          node->next_ = dataNode;
-         Log(VERBOSE, "[InsertDataInSortedCircularList] Inserted "+to_string(data)+" at end ");
+         Log(VERBOSE,
+               "[InsertDataInSortedCircularList] Inserted " + to_string(data)
+                     + " at end ");
          return;
       } else {
          node = node->next_;
@@ -506,23 +513,25 @@ void InsertDataInSortedCircularList(Node** root, int data) {
 /*
  * What: Gets all leaf ids populated in children
  */
-void GetAllSubChildren(map<int, vector<int>>& parentChildren, int id, set<int>& children) {
+void GetAllSubChildren(map<int, vector<int>>& parentChildren, int id,
+      set<int>& children) {
    children.insert(id);
    children.insert(parentChildren[id].begin(), parentChildren[id].end());
-   Log(VERBOSE, "[GetAllSubChildren] Processing "+to_string(id));
-   for(auto i : children) {
-      if(parentChildren.count(i) > 0) {
+   Log(VERBOSE, "[GetAllSubChildren] Processing " + to_string(id));
+   for (auto i : children) {
+      if (parentChildren.count(i) > 0) {
          vector<int>& grandChildren = parentChildren[i];
-         for(auto gChild: grandChildren) {
+         for (auto gChild : grandChildren) {
             if (children.count(gChild) == 0) {
-               Log(VERBOSE, "[GetAllSubChildren] Processing grand of "+to_string(gChild));
+               Log(VERBOSE,
+                     "[GetAllSubChildren] Processing grand of "
+                           + to_string(gChild));
                GetAllSubChildren(parentChildren, gChild, children);
             }
          }
       }
    }
 }
-
 
 /*
  * What: PrintSubTreeWeights
@@ -531,38 +540,44 @@ void GetAllSubChildren(map<int, vector<int>>& parentChildren, int id, set<int>& 
  */
 void PrintSubTreeWeights(const list<NodeWithWeight>& nodes) {
    // Populate parent to children relation
-   Log(VERBOSE, "[PrintSubTreeWeights] Nodes with length "+to_string(nodes.size()));
-   map<int,vector<int>> parentChildren;
-   for(auto& node: nodes) {
+   Log(VERBOSE,
+         "[PrintSubTreeWeights] Nodes with length " + to_string(nodes.size()));
+   map<int, vector<int>> parentChildren;
+   for (auto& node : nodes) {
       parentChildren[node.parent_].push_back(node.id_);
    }
-   Log(VERBOSE, "[PrintSubTreeWeights] Map with length "+to_string(parentChildren.size()));
+   Log(VERBOSE,
+         "[PrintSubTreeWeights] Map with length "
+               + to_string(parentChildren.size()));
    // For each node get all its subtrees' id
-   for(auto& node: nodes) {
+   for (auto& node : nodes) {
       set<int> children;
       Log(VERBOSE, "[PrintSubTreeWeights] Getting children"
-            " for id "+to_string(node.id_));
+            " for id " + to_string(node.id_));
       // Getting all children
       GetAllSubChildren(parentChildren, node.id_, children);
       children.insert(node.id_);
-      Log(VERBOSE, "[PrintSubTreeWeights] Got "+to_string(children.size())+" children"
-            " for id "+to_string(node.id_));
+      Log(VERBOSE,
+            "[PrintSubTreeWeights] Got " + to_string(children.size())
+                  + " children"
+                        " for id " + to_string(node.id_));
       int weight = 0;
       // Then get weight of each sub children
-      for(auto id: children) {
+      for (auto id : children) {
          // Get weight by looping into nodes
-         for(auto& nodeI: nodes) {
-            if(nodeI.id_ == id) {
-               weight+= nodeI.weight_;
-               Log(VERBOSE, "[PrintSubTreeWeights] Got weight"
-                     " for id "+to_string(nodeI.weight_)+" for "+to_string(nodeI.id_));
+         for (auto& nodeI : nodes) {
+            if (nodeI.id_ == id) {
+               weight += nodeI.weight_;
+               Log(VERBOSE,
+                     "[PrintSubTreeWeights] Got weight"
+                           " for id " + to_string(nodeI.weight_) + " for "
+                           + to_string(nodeI.id_));
             }
          }
       }
-      cout<<"Node : "<<node.id_<<" sub-tree weight: "<<weight<<endl;
+      cout << "Node : " << node.id_ << " sub-tree weight: " << weight << endl;
    }
 }
 
 }
-
 

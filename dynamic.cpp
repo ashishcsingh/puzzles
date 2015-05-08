@@ -8,12 +8,8 @@
 #include "dynamic.h"
 #include <cmath>
 
-
 namespace dynamic {
 using namespace std;
 
 }
-
-
-
 

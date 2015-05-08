@@ -11,6 +11,4 @@
 namespace dynamic {
 }
 
-
-
 #endif /* MAXNOY_DYNAMIC_H_ */

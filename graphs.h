@@ -13,18 +13,24 @@
 namespace graphs {
 
 struct BNode {
-   BNode* left_{nullptr};
-   BNode* right_{nullptr};
-   int data_{0};
-   BNode(int data):data_{data}{};
+   BNode* left_ { nullptr };
+   BNode* right_ { nullptr };
+   int data_ { 0 };
+   BNode(int data) :
+         data_ { data } {
+   }
+   ;
 };
 
 struct DNode {
-   DNode* left_{nullptr};
-   DNode* right_{nullptr};
-   DNode* parent_{nullptr};
-   int data_{0};
-   DNode(int data):data_{data}{};
+   DNode* left_ { nullptr };
+   DNode* right_ { nullptr };
+   DNode* parent_ { nullptr };
+   int data_ { 0 };
+   DNode(int data) :
+         data_ { data } {
+   }
+   ;
 };
 
 void Insert(BNode** root, int data);
@@ -60,16 +66,19 @@ void BinarySearchInsertion(BNode** bnodeAddr, int array[], int start, int end);
 BNode* BinarySearchInsertion2(int array[], int start, int end);
 BNode** SortedArrayToBst2(int array[], int length);
 int NextSuccessor(BNode* root, int node);
-std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights, int src, int dest);
-
+std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights,
+      int src, int dest);
 
 //Graph
 struct GNode {
-   GNode(int data): data_{data} {}
-   GNode() {}
-   GNode** neighbors_{nullptr};
-   int length_{0};
-   int data_{0};
+   GNode(int data) :
+         data_ { data } {
+   }
+   GNode() {
+   }
+   GNode** neighbors_ { nullptr };
+   int length_ { 0 };
+   int data_ { 0 };
 };
 
 bool PathToNodes(GNode* src, GNode* dest);

@@ -9,7 +9,7 @@
 
 void Log(LOG_LEVEL level, std::string msg) {
    if (GLOBAL_LOG_LEVEL <= level) {
-      std::cout<<msg<<std::endl;
+      std::cout << msg << std::endl;
    }
 }
 

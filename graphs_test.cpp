@@ -13,19 +13,19 @@ namespace graphs {
 using namespace std;
 
 void Test_Insert() {
-   cout<<"Started testing Test_Insert()"<<endl;
+   cout << "Started testing Test_Insert()" << endl;
    BNode* bnode = nullptr;
    Insert(&bnode, 5);
    Insert(&bnode, 1);
    Insert(&bnode, 2);
    Insert(&bnode, 8);
    Insert(&bnode, 3);
-   assert(bnode->data_==5);
-   assert(bnode->left_->data_==1);
-   assert(bnode->right_->data_==8);
-   assert(bnode->left_->right_->data_==2);
-   assert(bnode->left_->right_->right_->data_==3);
-   cout<<"Done testing Test_Insert()"<<endl;
+   assert(bnode->data_ == 5);
+   assert(bnode->left_->data_ == 1);
+   assert(bnode->right_->data_ == 8);
+   assert(bnode->left_->right_->data_ == 2);
+   assert(bnode->left_->right_->right_->data_ == 3);
+   cout << "Done testing Test_Insert()" << endl;
 }
 
 /*
@@ -64,8 +64,6 @@ BNode** Test_Insert2() {
    //cout<<"Done testing Test_Insert2()"<<endl;
    return bnodeAddr;
 }
-
-
 
 /*
  *                100
@@ -112,7 +110,7 @@ DNode** Test_Insert2D() {
 }
 
 void Test_PreOrder() {
-   cout<<"Started testing Test_PreOrder()"<<endl;
+   cout << "Started testing Test_PreOrder()" << endl;
    BNode* bnode = nullptr;
    Insert(&bnode, 5);
    Insert(&bnode, 1);
@@ -120,11 +118,11 @@ void Test_PreOrder() {
    Insert(&bnode, 8);
    Insert(&bnode, 3);
    PreOrder(bnode);
-   cout<<"Done testing Test_PreOrder()"<<endl;
+   cout << "Done testing Test_PreOrder()" << endl;
 }
 
 void Test_InOrder() {
-   cout<<"Started testing Test_InOrder()"<<endl;
+   cout << "Started testing Test_InOrder()" << endl;
    BNode* bnode = nullptr;
    Insert(&bnode, 5);
    Insert(&bnode, 1);
@@ -132,11 +130,11 @@ void Test_InOrder() {
    Insert(&bnode, 8);
    Insert(&bnode, 3);
    InOrder(bnode);
-   cout<<"Done testing Test_InOrder()"<<endl;
+   cout << "Done testing Test_InOrder()" << endl;
 }
 
 void Test_PostOrder() {
-   cout<<"Started testing Test_PostOrder()"<<endl;
+   cout << "Started testing Test_PostOrder()" << endl;
    BNode* bnode = nullptr;
    Insert(&bnode, 5);
    Insert(&bnode, 1);
@@ -144,11 +142,11 @@ void Test_PostOrder() {
    Insert(&bnode, 8);
    Insert(&bnode, 3);
    PostOrder(bnode);
-   cout<<"Done testing Test_PostOrder()"<<endl;
+   cout << "Done testing Test_PostOrder()" << endl;
 }
 
 void Test_Bfs() {
-   cout<<"Started testing Test_Bfs()"<<endl;
+   cout << "Started testing Test_Bfs()" << endl;
    BNode* bnode = nullptr;
    Insert(&bnode, 5);
    Insert(&bnode, 1);
@@ -157,11 +155,11 @@ void Test_Bfs() {
    Insert(&bnode, 3);
    Bfs(bnode, 8);
    Bfs(bnode, 3);
-   cout<<"Done testing Test_Bfs()"<<endl;
+   cout << "Done testing Test_Bfs()" << endl;
 }
 
 void Test_BfsPrint() {
-   cout<<"Started testing Test_BfsPrint()"<<endl;
+   cout << "Started testing Test_BfsPrint()" << endl;
    BNode* bnode = nullptr;
    Insert(&bnode, 5);
    Insert(&bnode, 1);
@@ -169,12 +167,11 @@ void Test_BfsPrint() {
    Insert(&bnode, 8);
    Insert(&bnode, 3);
    BfsPrint(bnode);
-   cout<<endl<<"Done testing Test_BfsPrint()"<<endl;
+   cout << endl << "Done testing Test_BfsPrint()" << endl;
 }
 
-
 void Test_DfsPrint() {
-   cout<<"Started testing Test_DfsPrint()"<<endl;
+   cout << "Started testing Test_DfsPrint()" << endl;
    BNode* bnode = nullptr;
    Insert(&bnode, 5);
    Insert(&bnode, 1);
@@ -182,11 +179,11 @@ void Test_DfsPrint() {
    Insert(&bnode, 8);
    Insert(&bnode, 3);
    DfsPrint(bnode);
-   cout<<endl<<"Done testing Test_DfsPrint()"<<endl;
+   cout << endl << "Done testing Test_DfsPrint()" << endl;
 }
 
 void Test_LevelOrdering() {
-   cout<<"Started testing Test_LevelOrdering()"<<endl;
+   cout << "Started testing Test_LevelOrdering()" << endl;
    BNode* bnode = nullptr;
    Insert(&bnode, 5);
    Insert(&bnode, 1);
@@ -194,11 +191,11 @@ void Test_LevelOrdering() {
    Insert(&bnode, 8);
    Insert(&bnode, 3);
    LevelOrdering(bnode);
-   cout<<endl<<"Done testing Test_LevelOrdering()"<<endl;
+   cout << endl << "Done testing Test_LevelOrdering()" << endl;
 }
 
 void Test_RightSibling() {
-   cout<<"Started testing Test_RightSibling()"<<endl;
+   cout << "Started testing Test_RightSibling()" << endl;
    BNode* bnode = nullptr;
    Insert(&bnode, 5);
    Insert(&bnode, 1);
@@ -206,19 +203,19 @@ void Test_RightSibling() {
    Insert(&bnode, 8);
    Insert(&bnode, 3);
    RightSibling(bnode, 1);
-   cout<<endl<<"Done testing Test_RightSibling()"<<endl;
+   cout << endl << "Done testing Test_RightSibling()" << endl;
 }
 
 void Test_RightSibling2() {
-   cout<<"Started testing Test_RightSibling2()"<<endl;
+   cout << "Started testing Test_RightSibling2()" << endl;
    BNode** bnodeAddr = Test_Insert2();
    assert(RightSibling(*bnodeAddr, 7) == 12);
    assert(RightSibling(*bnodeAddr, 20) == -1);
-   cout<<endl<<"Done testing Test_RightSibling2()"<<endl;
+   cout << endl << "Done testing Test_RightSibling2()" << endl;
 }
 
 void Test_Dfs() {
-   cout<<"Started testing Test_Dfs()"<<endl;
+   cout << "Started testing Test_Dfs()" << endl;
    BNode* bnode = nullptr;
    Insert(&bnode, 5);
    Insert(&bnode, 1);
@@ -227,12 +224,11 @@ void Test_Dfs() {
    Insert(&bnode, 3);
    Dfs(bnode, 8);
    Dfs(bnode, 3);
-   cout<<"Done testing Test_Dfs()"<<endl;
+   cout << "Done testing Test_Dfs()" << endl;
 }
 
-
 void Test_DfsRecursive() {
-   cout<<"Started testing Test_DfsRecursive()"<<endl;
+   cout << "Started testing Test_DfsRecursive()" << endl;
    BNode* bnode = nullptr;
    Insert(&bnode, 5);
    Insert(&bnode, 1);
@@ -241,35 +237,35 @@ void Test_DfsRecursive() {
    Insert(&bnode, 3);
    DfsRecursive(bnode, 8);
    DfsRecursive(bnode, 3);
-   cout<<"Done testing Test_DfsRecursive()"<<endl;
+   cout << "Done testing Test_DfsRecursive()" << endl;
 }
 
 void Test_VerticalOrdering() {
-   cout<<"Started testing Test_VerticalOrdering()"<<endl;
+   cout << "Started testing Test_VerticalOrdering()" << endl;
    BNode** bnodeAddr = Test_Insert2();
    VerticalOrdering(*bnodeAddr);
-   cout<<"Done testing Test_VerticalOrdering()"<<endl;
+   cout << "Done testing Test_VerticalOrdering()" << endl;
 }
 
 void Test_IsBst() {
-   cout<<"Started testing Test_IsBst()"<<endl;
+   cout << "Started testing Test_IsBst()" << endl;
    BNode** bnodeAddr = Test_Insert2();
-   if(IsBst(*bnodeAddr)) {
-      cout<<"The passed tree is BST"<<endl;
+   if (IsBst(*bnodeAddr)) {
+      cout << "The passed tree is BST" << endl;
    } else {
-      cout<<"The passed tree is NOT BST"<<endl;
+      cout << "The passed tree is NOT BST" << endl;
    }
-   cout<<"Done testing Test_IsBst()"<<endl;
+   cout << "Done testing Test_IsBst()" << endl;
 }
 
 void Test_IsBalanced() {
-   cout<<"Started testing Test_IsBalanced()"<<endl;
+   cout << "Started testing Test_IsBalanced()" << endl;
    //Positive testing
    BNode** bnodeAddr = Test_Insert2();
-   if(IsBalanced(*bnodeAddr)) {
-      cout<<"The first passed tree is balanced"<<endl;
+   if (IsBalanced(*bnodeAddr)) {
+      cout << "The first passed tree is balanced" << endl;
    } else {
-      cout<<"The first passed tree is NOT balanced"<<endl;
+      cout << "The first passed tree is NOT balanced" << endl;
    }
    //Negative testing
    BNode* bnode = nullptr;
@@ -278,80 +274,80 @@ void Test_IsBalanced() {
    Insert(&bnode, 2);
    Insert(&bnode, 8);
    Insert(&bnode, 3);
-   if(IsBalanced(bnode)) {
-      cout<<"The second passed tree is balanced"<<endl;
+   if (IsBalanced(bnode)) {
+      cout << "The second passed tree is balanced" << endl;
    } else {
-      cout<<"The second passed tree is NOT balanced"<<endl;
+      cout << "The second passed tree is NOT balanced" << endl;
    }
-   cout<<"Done testing Test_IsBalanced()"<<endl;
+   cout << "Done testing Test_IsBalanced()" << endl;
 }
 
 void Test_Lca() {
-   cout<<"Started testing Test_Lca()"<<endl;
+   cout << "Started testing Test_Lca()" << endl;
    BNode** bnodeAddr = Test_Insert2();
    assert(Lca(*bnodeAddr, 11, 20) == 15);
    assert(Lca(*bnodeAddr, 6, 12) == 10);
    assert(Lca(*bnodeAddr, 3, 8) == 5);
    //assert(Lca(*bnodeAddr, 5, 8) == 5);
-   cout<<"LCA of 5 and 8 "<<Lca(*bnodeAddr, 5,8)<<endl;
-   cout<<"Done testing Test_Lca()"<<endl;
+   cout << "LCA of 5 and 8 " << Lca(*bnodeAddr, 5, 8) << endl;
+   cout << "Done testing Test_Lca()" << endl;
 }
 
 void Test_LcaD() {
-   cout<<"Started testing Test_LcaD()"<<endl;
+   cout << "Started testing Test_LcaD()" << endl;
    DNode** dnodeAddr = Test_Insert2D();
    assert(LcaD(*dnodeAddr, 11, 20) == 15);
    assert(LcaD(*dnodeAddr, 6, 12) == 10);
    assert(LcaD(*dnodeAddr, 3, 8) == 5);
    assert(LcaD(*dnodeAddr, 5, 8) == 5);
-   cout<<"LCAD of 5 and 8 "<<LcaD(*dnodeAddr, 5,8)<<endl;
-   cout<<"Done testing Test_LcaD()"<<endl;
+   cout << "LCAD of 5 and 8 " << LcaD(*dnodeAddr, 5, 8) << endl;
+   cout << "Done testing Test_LcaD()" << endl;
 }
 
 void Test_LcaDForrest() {
-   cout<<"Started testing Test_LcaDForrest()"<<endl;
+   cout << "Started testing Test_LcaDForrest()" << endl;
    DNode** dnodeAddr1 = Test_Insert2D();
    DNode** dnodeAddr2 = Test_Insert3D();
-   DNode* forrest[] = {*dnodeAddr1, *dnodeAddr2};
-   assert(LcaDForrest(forrest[0],2, 11, 20) == 15);
-   assert(LcaDForrest(forrest[0],2, 6, 12) == 10);
-   assert(LcaDForrest(forrest[0],2, 10, 103) == -1);
-   cout<<"Done testing Test_LcaDForrest()"<<endl;
+   DNode* forrest[] = { *dnodeAddr1, *dnodeAddr2 };
+   assert(LcaDForrest(forrest[0], 2, 11, 20) == 15);
+   assert(LcaDForrest(forrest[0], 2, 6, 12) == 10);
+   assert(LcaDForrest(forrest[0], 2, 10, 103) == -1);
+   cout << "Done testing Test_LcaDForrest()" << endl;
 }
 
 void Test_SortedArrayToBst() {
-   cout<<"Started testing Test_SortedArrayToBst()"<<endl;
+   cout << "Started testing Test_SortedArrayToBst()" << endl;
    //int array[] = {1,2,3,4,5,6,7,8};
-   int array[] = {1,2,3};
-   int length = sizeof(array)/sizeof(int);
+   int array[] = { 1, 2, 3 };
+   int length = sizeof(array) / sizeof(int);
    BNode** bnodeAddr = SortedArrayToBst(array, length);
    LevelOrdering(*bnodeAddr);
-   cout<<"Done testing Test_SortedArrayToBst()"<<endl;
+   cout << "Done testing Test_SortedArrayToBst()" << endl;
 }
 
 void Test_SortedArrayToBst2() {
-   cout<<"Started testing Test_SortedArrayToBst2()"<<endl;
-   int array[] = {1,2,3,4,5,6,7,8};
+   cout << "Started testing Test_SortedArrayToBst2()" << endl;
+   int array[] = { 1, 2, 3, 4, 5, 6, 7, 8 };
    //int array[] = {1,2,3};
-   int length = sizeof(array)/sizeof(int);
+   int length = sizeof(array) / sizeof(int);
    BNode** bnodeAddr = SortedArrayToBst2(array, length);
    LevelOrdering(*bnodeAddr);
-   cout<<"Done testing Test_SortedArrayToBst2()"<<endl;
+   cout << "Done testing Test_SortedArrayToBst2()" << endl;
 }
 
 void Test_NextSuccessor() {
-   cout<<"Started testing Test_NextSuccessor()"<<endl;
+   cout << "Started testing Test_NextSuccessor()" << endl;
    BNode** bnodeAddr = Test_Insert2();
    LevelOrdering(*bnodeAddr);
    assert(NextSuccessor(*bnodeAddr, 7) == 12);
    assert(NextSuccessor(*bnodeAddr, 5) == 15);
    assert(NextSuccessor(*bnodeAddr, 20) == 1);
    assert(NextSuccessor(*bnodeAddr, 105) == -1);
-   cout<<"Done testing Test_NextSuccessor()"<<endl;
+   cout << "Done testing Test_NextSuccessor()" << endl;
 }
 
 void Test_PathToNodes() {
-   cout<<"Started testing Test_PathToNodes()"<<endl;
+   cout << "Started testing Test_PathToNodes()" << endl;
    GNode** gnodeAddr = new (GNode*);
    *gnodeAddr = new GNode[4];
    (*gnodeAddr)[0].data_ = 0;
@@ -368,43 +364,39 @@ void Test_PathToNodes() {
    (*gnodeAddr)[2].length_ = 1;
    (*gnodeAddr)[2].neighbors_[0] = &(*gnodeAddr)[3];
 
-   cout<<"Testing path from Node 0 to Node 3 : "<<PathToNodes(&(*gnodeAddr)[0], &(*gnodeAddr)[3])<<endl;
-   delete []*gnodeAddr;
-   cout<<"Done testing Test_PathToNodes()"<<endl;
+   cout << "Testing path from Node 0 to Node 3 : "
+         << PathToNodes(&(*gnodeAddr)[0], &(*gnodeAddr)[3]) << endl;
+   delete[] *gnodeAddr;
+   cout << "Done testing Test_PathToNodes()" << endl;
 }
-
 
 // To Do:
 void Test_MatchTree() {
-   cout<<"Started testing Test_MatchTree()"<<endl;
-   cout<<"Done testing Test_MatchTree()"<<endl;
+   cout << "Started testing Test_MatchTree()" << endl;
+   cout << "Done testing Test_MatchTree()" << endl;
 }
 
 void Test_CountNodesInBST() {
-   cout<<"Start testing Test_CountNodesInBST()"<<endl;
+   cout << "Start testing Test_CountNodesInBST()" << endl;
    BNode** bnode = Test_Insert2();
-   cout<<"CountNodesInBST(bnode, 2, 20) : "<<CountNodesInBST(*bnode, 1, 22)<<endl;
-   cout<<"Done testing Test_CountNodesInBST()"<<endl;
+   cout << "CountNodesInBST(bnode, 2, 20) : " << CountNodesInBST(*bnode, 1, 22)
+         << endl;
+   cout << "Done testing Test_CountNodesInBST()" << endl;
 }
 
 void Test_ShortestPathDjkstras() {
-   cout<<"Start Test_ShortestPathDjkstras()"<<endl;
+   cout << "Start Test_ShortestPathDjkstras()" << endl;
    // A -> B-> C-> D
    // A-> C-> D
-   vector<vector<int> > weights {
-      {0, 1, 1, 1000},
-      {1000, 0, 1, 1000},
-      {1000, 1000, 0, 1},
-      {1000, 1000, 1000, 1000}
-   };
+   vector<vector<int> > weights { { 0, 1, 1, 1000 }, { 1000, 0, 1, 1000 }, {
+         1000, 1000, 0, 1 }, { 1000, 1000, 1000, 1000 } };
    auto path = ShortestPathDjkstras(weights, 0, 3);
-   for(auto move: path) {
-      cout<<" "<<move;
+   for (auto move : path) {
+      cout << " " << move;
    }
-   cout<<endl;
-   cout<<"Done Test_ShortestPathDjkstras()"<<endl;
+   cout << endl;
+   cout << "Done Test_ShortestPathDjkstras()" << endl;
 }
-
 
 void Test_Graphs() {
 #ifdef TEST_DONE
