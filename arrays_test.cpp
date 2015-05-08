@@ -380,11 +380,6 @@ void Test_NegativePositiveOrganizer() {
    cout<<"Done Test_NegativePositiveOrganizer()"<<endl;
 }
 
-void Test_ShortestPathDjkstras() {
-   cout<<"Start Test_ShortestPathDjkstras()"<<endl;
-   cout<<"Done Test_ShortestPathDjkstras()"<<endl;
-}
-
 
 void Test_PrintDigonalMatrix() {
    cout<<"Start Test_PrintDigonalMatrix()"<<endl;
@@ -461,6 +456,17 @@ void Test_QueueUsingArray() {
    cout<<"Done Test_QueueUsingArray()"<<endl;
 }
 
+void Test_SortIncDecPairs() {
+   cout<<"Start Test_SortIncDecPairs()"<<endl;
+   vector<int> data {1, 2, 3, 4, 5, 6};
+   SortIncDecPairs(data);
+   for(auto val : data) {
+      cout<<val<<" ";
+   }
+   cout<<endl;
+   cout<<"Done Test_SortIncDecPairs()"<<endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -491,13 +497,13 @@ void Test_Arrays() {
    Test_GetEmployeesForManager();
    Test_EvenIndicesAsMax();
    Test_NegativePositiveOrganizer();
-   Test_ShortestPathDjkstras();
    Test_PrintDigonalMatrix();
    Test_Median();
    Test_MatrixFillDistanceFromG();
    Test_MaxRepeatVal();
 #endif
    Test_QueueUsingArray();
+   Test_SortIncDecPairs();
 }
 }
 

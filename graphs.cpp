@@ -9,6 +9,8 @@
 #include <stack>
 #include <deque>
 #include <set>
+#include <list>
+
 #include "graphs.h"
 
 namespace graphs {
@@ -709,6 +711,69 @@ int CountNodesInBST(BNode* root, int start, int end) {
    }
    count+= CountNodesInBST(root->left_, start, end) + CountNodesInBST(root->right_, start, end);
    return count;
+}
+
+
+/* What: Finds the shortest path from src to dest nodes
+ *       weights contain adjencency matrix with weights
+ *       For not connected nodes add high cost
+ * How:  distance[] and previous[] maintains the cost to move from source
+ *       previous nodes details.
+ *       Take out unvisited node from src with lowest distance cost
+ *       update distance[] and previous[] for any traversal via a neighbor node
+ *       Keep exploring till you visited all the nodes
+ *       When computing path from dest node in previous[],
+ *       keep exploring all the nodes till source
+ *       Reverse the constructed path
+ */
+std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights, int src, int dest) {
+   // Initialize weights, previous and distance
+   int length = weights.size();
+   vector<int> distance(length, INT_MAX), previous (length, -1);
+   list<int> unvisited;
+   unvisited.push_back(src);
+   distance[src] = 0;
+   for(int v=0; v<length; ++v) {
+      unvisited.push_back(v);
+   }
+   // Algorithm
+   while(!unvisited.empty()) {
+      // Find the closest node
+      int min = INT_MAX, u = -1, v;
+      for(auto v: unvisited) {
+         if(min > distance[v]) {
+            min = distance[v];
+            u = v;
+         }
+      }
+      // Update distance cost
+      for(v=0; v<length; ++v) {
+         int distUToV = distance[u] + weights[u][v];
+         if(distance[v] > distUToV) {
+            previous[v] = u;
+            distance[v] = distUToV;
+         }
+      }
+      unvisited.remove(u);
+   }
+   // Get path from previous array
+   vector<int> path;
+   int prev = dest;
+   for(int i=0; i<length; ++i) {
+      path.push_back(prev);
+      if (prev == src) {
+         break;
+      }
+      prev = previous[prev];
+   }
+   // Reverse path
+   int i = 0, j = path.size() - 1;
+   while(i < j) {
+      swap(path[i], path[j]);
+      ++i;
+      --j;
+   }
+   return path;
 }
 
 }

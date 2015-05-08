@@ -73,6 +73,7 @@ private:
 };
 
 void ClosestNumbers(const std::vector<std::vector<int>>& in, std::vector<int>& out);
+void SortIncDecPairs(std::vector<int>& data);
 
 }
 #endif /* MAXNOY_ARRAYS_H_ */

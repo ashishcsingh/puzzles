@@ -8,6 +8,8 @@
 #ifndef MAXNOY_BTREE_H_
 #define MAXNOY_BTREE_H_
 
+#include <vector>
+
 namespace graphs {
 
 struct BNode {
@@ -58,6 +60,7 @@ void BinarySearchInsertion(BNode** bnodeAddr, int array[], int start, int end);
 BNode* BinarySearchInsertion2(int array[], int start, int end);
 BNode** SortedArrayToBst2(int array[], int length);
 int NextSuccessor(BNode* root, int node);
+std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights, int src, int dest);
 
 
 //Graph

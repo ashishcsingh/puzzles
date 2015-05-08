@@ -7,10 +7,10 @@
 int main() {
 #ifdef TEST_DONE
    logics::Test_Logics();
-   graphs::Test_Graphs();
+   linkedlist::Test_LinkedLists();
+   strings::Test_Strings();
 #endif
-   //linkedlist::Test_LinkedLists();
+   graphs::Test_Graphs();
    arrays::Test_Arrays();
-   //strings::Test_Strings();
    return 0;
 }

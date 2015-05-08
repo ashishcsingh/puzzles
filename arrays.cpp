@@ -842,69 +842,6 @@ using namespace std;
       }
    }
 
-   /* What: Finds the shortest path from src to dest nodes
-    *       weights contain adjencency matrix with weights
-    *       For not connected nodes add high cost
-    * How:  distance[] and previous[] maintains the cost to move from source
-    *       previous nodes details.
-    *       Take out unvisited node from src with lowest distance cost
-    *       update distance[] and previous[] for any traversal via a neighbor node
-    *       Keep exploring till you visited all the nodes
-    *       When computing path from dest node in previous[],
-    *       keep exploring all the nodes till source
-    *       Reverse the constructed path
-    */
-   std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights, int src, int dest) {
-      // Initialize weights, previous and distance
-      int length = weights.size();
-      vector<int> distance(length, INT_MAX), previous (length, -1);
-      list<int> unvisited;
-      unvisited.push_back(src);
-      distance[src] = 0;
-      for(int v=0; v<length; ++v) {
-         unvisited.push_back(v);
-         distance[v] = weights[src][v];
-      }
-      unvisited.remove(src);
-      // Algorithm
-      while(!unvisited.empty()) {
-         // Find the closest node
-         int min = INT_MAX, u = -1, v;
-         for(auto v: unvisited) {
-            if(min > distance[v]) {
-               min = distance[v];
-               u = v;
-            }
-         }
-         // Update distance cost
-         for(v=0; v<length; ++v) {
-            int distUToV = distance[u] + weights[u][v];
-            if(distance[v] > distUToV) {
-               previous[v] = u;
-               distance[v] = distUToV;
-            }
-         }
-         unvisited.remove(u);
-      }
-      // Get path from previous array
-      vector<int> path;
-      int prev = dest;
-      for(int i=0; i<length; ++i) {
-         path.push_back(prev);
-         if (prev == src) {
-            break;
-         }
-         prev = previous[prev];
-      }
-      // Reverse path
-      int i = 0, j = path.size() - 1;
-      while(i < j) {
-         swap(path[i], path[j]);
-         ++i;
-         --j;
-      }
-      return path;
-   }
    /*
     * What: Prints digonal values in a NxN matrix
     *       1,2,3
@@ -1153,6 +1090,28 @@ using namespace std;
          out[i] = in[i][bestMinIndex[i]];
       }
    }
+
+   /*
+    * What: Sort this way: s1<=s2>=s3<=s4>=s5
+    * How:  Read 3 digits and move by 2 digit
+    */
+   void SortIncDecPairs(std::vector<int>& data) {
+      for(int i=0; i<data.size(); i+=2) {
+         if(i < data.size() - 2) {
+            if(data[i] > data[i+1]) {
+               swap(data[i], data[i+1]);
+            }
+            if(data[i+1] < data[i+2]) {
+               swap(data[i+1], data[i+2]);
+            }
+         } else if(i < data.size() - 1) {
+            if(data[i] > data[i+1]) {
+               swap(data[i], data[i+1]);
+            }
+         }
+      }
+   }
+
 }
 
 

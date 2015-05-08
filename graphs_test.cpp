@@ -387,6 +387,25 @@ void Test_CountNodesInBST() {
    cout<<"Done testing Test_CountNodesInBST()"<<endl;
 }
 
+void Test_ShortestPathDjkstras() {
+   cout<<"Start Test_ShortestPathDjkstras()"<<endl;
+   // A -> B-> C-> D
+   // A-> C-> D
+   vector<vector<int> > weights {
+      {0, 1, 1, 1000},
+      {1000, 0, 1, 1000},
+      {1000, 1000, 0, 1},
+      {1000, 1000, 1000, 1000}
+   };
+   auto path = ShortestPathDjkstras(weights, 0, 3);
+   for(auto move: path) {
+      cout<<" "<<move;
+   }
+   cout<<endl;
+   cout<<"Done Test_ShortestPathDjkstras()"<<endl;
+}
+
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -414,7 +433,7 @@ void Test_Graphs() {
    Test_PathToNodes();
    Test_MatchTree();
 #endif
-
+   Test_ShortestPathDjkstras();
    Test_CountNodesInBST();
 }
 
