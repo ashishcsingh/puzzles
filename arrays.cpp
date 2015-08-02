@@ -559,6 +559,105 @@ void EightQueens(int row, vector<int>& cols, vector<vector<int>>& results) {
    }
 }
 
+
+/*
+ * What: Merges two parts of the same array
+ * How: Move on smaller values and copy the left overs
+ */
+void MergeSortedArrays(int data[], int start1, int end1, int start2, int end2) {
+   int length = end1 - start1 + 1 + end2 - start2 + 1;
+   int place[length];
+   int i = start1, j = start2, k = 0;
+   // Move whatever is less between both the parts
+   while (i <= end1 && j <= end2) {
+      if(data[i] < data[j]) {
+         place[k] = data[i];
+         ++i;
+      } else {
+         place[k] = data[j];
+         ++j;
+      }
+      ++k;
+   }
+   // Move left overs in the first part
+   for(; i <= end1; ++i) {
+      place[k] = data[i];
+      ++k;
+   }
+   // Move left overs in the second part
+   for(; j <= end2; ++j) {
+      place[k] = data[j];
+      ++k;
+   }
+   // Copy place[] to data[]
+   for(k=0; k<=(end1 - start1); ++k) {
+      data[start1 + k] = place[k];
+   }
+   int startOfSecondArray = end1 - start1 + 1;
+   for(k=0; k<=(end2 - start2); ++k) {
+      data[start2 + k] = place[k + startOfSecondArray];
+   }
+
+}
+
+/*
+ * What: Quick Sort implementation
+ * How:  Find a pivot element at center and swap all bigger elems
+ *       on left with smaller elem on right then appropriately place
+ *       pivot at its right location. This elem is placed at the right
+ *       location respective to all elems. Apply the same quick sort around
+ *       this new bound that is new pivot for both on left and right.
+ */
+int Partition(int data[], int start, int end) {
+   int pivot = (start + end) / 2;
+   int pivotElem = data[pivot];
+   int i = start, j = end;
+   while(i <= j) {
+      // Find ith location that is bigger on left
+      while(data[i] <= pivotElem) {
+         ++i;
+      }
+      // Find jth location that is smaller on right
+      while(data[j] >= pivotElem) {
+         --j;
+      }
+      // Swap them
+      if(i <= j) {
+         swap(data[i], data[j]);
+         ++i;
+         --j;
+      }
+   }
+   return i;
+}
+
+/*
+ * What: Quick Sort the data
+ * How:  Calculate a pivot at center then
+ *       quick sort around this new pivot.
+ */
+void QuickSort(int data[], int start, int end) {
+   if(start < end) {
+      int pivot = Partition(data, start, end);
+      QuickSort(data, start, pivot - 1);
+      QuickSort(data, pivot, end);
+   }
+}
+
+/*
+ * What: Merge Sort implementation
+ * How: First sort the current data recursively into two arrays
+ *      then merge the two sorted arrays back.
+ */
+void MergeSort(int data[], int start, int end) {
+   if(end > start) {
+      int center = (end - start) / 2 + start;
+      MergeSort(data, start, center);
+      MergeSort(data, center + 1, end);
+      MergeSortedArrays(data, start, center, center + 1, end);
+   }
+}
+
 /*
  * What: Merge sorted array A and B and store into A
  * How:  Use merge sort and keep on storing into A

@@ -468,6 +468,38 @@ void Test_SortIncDecPairs() {
    cout << "Done Test_SortIncDecPairs()" << endl;
 }
 
+void Test_MergeSort() {
+   cout << "Start Test_MergeSort()" << endl;
+   int data[] {5, 4, 3 , 2, 1};
+   cout<<"before: "<<endl;
+   for(int i=0; i<5; ++i ) {
+      cout << data[i]<< " ";
+   }
+   MergeSort(data, 0, 4);
+   cout<<endl<<"after: "<<endl;
+   for(int i=0; i<5; ++i ) {
+      cout << data[i]<< " ";
+   }
+   cout<<endl;
+   cout << "Done Test_MergeSort()" << endl;
+}
+
+void Test_QuickSort() {
+   cout << "Start Test_QuickSort()" << endl;
+   int data[] {5, 4, 3 , 2, 1};
+   cout<<"before: "<<endl;
+   for(int i=0; i<5; ++i ) {
+      cout << data[i]<< " ";
+   }
+   QuickSort(data, 0, 4);
+   cout<<endl<<"after: "<<endl;
+   for(int i=0; i<5; ++i ) {
+      cout << data[i]<< " ";
+   }
+   cout<<endl;
+   cout << "Done Test_QuickSort()" << endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -502,9 +534,11 @@ void Test_Arrays() {
    Test_Median();
    Test_MatrixFillDistanceFromG();
    Test_MaxRepeatVal();
-#endif
    Test_QueueUsingArray();
    Test_SortIncDecPairs();
+#endif
+   Test_MergeSort();
+   Test_QuickSort();
 }
 }
 

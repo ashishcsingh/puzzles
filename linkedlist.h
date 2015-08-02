@@ -17,6 +17,7 @@ void Insert(Node**, int);
 bool Delete(Node**, int);
 int Length(Node* node);
 void Reverse(Node**);
+void DeleteVal(Node **head, int val);
 void Print(Node**);
 void Clear(Node**);
 void Split(Node* head, int pivot, Node** lt, Node** gt);

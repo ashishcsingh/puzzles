@@ -41,6 +41,11 @@ const static int MAX_QUEENS = 8;
 void EightQueens(int row, std::vector<int>& col,
       std::vector<std::vector<int>>& results);
 void MergeSortLargeAToB(int A[], int lenA, int B[], int lenB);
+void MergeSortedArrays(int data[], int start1, int end1, int start2, int end2);
+int Partition(int data[], int start, int end);
+void QuickSort(int data[], int start, int end);
+void quickSort(int arr[], int left, int right);
+void MergeSort(int data[], int start, int end);
 int FindInRotatedSortedArray(int[], int start, int end, int find);
 int ReverseNum(int x);
 void Merge(int A[], int m, int B[], int n);

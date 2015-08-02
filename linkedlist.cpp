@@ -47,6 +47,21 @@ void Print(Node** head) {
    std::cout << std::endl;
 }
 
+
+/*
+ * What: Remove data with val in list
+ */
+void DeleteVal(Node** head, int val) {
+   Node *prev, *node = *head, *temp;
+   while(node!= nullptr) {
+      if(node->next_ && node->next_->data_ == val) {
+         temp = node->next_;
+         node->next_ = node->next_->next_;
+         delete temp;
+      }
+      node = node->next_;
+   }
+}
 /*
  * What: Enque(int a)
  *       Inserts a into Queue formed by two stacks
