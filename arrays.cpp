@@ -256,9 +256,6 @@ long SumNLargest(int* data, int size, int n) {
    int digits[10];
    memset(digits, 0, 10 * sizeof(int));
    for (int i = 0; i < size; ++i) {
-      if (i < 0 && i > 9) {
-         return -1;
-      }
       digits[data[i]]++;
    }
    long sum = 0;

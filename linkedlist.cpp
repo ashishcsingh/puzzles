@@ -52,7 +52,7 @@ void Print(Node** head) {
  * What: Remove data with val in list
  */
 void DeleteVal(Node** head, int val) {
-   Node *prev, *node = *head, *temp;
+   Node *node = *head, *temp;
    while(node!= nullptr) {
       if(node->next_ && node->next_->data_ == val) {
          temp = node->next_;

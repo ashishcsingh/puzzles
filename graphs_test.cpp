@@ -398,6 +398,28 @@ void Test_ShortestPathDjkstras() {
    cout << "Done Test_ShortestPathDjkstras()" << endl;
 }
 
+void Test_Serialize() {
+   cout << "Start Test_Serialize()" << endl;
+   // A -> B-> C
+   SerializeNode* A = new SerializeNode();
+   A->string = "A";
+   SerializeNode* B = new SerializeNode();
+   B->string = "B";
+   SerializeNode* C = new SerializeNode();
+   C->string = "C";
+   A->child.push_back(B);
+   B->child.push_back(C);
+   vector<SerializedNode> snodes;
+   Serialize(A, snodes);
+   SerializeNode* root = Deserialize(snodes);
+   cout<<root->string<<" -> "<<root->child[0]->string<<" -> "
+         <<root->child[0]->child[0]->string<<endl;
+   cout << "Done Test_Serialize()" << endl;
+}
+
+
+
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -424,9 +446,10 @@ void Test_Graphs() {
    Test_NextSuccessor();
    Test_PathToNodes();
    Test_MatchTree();
-#endif
    Test_ShortestPathDjkstras();
    Test_CountNodesInBST();
+#endif
+   Test_Serialize();
 }
 
 }

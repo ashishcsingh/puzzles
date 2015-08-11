@@ -9,7 +9,8 @@
 #define MAXNOY_BTREE_H_
 
 #include <vector>
-
+#include <string>
+#include <memory>
 namespace graphs {
 
 struct BNode {
@@ -32,6 +33,22 @@ struct DNode {
    }
    ;
 };
+
+// To serialize a graph
+struct SerializeNode {
+   std::string string;
+   std::vector<SerializeNode*> child;
+};
+
+// Using the following
+struct SerializedNode {
+   std::string string;
+   int id;
+   int parent;
+};
+
+void Serialize(SerializeNode* root, std::vector<SerializedNode>& snodes);
+SerializeNode* Deserialize(std::vector<SerializedNode>& snodes);
 
 void Insert(BNode** root, int data);
 void PreOrder(BNode* root);

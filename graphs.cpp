@@ -10,12 +10,19 @@
 #include <deque>
 #include <set>
 #include <list>
+#include <map>
 
 #include "graphs.h"
+#include "log.h"
 
 namespace graphs {
 using namespace std;
 
+/*
+ * What: Bfs
+ * How: Explore tree using BFS
+ *      Using queue.
+ */
 BNode* Bfs(BNode* root, int data) {
    if (root == nullptr) {
       return nullptr;
@@ -64,6 +71,87 @@ void BfsPrint(BNode* root) {
       }
    }
 }
+
+/*
+ * What: Serialize a graph with string data
+ * How: Assign an id and parent id.
+ *      Traverse tree using DFS
+ *      Keep assigning a new id to the current node and set
+ *      parentId as the parent's id. Use map to identify parents.
+ *
+ */
+void Serialize(SerializeNode* root, vector<SerializedNode>& snodes) {
+   if(root == nullptr) {
+      return;
+   }
+   cout<<"Test input "<<root->string<<" -> "<<root->child[0]->string<<" -> "
+         <<root->child[0]->child[0]->string<<endl;
+   // Maps ids for parent linking.
+   std::map<SerializeNode*, int> smap;
+   SerializedNode snode;
+   // root's parent is 0.
+   int sequencer = 0;
+   int parentSequence = sequencer;
+   snode.parent = parentSequence;
+   // node/root's id starts with 1.
+   snode.id = ++sequencer;
+   snode.string = root->string;
+   // storing for linking parentId.
+   smap[root] = snode.id;
+   stack<SerializeNode*> s;
+   snodes.push_back(snode);
+   s.push(root);
+   while(!s.empty()) {
+      SerializeNode* node = s.top();
+      s.pop();
+      parentSequence = smap[node];
+      // Explore all children and add to serialized;
+      for(auto child: node->child) {
+         snode.parent = parentSequence;
+         snode.id = ++sequencer;
+         snode.string = child->string;
+         smap[child] = snode.id;
+         snodes.push_back(snode);
+         s.push(child);
+      }
+   }
+   for(auto n: snodes) {
+      Log(VERBOSE, "[Serialize] string " + n.string);
+      Log(VERBOSE, "[Serialize] id " + to_string(n.id));
+      Log(VERBOSE, "[Serialize] parent " + to_string(n.parent));
+   }
+}
+
+
+/*
+ * What: Deserialize
+ * How:  Load into a map
+ *       While traversing vector<SerializedNode>
+ *       keep on referring parent to add a child node.
+ */
+SerializeNode* Deserialize(vector<SerializedNode>& snodes) {
+   map<int, SerializeNode*> smap;
+   SerializeNode* root = nullptr;
+   for(auto snode: snodes) {
+      if(smap.count(snode.id) == 0) {
+         Log(VERBOSE, "[Deserialize] string " + snode.string);
+         Log(VERBOSE, "[Deserialize] id " + to_string(snode.id));
+         Log(VERBOSE, "[Deserialize] parent " + to_string(snode.parent));
+         SerializeNode* node = new SerializeNode();
+         node->string = snode.string;
+         smap[snode.id] = node;
+      }
+   }
+   for(auto snode: snodes) {
+      if(snode.parent == 0) {
+         root = smap[snode.id];
+         continue;
+      }
+      smap[snode.parent]->child.push_back(smap[snode.id]);
+   }
+   return root;
+}
+
 
 void DfsPrint(BNode* root) {
    if (root == nullptr) {
