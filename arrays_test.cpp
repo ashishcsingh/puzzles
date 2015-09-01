@@ -500,6 +500,38 @@ void Test_QuickSort() {
    cout << "Done Test_QuickSort()" << endl;
 }
 
+void Test_FindMissingNum() {
+   cout << "Start Test_FindMissingNum()" << endl;
+   vector<int> data {1,3,6,4,1,2};
+   cout <<"The missing one is : "<<FindMissingNum(data)<<endl;
+   cout << "Done Test_FindMissingNum()" << endl;
+}
+
+void Test_CounterWithMax() {
+   cout << "Start Test_CounterWithMax()" << endl;
+   vector<int> data {1,3,6,4,1,2};
+   cout <<"The missing one is : "<<endl;
+   auto output = CounterWithMax(5, data);
+   for(auto o: output) {
+      cout<<o<<" ";
+   }
+   cout <<endl<< "Done Test_CounterWithMax()" << endl;
+}
+
+void Test_CountUniques() {
+   cout << "Start Test_CountUniques()" << endl;
+   vector<int> data {1,3,6,4,1,2};
+   cout<<"Unique elements : "<<CountUniques(data);
+   cout <<endl<< "Done Test_CountUniques()" << endl;
+}
+
+void Test_FindMaxSumInRange() {
+   cout << "Start Test_FindMaxSumInRange()" << endl;
+   vector<int> data {1,-3,6,-4,1,2};
+   cout<<"MaxRange is : "<<FindMaxSumInRange(data);
+   cout <<endl<< "Done Test_FindMaxSumInRange()" << endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -536,9 +568,13 @@ void Test_Arrays() {
    Test_MaxRepeatVal();
    Test_QueueUsingArray();
    Test_SortIncDecPairs();
-#endif
    Test_MergeSort();
    Test_QuickSort();
+#endif
+   Test_FindMissingNum();
+   Test_CounterWithMax();
+   Test_CountUniques();
+   Test_FindMaxSumInRange();
 }
 }
 

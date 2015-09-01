@@ -18,6 +18,7 @@
 #include <list>
 #include <climits>
 #include <utility>
+#include <unordered_set>
 
 namespace arrays {
 using namespace std;
@@ -1215,5 +1216,83 @@ void SortIncDecPairs(std::vector<int>& data) {
    }
 }
 
+
+/*
+ * What: unorderd number, with one repeating, then find missing.
+ * How: Mark the location and then find the missing.
+ */
+int FindMissingNum(std::vector<int>& data) {
+   vector<int> count(data.size(), 0);
+   // Mark at location a - 1.
+   for(auto a: data) {
+       count[a - 1]++;
+   }
+   // The unincremented value is the return.
+   for(unsigned i = 0; i < count.size(); ++i) {
+       if(count[i] == 0) {
+           return i + 1;
+       }
+   }
+   return -1;
+}
+
+/*
+ * What:
+ *    A non-empty zero-indexed array A of M integers is given.
+ *    This array represents consecutive operations:
+ *    if A[K] = X, such that 1 ≤ X ≤ N, then operation K is increase(X),
+ *    if A[K] = N + 1 then operation K is max counter.
+ * How: When found N+1 set max for all.
+ *      Store in Counter the new value and also keep track of max.
+ */
+vector<int> CounterWithMax(int N, std::vector<int>& data) {
+    // write your code in C++11
+    vector<int> markers(N, 0);
+    int max = 0;
+    for(auto a: data) {
+        if (a > N) {
+            for(auto& c: markers) {
+                c = max;
+            }
+            continue;
+        }
+        int temp = ++markers[a - 1];
+        if(temp > max) {
+            max = temp;
+        }
+    }
+    return markers;
+}
+
+/*
+ * What: In an array find count of uniques
+ * How: using unordered_set
+ */
+int CountUniques(std::vector<int>& data) {
+   // write your code in C++11
+   unordered_set<int> unique;
+   for(auto a: data) {
+       unique.insert(a);
+   }
+   return unique.size();
+}
+
+/*
+ * What: Find Max in an array from any range.
+ * How:
+ *   for(i=0 to a.length)
+ *    maxEnding = max (0, maxEnding + a[i]);
+ *    maxSlice = max (maxEnding, maxSlice);
+ *    Complexity O(n)
+ *
+ */
+int FindMaxSumInRange(vector<int>& data) {
+   int maxEnding = 0, maxSlice = 0;
+   for(auto& a: data) {
+      maxEnding = max(0, a);
+      maxSlice = max(maxEnding, maxSlice);
+   }
+   return maxSlice;
+}
 }
 

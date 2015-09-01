@@ -64,6 +64,7 @@ void EvenIndicesAsMax(std::vector<int>& input);
 void NegativePositiveOrganizer(std::vector<int>& input);
 std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights,
       int src, int dest);
+int FindMaxSumInRange(std::vector<int>& data);
 void PrintDigonalMatrix(std::vector<std::vector<int> >& data);
 int Median(int a, int b, int c);
 int Median(int a, int b, int c, int min, int max);
@@ -86,6 +87,14 @@ private:
 void ClosestNumbers(const std::vector<std::vector<int>>& in,
       std::vector<int>& out);
 void SortIncDecPairs(std::vector<int>& data);
+// unorderd number, with one repeating, then find missing.
+int FindMissingNum(std::vector<int>& data);
 
+// A non-empty zero-indexed array A of M integers is given. This array represents consecutive operations:
+// if A[K] = X, such that 1 ≤ X ≤ N, then operation K is increase(X),
+// if A[K] = N + 1 then operation K is max counter.
+std::vector<int> CounterWithMax(int N, std::vector<int>& data);
+//Unique elements
+int CountUniques(std::vector<int>& data);
 }
 #endif /* MAXNOY_ARRAYS_H_ */
