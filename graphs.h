@@ -49,7 +49,8 @@ struct SerializedNode {
 
 void Serialize(SerializeNode* root, std::vector<SerializedNode>& snodes);
 SerializeNode* Deserialize(std::vector<SerializedNode>& snodes);
-
+void Heapify(int data[], int length);
+void HeapSort(int data[], int length);
 void Insert(BNode** root, int data);
 void PreOrder(BNode* root);
 void PostOrder(BNode* root);

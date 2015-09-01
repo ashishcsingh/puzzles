@@ -4,6 +4,7 @@
 #include "graphs_test.h"
 #include "logics_test.h"
 #include "dynamic_test.h"
+#include "threads_test.h"
 
 int main() {
 #ifdef TEST_DONE
@@ -11,8 +12,9 @@ int main() {
    linkedlist::Test_LinkedLists();
    strings::Test_Strings();
    arrays::Test_Arrays();
-#endif
-   graphs::Test_Graphs();
    dynamic::Test_Dynamic();
+   graphs::Test_Graphs();
+#endif
+   threads::Test_Threads();
    return 0;
 }

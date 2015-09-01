@@ -417,7 +417,20 @@ void Test_Serialize() {
    cout << "Done Test_Serialize()" << endl;
 }
 
-
+void Test_HeapSort() {
+   cout << "Start Test_HeapSort()" << endl;
+   int data[] {1, 2};
+   cout<<"Before sorting "<<endl;
+   for(int i=0; i<2; ++i) {
+      cout<<data[i]<<" ";
+   }
+   HeapSort(data, 2);
+   cout<<endl<<"After sorting "<<endl;
+   for(int i=0; i<2; ++i) {
+      cout<<data[i]<<" ";
+   }
+   cout << endl<< "Done Test_HeapSort()" << endl;
+}
 
 
 void Test_Graphs() {
@@ -450,6 +463,7 @@ void Test_Graphs() {
    Test_CountNodesInBST();
 #endif
    Test_Serialize();
+   Test_HeapSort();
 }
 
 }

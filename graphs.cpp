@@ -50,6 +50,35 @@ BNode* Bfs(BNode* root, int data) {
    return nullptr;
 }
 
+/*
+ * What: Heapify()
+ * How: The largest element traverses to top
+ *      by comparing all sub parents to its two children
+ *      All the way up.
+ */
+void Heapify(int data[], int length) {
+   for(int i = length / 2; i >= 1; --i) {
+      if(data[i-1] < data[2*i - 1]) {
+         swap(data[i-1], data[2*i-1]);
+      }
+      if((i % 2) && data[i-1] < data[2*i]) {
+         swap(data[i-1], data[2*i]);
+      }
+   }
+}
+
+/*
+ * What: HeapSort()
+ * How: Heapify() for N to 2
+ *      Keep swapping the largest elem to last
+ */
+void HeapSort(int data[], int length) {
+   for(int i = length - 1; i > 0; --i) {
+      Heapify(data, i + 1);
+      swap(data[0], data[i]);
+   }
+}
+
 void BfsPrint(BNode* root) {
    if (root == nullptr) {
       return;
