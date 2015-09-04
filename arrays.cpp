@@ -1294,5 +1294,133 @@ int FindMaxSumInRange(vector<int>& data) {
    }
    return maxSlice;
 }
+
+/*
+ * What: Find minimum perimeter for an area
+ * How: The closest to square root int would build the
+ *       the smallest perimeter.
+ */
+int MinPerimeterForArea(int area) {
+   int n = 0, factor = 0;
+   for(;;) {
+       ++n;
+       if(area % n == 0) {
+           factor = n;
+       }
+       if(n * n > area) {
+           break;
+       }
+   }
+   // When the area is not a prime number.
+   if(factor > 1) {
+       return 2 * (factor + area/factor);
+   }
+  // When the area is a prime number.
+   else {
+       return 2 * (area + 1);
+   }
+}
+
+/*
+ * What: Count divisible factors
+ * How: 8 has 1, 2, 4, 8
+ *      Till square root count two factors when
+ *      n*n == N decrement 1.
+ */
+int CountFactors(int N) {
+   int factors = 0, n = 1;
+   for (;;) {
+       if (n * n > N) {
+           break;
+       }
+       if (N % n == 0) {
+           factors += 2;
+       }
+       if (n * n == N) {
+           factors -= 1;
+           break;
+       }
+       ++n;
+   }
+   return factors;
+}
+
+
+ vector<int> FindAllPrimesUsingSieve(int N) {
+   // Take N inside 0 initialized datastructure.
+   N = N + 1;
+   vector<int> sieve(N, 1);
+   sieve[0] = 0;
+   sieve[1] = 0;
+   int n = 2;
+   while(n * n < N) {
+      if(sieve[n]) {
+         int m = 2;
+         while(m * n < N) {
+            sieve[m*n] = 0;
+            ++m;
+         }
+      }
+      ++n;
+   }
+   return sieve;
+}
+
+void FindAllSubPrimesInSieve(std::vector<int>& sieve) {
+   int N = sieve.size();
+   int n = 2;
+   while(n * n < N) {
+      int m = 2;
+      while(n * m < N) {
+         sieve[n * m] = -1;
+         m = NextPrimeInSieve(sieve, m);
+      }
+      n = NextPrimeInSieve(sieve, n);
+   }
+}
+
+
+int NextPrimeInSieve(std::vector<int>& sieve, int n) {
+   for(int m = n + 1; m < sieve.size(); ++m) {
+      if(sieve[m] == 1) {
+         return m;
+      }
+   }
+   return sieve.size();
+}
+
+void AddSubPrimesInSieve(std::vector<int>& sieve) {
+   int sum = 0;
+   for(auto& s: sieve) {
+      if(s == -1) {
+         ++sum;
+         s = sum;
+      } else {
+         s = sum;
+      }
+   }
+}
+
+/*
+ * What: SubPrime means prime * prime, find all count between P[i]
+ *       and Q[i] and store it in result.
+ * How:  First find all primes using sieve of Eratosthenes
+ *       Then find all subprimes and mark it with -1
+ *       Then add all prefix commulitatively across.
+ *       For quick difference calculations.
+ */
+std::vector<int> FindAllSubPrimes(int N, std::vector<int>& P, std::vector<int>& Q) {
+   vector<int> sieve = FindAllPrimesUsingSieve(N + 1);
+   FindAllSubPrimesInSieve(sieve);
+   AddSubPrimesInSieve(sieve);
+   int m = P.size();
+   vector<int> results(m, 0);
+   for(int i=0; i<m; ++i) {
+      results[i] = sieve[Q[i]] - sieve[P[i]];
+   }
+   return results;
+}
+
+
 }
 

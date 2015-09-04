@@ -532,6 +532,36 @@ void Test_FindMaxSumInRange() {
    cout <<endl<< "Done Test_FindMaxSumInRange()" << endl;
 }
 
+void Test_MinPerimeterForArea() {
+   cout << "Start Test_MinPerimeterForArea()" << endl;
+   int area = 36;
+   cout<<"MinPerimeter for "<<area<<" is : "<<MinPerimeterForArea(area);
+   cout <<endl<< "Done Test_MinPerimeterForArea()" << endl;
+}
+
+
+void Test_CountFactors() {
+   cout << "Start Test_CountFactors()" << endl;
+   int N = 8;
+   cout<<"MinPerimeter for "<<N<<" is : "<<CountFactors(N);
+   cout <<endl<< "Done Test_CountFactors()" << endl;
+}
+
+
+
+void Test_FindAllSubPrimes() {
+   cout << "Start Test_FindAllSubPrimes()" << endl;
+   vector<int> P{3,4,8};
+   vector<int> Q{10, 20, 20};
+   cout<<"Results: ";
+   auto&& results = FindAllSubPrimes(25, P, Q);
+   for(auto r: results) {
+      cout<<r<<" ";
+   }
+   cout << endl<<"Done Test_FindAllSubPrimes()" << endl;
+}
+
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -575,6 +605,9 @@ void Test_Arrays() {
    Test_CounterWithMax();
    Test_CountUniques();
    Test_FindMaxSumInRange();
+   Test_MinPerimeterForArea();
+   Test_CountFactors();
+   Test_FindAllSubPrimes();
 }
 }
 

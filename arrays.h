@@ -96,5 +96,13 @@ int FindMissingNum(std::vector<int>& data);
 std::vector<int> CounterWithMax(int N, std::vector<int>& data);
 //Unique elements
 int CountUniques(std::vector<int>& data);
+// Find min parameter for a rectangle with given area
+int MinPerimeterForArea(int area);
+int CountFactors(int N);
+std::vector<int> FindAllPrimesUsingSieve(int N);
+void FindAllSubPrimesInSieve(std::vector<int>& sieve);
+int NextPrimeInSieve(std::vector<int>& sieve, int N);
+void AddSubPrimesInSieve(std::vector<int>& sieve);
+std::vector<int> FindAllSubPrimes(int N, std::vector<int>& P, std::vector<int>& Q);
 }
 #endif /* MAXNOY_ARRAYS_H_ */
