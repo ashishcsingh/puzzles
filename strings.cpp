@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <cassert>
+#include <sstream>
 
 #include "log.h"
 
@@ -531,6 +532,38 @@ void PrintMatrixWords(const string* matrix, const Trie& t, int length) {
    }
 }
 
+
+/*
+ * What: Count number of twos till N
+ * How:  % / 10 would give # at different positions
+ *       Leftmost count of twos: N/10 + (LeftMost > 1)? 1 : 0
+ *       > 2 : 10 < 2 : 0 == 2 prevMost + 10
+ */
+int CountTwos(int N) {
+   int power = 1;
+   int num = N, total = 0;
+   while (num  / power) {
+      // Read the digits at the left of the power position.
+      int left = (num / (10 * power));
+      // Read the digits at the right of the power position.
+      int right = num % power;
+      // Read the digit at power position.
+      int current =  (num / power) % 10;
+      // ex. 41 means at least 4 times 2 appears at unit.
+      total += left * power;
+      // ex. 23 means 2 appears 3+1 times at tens.
+      if (current == 2) {
+         total += right + 1;
+      } else if (current > 2) {
+         // ex. 34 means 2 appears 10 (power) times at tens.
+         // ex. 300 means 2 appear 100 (power) times at hund.
+         total += power;
+      }
+      power *= 10;
+   }
+   return total;
+}
+
 void Swap(char* a, char* b) {
    char temp = *a;
    *a = *b;
@@ -668,6 +701,145 @@ bool IsPalindrome(string s) {
       }
       ++i;
       --j;
+   }
+   return true;
+}
+
+
+int abs(int x) {
+   if ( x < 0) {
+      return -x;
+   } else {
+      return x;
+   }
+}
+
+int Evaluate(string& str) {
+   stringstream ss;
+   ss << str;
+   long i, sum = 0;
+   char c;
+   if(!ss.eof()) {
+      ss >> sum;
+   }
+   while(!ss.eof()) {
+      ss >> c;
+      ss >> i;
+      switch(c) {
+         case '+':
+            sum += i;
+            break;
+         case '-':
+            sum -= i;
+            break;
+         default:
+            cerr << str<< " : Not supported "<<endl;
+            return -1;
+      };
+   }
+   return sum;
+}
+
+/*
+ * What: Balances parenthesis across alphanumerics
+ * How: Count '(' as increment and ')' as decrement.
+ *      when ')' goes above 0 then replace with ' '.
+ *      at the end start replacing extra '(' from start.
+ */
+void BalanceParenthesis(string& str) {
+   int par = 0;
+   // Replace extra ')'
+   for(auto& c: str) {
+      if (c == '(') {
+         ++par;
+      } else if(c== ')') {
+         if ( par > 0) {
+            --par;
+         } else {
+            c = ' ';
+         }
+      }
+   }
+   // Replace extra '(' from end
+   for(int i=str.length() - 1; i >= 0; --i) {
+      if (par > 0 && str[i] == '(') {
+         str[i] = ' ';
+         --par;
+      }
+   }
+   // Inplace replace ' '
+   int j = 0;
+   for(int i=0; i<str.length(); ++i) {
+      if(str[i] == ' ') {
+         continue;
+      }
+      str[j++] = str[i];
+   }
+   str.resize(j);
+}
+
+
+void Print123To100(string& str, int num) {
+   if (num > 9) {
+      if (Evaluate(str) == 100) {
+         cout << str << endl;
+      }
+      return;
+   }
+   // Assuming 123+4 given with num = 5
+   char c = '0' + num;
+   string strNext = str + c;
+   // Pure concat. 123+45
+   Print123To100(strNext, num + 1);
+   if (num > 1) {
+      // Add 123+4+5
+      strNext = str + "+" + c;
+      Print123To100(strNext, num + 1);
+   }
+   // substract 123+4-5
+   strNext = str + "-" + c,
+   Print123To100(strNext, num + 1);
+}
+/*
+ * What: 123456789
+ * How: Recursion with state for all 3 +,-,.
+ *      where . is simple append
+ *      after evaluation/compute to 100 print.
+ */
+void Print123To100() {
+   string str = "";
+   Print123To100(str, 1);
+}
+
+/*
+ * What: OneEditApart
+ * How:  when off and sizeDiff == 1 then
+ *       retry with same str1 index.
+ */
+bool OneEditApart(string* str1, string* str2) {
+   // Identify too different strings by length.
+   int sizeDiff = str1->length() - str2->length();
+   // Length too off.
+   if (sizeDiff > 1 || sizeDiff < -1) {
+      return false;
+   } else if (sizeDiff == -1) {
+      // keep str larger.
+      swap(str1, str2);
+      sizeDiff = 1;
+   }
+   // when off and sizeDiff == 1 then retry with same str1 index.
+   bool difference = false;
+   for(int i = 0, j = 0; i < str1->length(); ++i, ++j) {
+      if ((*str1)[i] != (*str2)[j]) {
+         if(difference) {
+            return false;
+         } else {
+            difference = true;
+         }
+         if (sizeDiff == 1) {
+            sizeDiff = 1;
+         }
+      }
    }
    return true;
 }

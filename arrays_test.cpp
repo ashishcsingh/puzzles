@@ -8,9 +8,10 @@
 #include "arrays.h"
 
 #include <cassert>
-#include <iostream>
 #include <cstdlib>
-#include <vector>
+#include <initializer_list>
+#include <iostream>
+#include <utility>
 
 namespace arrays {
 using namespace std;

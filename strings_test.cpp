@@ -341,6 +341,41 @@ void Test_Scribble() {
    cout << "Done Test_Scribble" << endl;
 }
 
+void Test_OneEditApart() {
+   cout << "Start Test_OneEditApart" << endl;
+   string a1("cat");
+   string b1("cat1");
+   cout << endl <<  a1 << " " << b1 << " Result " << OneEditApart(&a1, &b1);
+   a1 = "cbp";
+   b1 = "aaa";
+   cout << endl <<  a1 << " " << b1 << " Result " << OneEditApart(&a1, &b1);
+
+   cout << endl << "Done Test_OneEditApart" << endl;
+}
+
+void Test_Print123To100() {
+   cout << endl << "Start Test_Print123To100" << endl;
+   Print123To100();
+   cout << endl << "Done Test_Print123To100" << endl;
+}
+
+void Test_BalanceParenthesis() {
+   cout << endl << "Start Test_BalanceParenthesis" << endl;
+   string str{"((((((((((((a()b(()c("};
+   cout<<"Before balance : "<<str<<endl;
+   BalanceParenthesis(str);
+   cout<<"After balance : "<<str<<endl;
+   cout << endl << "Done Test_BalanceParenthesis" << endl;
+}
+
+void Test_CountTwos() {
+   cout << "Start Test_CountTwos" << endl;
+   for(int i = 0; i<= 200; ++i) {
+      cout<<" For "<<i<<" "<<CountTwos(i)<<endl;
+   }
+   cout <<  "Done Test_CountTwos" << endl;
+}
+
 void Test_Strings() {
 #ifdef TEST_DONE
    Test_Reverse();
@@ -373,6 +408,10 @@ void Test_Strings() {
    Test_OrganizeAlphaNumStr();
 #endif
    Test_Scribble();
+   Test_OneEditApart();
+   Test_Print123To100();
+   Test_BalanceParenthesis();
+   Test_CountTwos();
 }
 
 }

@@ -10,11 +10,11 @@ int main() {
 #ifdef TEST_DONE
    logics::Test_Logics();
    linkedlist::Test_LinkedLists();
-   strings::Test_Strings();
    dynamic::Test_Dynamic();
    graphs::Test_Graphs();
    threads::Test_Threads();
 #endif
    arrays::Test_Arrays();
+   strings::Test_Strings();
    return 0;
 }

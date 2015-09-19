@@ -42,6 +42,9 @@ void ReverseString(char* str);
 bool Anagram(const string& str1, const string& str2);
 void ReplaceSpaces(char* str, int length);
 string CompressString(const string& str);
+bool OneEditApart(string* str1, string* str2);
+void Print123To100();
+void BalanceParenthesis(string& str);
 /*
  * Trie
  */
@@ -95,5 +98,7 @@ private:
 string Numeronym(const string& str);
 void OrganizeAlphaNumStr(string& str);
 void Scribble(std::list<string>& words, const std::vector<char>& alphas);
+int CountTwos(int k);
+
 }
 #endif /* MAXNOY_STRINGS_H_ */
