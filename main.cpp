@@ -9,12 +9,12 @@
 int main() {
 #ifdef TEST_DONE
    logics::Test_Logics();
-   linkedlist::Test_LinkedLists();
    dynamic::Test_Dynamic();
    graphs::Test_Graphs();
    threads::Test_Threads();
 #endif
    arrays::Test_Arrays();
    strings::Test_Strings();
+   linkedlist::Test_LinkedLists();
    return 0;
 }

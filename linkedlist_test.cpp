@@ -289,6 +289,22 @@ void Test_PrintSubTreeWeights() {
    cout << "Done testing Test_PrintSubTreeWeights()" << endl;
 }
 
+void Test_HashMapWithLast() {
+   cout << "Start testing Test_HashMapWithLast()" << endl;
+   HashMapWithLast<int, int> mapLast;
+   for(int i=1; i<10; ++i) {
+      mapLast.Put(i, i + 5);
+   }
+   mapLast.Get(5);
+   mapLast.Get(6);
+   for(int i=10; i>0; --i) {
+      mapLast.Delete(i);
+      cout<<mapLast.Last()<<" ";
+   }
+   cout<<"Should be 6 6 6 6 5 4 3 2 1 0 "<<endl;
+   cout << "Done testing Test_HashMapWithLast()" << endl;
+}
+
 void Test_LinkedLists() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -307,8 +323,9 @@ void Test_LinkedLists() {
    Test_IsPalindrom();
    Test_QueueUsingTwoStacks();
    Test_InsertDataInSortedCircularList();
-#endif
    Test_PrintSubTreeWeights();
+#endif
+   Test_HashMapWithLast();
 }
 
 }

@@ -3,6 +3,7 @@
 
 #include <stack>
 #include <list>
+#include <unordered_map>
 
 namespace linkedlist {
 using namespace std;
@@ -39,6 +40,52 @@ private:
    stack<int> enq_;
    stack<int> deq_;
 };
+template<typename K, typename V>
+class HashMapWithLast {
+   std::unordered_map<K, V> _map;
+   std::list<K> _access;
+public:
+   void Put(const K& key, const V& value) {
+      if(!Has(key)) {
+         addNewAccess(key);
+      }
+      _map[key] = value;
+   }
+   V Get(const K& key) {
+      updateAccess(key);
+      return _map[key];
+   }
+   bool Has(const K& key) {
+      return _map.count(key) > 0;
+   }
+   void Delete(const K& key) {
+      deleteAccess(key);
+      _map.erase(key);
+   }
+   K Last() {
+      return _access.back();
+   }
+private:
+   void updateAccess(const K& key) {
+      if (Last()!= key) {
+         deleteAccess(key);
+         addNewAccess(key);
+      }
+   }
+
+   void deleteAccess(const K& key) {
+      for(auto it = _access.rbegin(); it!=_access.rend(); ++it) {
+         if (*it == key) {
+            it++;
+            _access.erase((it).base());
+            break;
+         }
+      }
+   }
+   void addNewAccess(const K& key) {
+      _access.push_back(key);
+   }
+};
 
 template<class T>
 class Queue {
@@ -50,11 +97,11 @@ public:
             data_ { 0 } {
       }
       ;
-      Node(T data) :
+      Node(const T& data) :
             data_ { data } {
       }
    };
-   void Push(T data) {
+   void Push(const T& data) {
       Node* node = new Node(data);
       if (!head_) {
          head_ = back_ = node;

@@ -370,7 +370,7 @@ void Test_BalanceParenthesis() {
 
 void Test_CountTwos() {
    cout << "Start Test_CountTwos" << endl;
-   for(int i = 0; i<= 200; ++i) {
+   for(int i = 0; i<= 10; ++i) {
       cout<<" For "<<i<<" "<<CountTwos(i)<<endl;
    }
    cout <<  "Done Test_CountTwos" << endl;
