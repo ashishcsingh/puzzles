@@ -40,6 +40,13 @@ private:
    stack<int> enq_;
    stack<int> deq_;
 };
+
+/*
+ * What: HashMapWithLast
+ *       Get(), Delete(), Put(), Has() and Last()
+ * How: Using a list<> to locate the last referred element for Last.
+ *      Search in the reverse order to keep the latest as last.
+ */
 template<typename K, typename V>
 class HashMapWithLast {
    std::unordered_map<K, V> _map;
