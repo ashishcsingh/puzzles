@@ -5,11 +5,11 @@
  *      Author: acs
  */
 
-#ifndef MAXNOY_GRAPHS_TEST_H_
-#define MAXNOY_GRAPHS_TEST_H_
+#ifndef GRAPHS_TEST_H_
+#define GRAPHS_TEST_H_
 
 namespace graphs {
 void Test_Graphs();
 }
 
-#endif /* MAXNOY_GRAPHS_TEST_H_ */
+#endif

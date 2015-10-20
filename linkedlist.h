@@ -1,5 +1,5 @@
-#ifndef _MAXNOY_LINKEDLIST_H
-#define _MAXNOY_LINKEDLIST_H
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
 
 #include <stack>
 #include <list>
@@ -150,5 +150,6 @@ struct NodeWithWeight {
    }
 };
 void PrintSubTreeWeights(const std::list<NodeWithWeight>& nodes);
+
 }
 #endif

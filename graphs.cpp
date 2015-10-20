@@ -11,6 +11,11 @@
 #include <set>
 #include <list>
 #include <map>
+#include<unordered_map>
+#include<unordered_set>
+#include<string>
+#include<vector>
+#include<utility>
 
 #include "graphs.h"
 #include "log.h"
@@ -882,6 +887,60 @@ std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights,
       --j;
    }
    return path;
+}
+
+vector<int> dfs(const int& contact,
+      unordered_map<string, vector<int>>& mapEmailContacts,
+      unordered_map<int, vector<string>>& mapContactEmails,
+      unordered_set<int>& unvisited) {
+   vector<int> connectedContacts;
+   stack<int> s;
+   s.push(contact);
+   while(!s.empty()) {
+      int current = s.top();
+      s.pop();
+      // remove the current from unvisited.
+      unvisited.erase(current);
+      connectedContacts.push_back(current);
+      //find all the connected.
+      for(auto& email: mapContactEmails[current]) {
+         for(auto& c: mapEmailContacts[email]) {
+            if (unvisited.count(c) > 0) {
+               s.push(c);
+            }
+         }
+      }
+   }
+   return connectedContacts;
+}
+
+/*
+ * What: Merges contacts by common emails.
+ * How: Using DFS to traverse common email across two contacts.
+ */
+vector<vector<int>> Dedupe(vector<pair<int,vector<string>>>& contacts) {
+   // prepare maps.
+   unordered_map<int, vector<string>> mapContactEmails;
+   unordered_map<string, vector<int>> mapEmailContacts;
+   for(auto& c : contacts) {
+      for(auto& email : c.second) {
+         mapContactEmails[c.first].push_back(email);
+         mapEmailContacts[email].push_back(c.first);
+      }
+   }
+   // add unvisited.
+   unordered_set<int> unvisited;
+   for(auto& c:mapContactEmails) {
+      unvisited.insert(c.first);
+   }
+   vector<vector<int>> output;
+   while(!unvisited.empty()) {
+      auto connectedContacts = move(
+            dfs(*unvisited.begin(), mapEmailContacts,
+               mapContactEmails, unvisited));
+      output.push_back(connectedContacts);
+   }
+   return output;
 }
 
 }

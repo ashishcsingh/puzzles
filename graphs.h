@@ -5,8 +5,8 @@
  *      Author: acs
  */
 
-#ifndef MAXNOY_BTREE_H_
-#define MAXNOY_BTREE_H_
+#ifndef GRAPTH_H
+#define GRAPTH_H
 
 #include <vector>
 #include <string>
@@ -87,6 +87,10 @@ int NextSuccessor(BNode* root, int node);
 std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights,
       int src, int dest);
 
+// contact_id (int) and associated emails, will return merged contact_ids.
+std::vector<std::vector<int>> Dedupe(
+      std::vector<std::pair<int,std::vector<std::string>>>& contacts);
+
 //Graph
 struct GNode {
    GNode(int data) :
@@ -102,7 +106,5 @@ struct GNode {
 bool PathToNodes(GNode* src, GNode* dest);
 
 int CountNodesInBST(BNode* root, int start, int end);
-
-#endif /* MAXNOY_BTREE_H_ */
-
 }
+#endif /* GRAPTH_H */

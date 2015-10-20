@@ -432,6 +432,21 @@ void Test_HeapSort() {
    cout << endl<< "Done Test_HeapSort()" << endl;
 }
 
+void Test_Dedupe() {
+   cout << endl<< "Start Test_Dedupe()" << endl;
+   vector<pair<int, vector<string>>> contacts = {
+         {1, {"a@gmail.com", "b@gmail.com"}},
+         {2, {"c@gmail.com"}},
+         {3, {"c@gmail.com"}}
+   };
+   vector<vector<int>> allGroups = Dedupe(contacts);
+   for(auto group : allGroups) {
+      for(auto id: group) {
+         cout<<id<<",";
+      }
+   }
+   cout << endl<< "Done Test_Dedupe()" << endl;
+}
 
 void Test_Graphs() {
 #ifdef TEST_DONE
@@ -461,9 +476,9 @@ void Test_Graphs() {
    Test_MatchTree();
    Test_ShortestPathDjkstras();
    Test_CountNodesInBST();
-#endif
    Test_Serialize();
    Test_HeapSort();
+#endif
+   Test_Dedupe();
 }
-
 }

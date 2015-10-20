@@ -5,16 +5,18 @@
 #include "logics_test.h"
 #include "dynamic_test.h"
 #include "threads_test.h"
+#include "hashmaps_test.h"
 
 int main() {
 #ifdef TEST_DONE
    logics::Test_Logics();
    dynamic::Test_Dynamic();
-   graphs::Test_Graphs();
    threads::Test_Threads();
-#endif
    arrays::Test_Arrays();
    strings::Test_Strings();
    linkedlist::Test_LinkedLists();
+#endif
+   graphs::Test_Graphs();
+   hashmaps::Test_HashMaps();
    return 0;
 }
