@@ -413,16 +413,16 @@ void Test_MatrixFillDistanceFromG() {
    vector<vector<char>> data = { { '0', '0', '0' }, { 'B', 'G', 'G' }, { 'B',
          '0', '0' } };
    cout << "Before" << endl;
-   for (int i = 0; i < data.size(); ++i) {
-      for (int j = 0; j < data.size(); ++j) {
+   for (unsigned i = 0; i < data.size(); ++i) {
+      for (unsigned j = 0; j < data.size(); ++j) {
          cout << data[i][j] << ", ";
       }
       cout << endl;
    }
    MatrixFillDistanceFromG(data);
    cout << "After" << endl;
-   for (int i = 0; i < data.size(); ++i) {
-      for (int j = 0; j < data.size(); ++j) {
+   for (unsigned i = 0; i < data.size(); ++i) {
+      for (unsigned j = 0; j < data.size(); ++j) {
          if (data[i][j] == 'B' || data[i][j] == 'G') {
             cout << data[i][j] << ", ";
          } else {

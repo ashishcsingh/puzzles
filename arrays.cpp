@@ -19,6 +19,7 @@
 #include <climits>
 #include <utility>
 #include <unordered_set>
+#include <cstring>
 
 namespace arrays {
 using namespace std;
@@ -95,7 +96,7 @@ bool CombineSameSigns(std::vector<int>& data) {
    int j = 0;
    std::vector<int> newData;
    newData.push_back(data[0]);
-   for (int i = 1; i < data.size(); i++) {
+   for (unsigned i = 1; i < data.size(); i++) {
       //data[i] is negative
       if (data[i] < 0) {
          //Both negative, sum it
@@ -147,7 +148,7 @@ void CombinePositiveNegativePairs(std::vector<int>& data) {
       return;
    }
    std::vector<int> newData;
-   int i = 0;
+   unsigned i = 0;
    while (i < data.size()) {
       if ((data[i] > 0) && (i + 2 < data.size())
             && (data[i] + data[i + 1] + data[i + 2] > data[i])) {
@@ -186,7 +187,7 @@ void LongestStrictlyOrderedSubSequence(std::vector<int>& data) {
    std::vector<int> output;
    int current = container[0].second;
    output.push_back(current);
-   for (int i = 1; i < container.size(); ++i) {
+   for (unsigned i = 1; i < container.size(); ++i) {
       if (current < container[i].second) {
          current = container[i].second;
          output.push_back(container[i].first);
@@ -332,7 +333,7 @@ int GetMinElemNxN(const std::vector<std::vector<int>>& matrix,
       vector<int>& colCtr) {
    int min = INT_MAX;
    int lowestRow = 0;
-   for (int i = 0; i < matrix.size(); ++i) {
+   for (unsigned i = 0; i < matrix.size(); ++i) {
       if (min > matrix[i][colCtr[i]]) {
          min = matrix[i][colCtr[i]];
          lowestRow = i;
@@ -456,9 +457,9 @@ vector<string> Permutations(const string& s) {
    // Get previous permutations for 1 to npos
    vector<string> prevPerms = Permutations(s.substr(1));
    vector<string> perms;
-   for (int j = 0; j < prevPerms.size(); ++j) {
+   for (unsigned j = 0; j < prevPerms.size(); ++j) {
       // when s = abc, for bc place a all 0,1,2 positions
-      for (int i = 0; i <= prevPerms[j].length(); ++i) {
+      for (unsigned i = 0; i <= prevPerms[j].length(); ++i) {
          perms.push_back(PlaceCharAtLoc(prevPerms[j], s[0], i));
       }
    }
@@ -506,7 +507,7 @@ vector<string> BuildParenthesis(int count) {
  * How: Go up, left, right, down and call the same method
  *      int [][]
  */
-void PrintScreen(vector<vector<int>>& screen, int x, int y, int color) {
+void PrintScreen(vector<vector<int>>& screen, unsigned x, unsigned y, int color) {
    if (x < 0 || y < 0 || y >= screen.size() || x >= screen[0].size()) {
       return;
    }
@@ -809,13 +810,13 @@ void KMaxRepeatedElements(const std::vector<int>& input, int k,
  */
 void KShortestDistance(const vector<Point>& points, int k, vector<Point>& out) {
    vector<long> distance(points.size());
-   for (int i = 0; i < points.size(); ++i) {
+   for (unsigned i = 0; i < points.size(); ++i) {
       distance[i] = points[i].x * points[i].x + points[i].y * points[i].y
             + points[i].z * points[i].z;
    }
    for (int j = 0; j < k; ++j) {
       long min = INT_MAX, minIndex = 0;
-      for (int i = 0; i < distance.size(); ++i) {
+      for (unsigned i = 0; i < distance.size(); ++i) {
          if (min > distance[i]) {
             min = distance[i];
             minIndex = i;
@@ -842,7 +843,7 @@ void PairSumClosestToZero(std::vector<int>& input,
       std::pair<int, int>& output) {
    sort(input.begin(), input.end(), comparator);
    int min = INT_MAX;
-   for (int i = 0; i < input.size(); i += 2) {
+   for (unsigned i = 0; i < input.size(); i += 2) {
       int sum = input[i] + input[i + 1];
       if (min > sum) {
          min = sum;
@@ -906,7 +907,7 @@ void GetEmployeesForManager(std::vector<std::pair<int, int> >& employeeManagers,
  *       Do it till the end with +2 increments
  */
 void EvenIndicesAsMax(std::vector<int>& input) {
-   for (int i = 1; i < input.size() - 1; i += 2) {
+   for (unsigned i = 1; i < input.size() - 1; i += 2) {
       if (input[i - 1] > input[i]) {
          swap(input[i - 1], input[i]);
       }
@@ -925,7 +926,7 @@ void EvenIndicesAsMax(std::vector<int>& input) {
  *       Similarly do positive numbers with odd indices
  */
 void NegativePositiveOrganizer(std::vector<int>& input) {
-   int even = 0, odd = 1;
+   unsigned even = 0, odd = 1;
    while (1) {
       while (even < input.size() && input[even] < 0) {
          even += 2;
@@ -958,9 +959,9 @@ void NegativePositiveOrganizer(std::vector<int>& input) {
  *            print a[i][k-1]
  */
 void PrintDigonalMatrix(std::vector<std::vector<int> >& data) {
-   int sizeI = data.size() - 1;
-   for (int k = 0; k <= 2 * sizeI; ++k) {
-      for (int i = 0; i <= k; ++i) {
+   unsigned sizeI = data.size() - 1;
+   for (unsigned k = 0; k <= 2 * sizeI; ++k) {
+      for (unsigned i = 0; i <= k; ++i) {
          if (i <= sizeI && (k - i) <= sizeI) {
             cout << data[i][k - i] << ", ";
          }
@@ -1045,12 +1046,12 @@ void MatrixFillDistanceFromG(std::vector<std::vector<char>>& data) {
    }
    // initialize and find all the Gs
    vector<pair<int, int>> allGs;
-   int length = data.size();
+   unsigned length = data.size();
    Log(VERBOSE,
          "[MatrixFillDistanceFromG] Data received of length "
                + to_string(length));
-   for (int i = 0; i < length; ++i) {
-      for (int j = 0; j < length; ++j) {
+   for (unsigned i = 0; i < length; ++i) {
+      for (unsigned j = 0; j < length; ++j) {
          switch (data[i][j]) {
          case '0':
             data[i][j] = CHAR_MAX;
@@ -1087,7 +1088,7 @@ int MaxRepeatVal(const std::vector<int>& data) {
       return data[0];
    }
    int maxRepeatCount = 0, maxRepeatVal, repeatCount = 1, repeatVal;
-   for (int i = 1; i < data.size(); ++i) {
+   for (unsigned i = 1; i < data.size(); ++i) {
       if (data[i] == data[i - 1]) {
          ++repeatCount;
          repeatVal = data[i];
@@ -1153,11 +1154,11 @@ int DiffNumbers(const vector<vector<int>>&in, const vector<int>& minIndex) {
 }
 
 int minimumArray(const vector<vector<int>>&in, const vector<int>& minIndex) {
-   int length = in.size();
+   unsigned length = in.size();
    int minArray = 0;
    int min = INT_MAX;
    // Among all the arrays find the lowest minIndex
-   for (int i = 0; i < length; ++i) {
+   for (unsigned i = 0; i < length; ++i) {
       if (min > in[i][minIndex[i]]) {
          min = in[i][minIndex[i]];
          minArray = i;
@@ -1171,15 +1172,15 @@ void ClosestNumbers(const std::vector<std::vector<int>>& in,
    if (in.size() < 1) {
       return;
    }
-   int countInArray = in[0].size();
-   int countArrays = in.size();
+   unsigned countInArray = in[0].size();
+   unsigned countArrays = in.size();
    out.resize(countArrays);
    vector<int> minIndex(countArrays, 0);
    vector<int> bestMinIndex;
    int bestMinDiff = INT_MAX;
    int diffNumbers, minArray;
    // While tracking best closest range explore through all the elements
-   for (int i = 0; i < countInArray; ++i) {
+   for (unsigned i = 0; i < countInArray; ++i) {
       diffNumbers = DiffNumbers(in, minIndex);
       if (diffNumbers < bestMinDiff) {
          bestMinIndex = minIndex;
@@ -1190,7 +1191,7 @@ void ClosestNumbers(const std::vector<std::vector<int>>& in,
       minIndex[minArray]++;
    }
    // Copy values to output
-   for (int i = 0; i < countArrays; ++i) {
+   for (unsigned i = 0; i < countArrays; ++i) {
       out[i] = in[i][bestMinIndex[i]];
    }
 }
@@ -1200,7 +1201,7 @@ void ClosestNumbers(const std::vector<std::vector<int>>& in,
  * How:  Read 3 digits and move by 2 digit
  */
 void SortIncDecPairs(std::vector<int>& data) {
-   for (int i = 0; i < data.size(); i += 2) {
+   for (unsigned i = 0; i < data.size(); i += 2) {
       if (i < data.size() - 2) {
          if (data[i] > data[i + 1]) {
             swap(data[i], data[i + 1]);
@@ -1381,7 +1382,7 @@ void FindAllSubPrimesInSieve(std::vector<int>& sieve) {
 
 
 int NextPrimeInSieve(std::vector<int>& sieve, int n) {
-   for(int m = n + 1; m < sieve.size(); ++m) {
+   for(unsigned m = n + 1; m < sieve.size(); ++m) {
       if(sieve[m] == 1) {
          return m;
       }

@@ -14,7 +14,7 @@ namespace threads {
 using namespace std;
 
 template<class ASYNC>
-void print_results( ASYNC &f, string &pattern, int threadno )
+void print_results( ASYNC &f, string &pattern, unsigned threadno )
 {
     vector<string> words = f.get();
     cerr << "Found " << words.size()

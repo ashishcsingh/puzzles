@@ -14,6 +14,7 @@
 #include <future>
 #include <mutex>
 #include <functional>
+#include <thread>
 
 namespace threads {
 std::vector<std::string> find_matches( std::string pattern, std::deque<std::string> &backlog);

@@ -75,7 +75,7 @@ private:
    TNode* head_ { nullptr };
 };
 
-void PrintMatrixWords(const string*, const Trie&, int length);
+void PrintMatrixWords(const string*, const Trie&, unsigned length);
 string CompressString(const string& str);
 bool IsRotatedSubstring(const string& str1, const string& str2);
 void PrintPermutations(char* c, int i, int n);

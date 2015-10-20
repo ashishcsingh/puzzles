@@ -4,6 +4,8 @@
 #include <vector>
 #include <cassert>
 #include <sstream>
+#include <cstring>
+#include <algorithm>
 
 #include "log.h"
 
@@ -150,8 +152,8 @@ void ReplaceSpaces(char* str, int length) {
  * How:  No space, therefore N2 complexity of comparisions
  */
 bool UniqueCharactersNoSpace(const string& str) {
-   for (int i = 0; i < str.length(); ++i) {
-      for (int j = i + 1; j < str.length(); ++j) {
+   for (unsigned i = 0; i < str.length(); ++i) {
+      for (unsigned j = i + 1; j < str.length(); ++j) {
          if (str[i] == str[j]) {
             return false;
          }
@@ -163,8 +165,8 @@ bool UniqueCharactersNoSpace(const string& str) {
 /*
  * Calculate Length
  */
-unsigned int Length(char* str) {
-   unsigned int length = 0;
+unsigned Length(char* str) {
+   unsigned length = 0;
    while (str[length] != '\0') {
       length++;
    }
@@ -174,8 +176,8 @@ unsigned int Length(char* str) {
 /*
  * What: Calculate Length
  */
-unsigned int Length(wchar_t* str) {
-   unsigned int length = 0;
+unsigned Length(wchar_t* str) {
+   unsigned length = 0;
    while (str[length] != '\0') {
       length++;
    }
@@ -223,9 +225,9 @@ void RemoveDuplicate(char* str) {
  * Iterate through each element from start when count is 1 return
  */
 char FindFirstUnique(char* str) {
-   int length = Length(str);
+   unsigned length = Length(str);
    std::map<char, int> strMap;
-   for (unsigned int i = 0; i < length; i++) {
+   for (unsigned i = 0; i < length; i++) {
       if (strMap.count(str[i]) > 0) {
          strMap[str[i]]++;
       } else {
@@ -484,7 +486,7 @@ string CompressString(const string& str) {
    }
    int count = 1;
    string ret;
-   for (int i = 1; i < str.length(); ++i) {
+   for (unsigned i = 1; i < str.length(); ++i) {
       if (str[i - 1] == str[i]) {
          ++count;
       } else {
@@ -520,10 +522,10 @@ bool IsRotatedSubstring(const string& str1, const string& str2) {
  *                Print
  *
  */
-void PrintMatrixWords(const string* matrix, const Trie& t, int length) {
+void PrintMatrixWords(const string* matrix, const Trie& t, unsigned length) {
    // Horizonally
-   for (int i = 0; i < length; ++i) {
-      for (int j = 0; j < matrix[i].length() - 1; ++j) {
+   for (unsigned i = 0; i < length; ++i) {
+      for (unsigned j = 0; j < matrix[i].length() - 1; ++j) {
          const char* candidate = matrix[i].substr(j).c_str();
          if (t.Exists(candidate)) {
             cout << candidate << endl;
@@ -599,7 +601,7 @@ bool CheckPattern(const string& pat, const string& match) {
    if (pat[0] == '+' || pat[0] == '*') {
       return false;
    }
-   int patI = 0, matI = 0;
+   unsigned patI = 0, matI = 0;
    while (patI < pat.length() && matI < match.length()) {
       switch (pat[patI]) {
       case '+':
@@ -769,7 +771,7 @@ void BalanceParenthesis(string& str) {
    }
    // Inplace replace ' '
    int j = 0;
-   for(int i=0; i<str.length(); ++i) {
+   for(unsigned i=0; i<str.length(); ++i) {
       if(str[i] == ' ') {
          continue;
       }
@@ -829,7 +831,7 @@ bool OneEditApart(string* str1, string* str2) {
    }
    // when off and sizeDiff == 1 then retry with same str1 index.
    bool difference = false;
-   for(int i = 0, j = 0; i < str1->length(); ++i, ++j) {
+   for(unsigned i = 0, j = 0; i < str1->length(); ++i, ++j) {
       if ((*str1)[i] != (*str2)[j]) {
          if(difference) {
             return false;
@@ -849,14 +851,14 @@ bool OneEditApart(string* str1, string* str2) {
  * How: N2 complexity to test
  */
 string LongestPalindrome(string s) {
-   int max = 1;
+   unsigned max = 1;
    string longest = s;
-   int limit = 1000;
+   unsigned limit = 1000;
    if (limit > s.length()) {
       limit = s.length();
    }
-   for (int i = 0; i < limit; ++i) {
-      for (int j = limit - 1; j >= i && max < (j - i + 1); --j) {
+   for (unsigned i = 0; i < limit; ++i) {
+      for (unsigned j = limit - 1; j >= i && max < (j - i + 1); --j) {
          string temp = s.substr(i, j - i + 1);
          if (IsPalindrome(temp)) {
             max = j - i + 1;
@@ -901,7 +903,7 @@ void Roman::init() {
 
 int Roman::FromRoman(string roman) {
    init();
-   int i = 0;
+   unsigned i = 0;
    int sum = 0;
    while (i < roman.length()) {
       if (i == roman.length() - 1

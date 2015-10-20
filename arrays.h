@@ -36,7 +36,7 @@ int MagicNumberWithDup(const int data[], int length);
 std::vector<std::vector<int>> Subsets(const std::vector<int> set);
 std::vector<std::string> Permutations(const std::string& s);
 std::vector<std::string> BuildParenthesis(int count);
-void PrintScreen(std::vector<std::vector<int>>&, int x, int y, int color);
+void PrintScreen(std::vector<std::vector<int>>&, unsigned x, unsigned y, int color);
 const static int MAX_QUEENS = 8;
 void EightQueens(int row, std::vector<int>& col,
       std::vector<std::vector<int>>& results);

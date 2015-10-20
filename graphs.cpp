@@ -16,6 +16,7 @@
 #include<string>
 #include<vector>
 #include<utility>
+#include<climits>
 
 #include "graphs.h"
 #include "log.h"

@@ -84,7 +84,7 @@ void QueueUsingTwoStacks::Enque(int e) {
 int QueueUsingTwoStacks::Deque() {
    if (deq_.empty()) {
       if (!enq_.empty()) {
-         for (int i = 0; i < enq_.size(); ++i) {
+         for (unsigned i = 0; i < enq_.size(); ++i) {
             deq_.push(enq_.top());
             enq_.pop();
          }
