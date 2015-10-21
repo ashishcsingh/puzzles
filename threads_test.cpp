@@ -14,32 +14,29 @@ namespace threads {
 using namespace std;
 
 template<class ASYNC>
-void print_results( ASYNC &f, string &pattern, unsigned threadno )
-{
-    vector<string> words = f.get();
-    cerr << "Found " << words.size()
-         << " matches for " << pattern
-         << " in thread " << threadno
-         << endl;
-    for ( auto s : words )
-        cout << s << "\n";
+void print_results(ASYNC &f, string &pattern, unsigned threadno) {
+   vector<string> words = f.get();
+   cerr << "Found " << words.size() << " matches for " << pattern
+         << " in thread " << threadno << endl;
+   for (auto s : words)
+      cout << s << "\n";
 }
 
-void Test_WordSearch()
-{
-    string pattern = "c..per";
-
-    string words[] = {"copper", "cloper",  "subject" };
-    deque<string> backlog;
-    for(auto word: words) {
-        backlog.push_back( word );
-    }
-    auto f1 = async( launch::async, find_matches, pattern, ref(backlog) );
-    auto f2 = async( launch::async, find_matches, pattern, ref(backlog) );
-    auto f3 = async( launch::async, find_matches, pattern, ref(backlog) );
-    print_results( f1, pattern, 1 );
-    print_results( f2, pattern, 2 );
-    print_results( f3, pattern, 3 );
+void Test_WordSearch() {
+   cout<<"Started Test_WordSearch()"<<endl;
+   string pattern = "c..per";
+   string words[] = { "copper", "cloper", "subject" };
+   deque<string> backlog;
+   for (auto word : words) {
+      backlog.push_back(word);
+   }
+   auto f1 = async(launch::async, find_matches, pattern, ref(backlog));
+   auto f2 = async(launch::async, find_matches, pattern, ref(backlog));
+   auto f3 = async(launch::async, find_matches, pattern, ref(backlog));
+   print_results(f1, pattern, 1);
+   print_results(f2, pattern, 2);
+   print_results(f3, pattern, 3);
+   cout<<"Done Test_WordSearch()"<<endl;
 }
 
 /*
@@ -47,19 +44,31 @@ void Test_WordSearch()
  * How: Spawn and then get();
  */
 void Test_Twice() {
+   cout<<"Started Test_Twice()"<<endl;
    vector<future<int>> futures;
-   for(int i = 0; i < 10; ++i) {
-      futures.push_back(async([] (int n) { return 2*n;}, i));
+   for (int i = 0; i < 10; ++i) {
+      futures.push_back(async([] (int n) {return 2*n;}, i));
    }
-   for(auto &f: futures) {
-      cout<<f.get()<<endl;
+   for (auto &f : futures) {
+      cout << f.get() << endl;
    }
+   cout<<"Done Test_Twice()"<<endl;
+}
+
+void Test_Racer() {
+   cout<<"Started Test_Racer()"<<endl;
+   Racer r(10);
+   r.begin(r);
+   r.end();
+   cout<<"Done Test_Racer()"<<endl;
 }
 
 void Test_Threads() {
+#ifdef TEST_DONE
    Test_WordSearch();
    Test_Twice();
+#endif
+   Test_Racer();
 }
 }
-
 

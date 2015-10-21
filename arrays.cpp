@@ -508,7 +508,7 @@ vector<string> BuildParenthesis(int count) {
  *      int [][]
  */
 void PrintScreen(vector<vector<int>>& screen, unsigned x, unsigned y, int color) {
-   if (x < 0 || y < 0 || y >= screen.size() || x >= screen[0].size()) {
+   if (y >= screen.size() || x >= screen[0].size()) {
       return;
    }
    if (screen[y][x] != color) {

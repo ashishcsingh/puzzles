@@ -10,12 +10,14 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <chrono>
 
 namespace threads {
 
 using namespace std;
 
-std::mutex m;
+mutex m;
+
 
 inline bool match( const std::string &pattern, std::string word )
 {
@@ -44,5 +46,37 @@ vector<string> find_matches( string pattern, deque<string> &backlog )
     }
 }
 
+Racer::Racer(int numThreads) {
+   _numThreads = numThreads;
+}
+
+void Racer::race(int id)  {
+   cout<<"Thread : "<<id<<" locking "<<endl;
+   unique_lock<mutex> lock(_m);
+   cout<<"Thread : "<<id<<" waiting "<<endl;
+   _cv.wait(lock, [=]{return _ready;});
+   cout<<"Thread : "<<id<<" racing "<<endl;
+   lock.unlock();
+   // Let other race.
+   _cv.notify_one();
+}
+
+void Racer::begin(Racer& r)  {
+   for(auto i = 0; i < _numThreads; ++i) {
+      _threads.push_back(thread(&Racer::race, &r, i + 1));
+   }
+   cout<<"Begin by notifying one"<<endl;
+   lock_guard<mutex> lock(_m);
+   _ready = true;
+   _cv.notify_one();
+}
+
+
+void Racer::end()  {
+   for(auto& t: _threads) {
+      t.join();
+   }
+   cout<<"End all"<<endl;
+}
 }
 
