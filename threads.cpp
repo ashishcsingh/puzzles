@@ -50,12 +50,17 @@ Racer::Racer(int numThreads) {
    _numThreads = numThreads;
 }
 
+void Racer::print(int id, const string& msg) {
+   lock_guard<mutex> locker(_mPrint);
+   cout<<"Thread : "<<id<<" "<<msg<<endl;
+}
+
 void Racer::race(int id)  {
-   cout<<"Thread : "<<id<<" locking "<<endl;
+   print(id, "staring");
    unique_lock<mutex> lock(_m);
-   cout<<"Thread : "<<id<<" waiting "<<endl;
-   _cv.wait(lock, [=]{return _ready;});
-   cout<<"Thread : "<<id<<" racing "<<endl;
+   print(id, "waiting");
+   _cv.wait(lock, [=](){return _ready;});
+   print(id, "racing");
    lock.unlock();
    // Let other race.
    _cv.notify_one();

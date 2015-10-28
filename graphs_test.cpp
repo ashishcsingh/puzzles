@@ -448,6 +448,22 @@ void Test_Dedupe() {
    cout << endl<< "Done Test_Dedupe()" << endl;
 }
 
+void Test_RotateTree() {
+   cout << endl<< "Start Test_RotateTree()" << endl;
+   BNode* bnode = nullptr;
+   Insert(&bnode, 5);
+   Insert(&bnode, 2);
+   Insert(&bnode, 8);
+   Insert(&bnode, 1);
+   Insert(&bnode, 3);
+   RotateTree(bnode);
+   assert(bnode->data_ == 5);
+   assert(bnode->left_->data_ == 8);
+   assert(bnode->right_->data_ == 2);
+   assert(bnode->right_->left_->data_ == 3);
+   cout << endl<< "Done Test_RotateTree()" << endl;
+}
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -480,5 +496,6 @@ void Test_Graphs() {
    Test_HeapSort();
 #endif
    Test_Dedupe();
+   Test_RotateTree();
 }
 }

@@ -57,6 +57,46 @@ BNode* Bfs(BNode* root, int data) {
 }
 
 /*
+ * What: RotateTree()
+ * How: Rotates tree from right to left.
+ * Input
+           (0)
+           / \
+          /   \
+       (1)     (2)
+       / \     / \
+     (3) (4) (5) (6)
+
+
+Output
+           (0)
+           / \
+          /   \
+       (2)     (1)
+       / \     / \
+     (6) (5) (4) (3)
+ */
+void RotateTree(BNode* node) {
+   if (node == nullptr) {
+      return;
+   }
+   stack<BNode*> s;
+   s.push(node);
+   while (!s.empty()) {
+      // take out top.
+      BNode* cur = s.top();
+      s.pop();
+      // swap left and right
+      if (cur != nullptr) {
+         swap(cur->left_, cur->right_);
+         s.push(cur->left_);
+         s.push(cur->right_);
+      }
+   }
+}
+
+
+/*
  * What: Heapify()
  * How: The largest element traverses to top
  *      by comparing all sub parents to its two children

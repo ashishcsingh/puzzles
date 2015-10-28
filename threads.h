@@ -26,6 +26,8 @@ class Racer {
    bool _ready {false};
    unsigned _numThreads;
    std::vector<std::thread> _threads;
+   std::mutex _mPrint;
+   void print(int id, const std::string& msg);
 public:
    void race(int id);
    void begin(Racer& r);

@@ -23,6 +23,8 @@ struct BNode {
    ;
 };
 
+void RotateTree(BNode* node);
+
 struct DNode {
    DNode* left_ { nullptr };
    DNode* right_ { nullptr };

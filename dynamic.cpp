@@ -7,6 +7,7 @@
 
 #include "dynamic.h"
 #include <cmath>
+#include<vector>
 
 namespace dynamic {
 using namespace std;
@@ -36,6 +37,39 @@ int FibonacciRecurse(int n) {
       return n;
    }
    return FibonacciRecurse(n - 1) + FibonacciRecurse(n - 2);
+}
+
+/*
+ * What: Distinct means unique combinations
+ * How: 1,2 all options will be Fib()
+ */
+int DistinctOptions(vector<int>& points, int val) {
+   vector<int> table(val + 1, 0);
+   for(auto p :points) {
+      ++table[p];
+   }
+   for(auto p: points) {
+      for(unsigned i=p; i<points.size(); ++i) {
+         table[i] += table[i - p];
+      }
+   }
+   return table[val];
+}
+
+/*
+ * What: Options means all combinations without uniqueness
+ * How: 1,1,2,2 will cover all {1,2,1,2}
+ * Idea is table[0] stores 1.
+ */
+int Options(vector<int>& points, int val) {
+   vector<int> table(val + 1, 0);
+   table[0] = 1;
+   for(auto p: points) {
+      for(unsigned i=p; i<points.size(); ++i) {
+         table[i] += table[i - p];
+      }
+   }
+   return table[val];
 }
 
 
