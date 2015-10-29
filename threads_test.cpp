@@ -8,6 +8,8 @@
 #include "threads.h"
 #include "threads_test.h"
 #include <iostream>
+#include<functional>
+#include<tuple>
 
 namespace threads {
 
@@ -63,12 +65,38 @@ void Test_Racer() {
    cout<<"Done Test_Racer()"<<endl;
 }
 
+typedef tuple<int&, string&> tuple_type;
+tuple_type promiseTupleData(future<tuple_type>& f) {
+   tuple_type t = f.get();
+   get<0>(t) += 20;
+   get<1>(t) += " completed";
+   return t;
+}
+
+void Test_PromiseTupleData() {
+   cout<<"Started Test_Racer()"<<endl;
+   int i = 10;
+   string s {"hello"};
+   auto t = make_tuple(i, s);
+   promise<tuple_type> p;
+   future<tuple_type> f = p.get_future();
+   auto fRet = async(launch::async, promiseTupleData, ref(f));
+   p.set_value(t);
+   tuple_type tRet = fRet.get();
+   cout<<" Int Sent : " <<i<<endl;
+   cout<<" String Sent : " <<s<<endl;
+   cout<<" Int Return : " <<get<0>(tRet)<<endl;
+   cout<<" String Return  :  " <<get<1>(tRet)<<endl;
+   cout<<"Done Test_Racer()"<<endl;
+}
+
 void Test_Threads() {
 #ifdef TEST_DONE
    Test_WordSearch();
    Test_Twice();
 #endif
    Test_Racer();
+   Test_PromiseTupleData();
 }
 }
 
