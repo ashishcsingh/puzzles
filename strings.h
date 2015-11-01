@@ -5,8 +5,8 @@
  *      Author: acs
  */
 
-#ifndef MAXNOY_STRINGS_H_
-#define MAXNOY_STRINGS_H_
+#ifndef STRINGS_H_
+#define STRINGS_H_
 
 #include <string>
 #include <vector>
@@ -101,4 +101,4 @@ void Scribble(std::list<string>& words, const std::vector<char>& alphas);
 int CountTwos(int k);
 
 }
-#endif /* MAXNOY_STRINGS_H_ */
+#endif /* STRINGS_H_ */

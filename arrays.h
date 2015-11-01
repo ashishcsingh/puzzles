@@ -5,12 +5,15 @@
  *      Author: acs
  */
 
-#ifndef MAXNOY_ARRAYS_H_
-#define MAXNOY_ARRAYS_H_
+#ifndef ARRAYS_H_
+#define ARRAYS_H_
 
 #include <vector>
 #include <string>
 #include <mutex>
+#include <new>
+#include <iostream>
+#include <cstring>
 
 namespace arrays {
 int FindMissingNumber(int array[], int arrayLength, int length);
@@ -84,6 +87,96 @@ private:
    int length_ { 0 };
 };
 
+/*
+ * What: QueueRound implements Queue with rotation
+ *       with max size size_.
+ * How: 0 ... start_ ... length_ ... size_
+ *      length_ can go around.
+ *      Max full is when length_ + 1 == start_
+ *      Enque will push length_ forward.
+ *      Deque will push start_ forward.
+ *      Split case is when some data can be copied around.
+ */
+class QueueRound {
+   char* data_;
+   unsigned length_;
+   unsigned start_;
+   unsigned size_;
+public:
+   QueueRound(unsigned size) : length_(0), start_(0), size_(size) {
+      try {
+         data_ = new char[size_];
+      }
+      catch(std::bad_alloc& ba) {
+         std::cerr<<"Failed to allocate memory " << ba.what();
+      }
+   }
+   unsigned Enque(const char * src, unsigned size) {
+      if (size == 0 || size_ == 0 || start_ == length_ + 1) {
+         return 0;
+      }
+      unsigned first = 0;
+      if (start_ < length_) {
+         // start_ ... length_ ... size_
+         first = min(size, size_ - length_);
+         std::memcpy(data_ + length_, src, first);
+         length_ += first;
+         length_ %= size_;
+         // Split case
+         if (first < size) {
+            unsigned second = min(size - first, start_);
+            std::memcpy(data_, src + first, second);
+            length_ += second;
+            length_ %= size_;
+            return first + second;
+         }
+         return first;
+      } else {
+         // length_ ... start_ ... size_
+         first = min(size, length_ - start_ - 1);
+         std::memcpy(data_ + length_, src, first);
+         length_ += first;
+         length_ %= size_;
+         return first;
+      }
+   };
+
+   unsigned Deque(char * dst, unsigned size) {
+      if (size == 0 || size_ == 0 || start_ == length_) {
+         return 0;
+      }
+      unsigned first = 0;
+      if (start_ < length_) {
+         // 0 ... start_ ... length_ .. size_
+         first = min(size, length_ - start_);
+         std::memcpy(dst, data_ + start_, first);
+         start_ += first;
+         start_ %= size_;
+         return first;
+      } else {
+         // 0 ... length_ ... start_ ... size_
+         first = min(size, size_ - start_);
+         std::memcpy(dst, data_ + start_, first);
+         start_ += first;
+         start_ %= size_;
+         // Split case.
+         if (first < size) {
+            unsigned second = min(size - first, start_ - length_ - 1);
+            std::memcpy(dst, data_, second);
+            start_ += second;
+            start_ %= size_;
+            return first + second;
+         }
+         return first;
+      }
+   };
+protected:
+   template<typename T>
+   T min(T a, T b) {
+      return (a < b)? a: b;
+   }
+};
+
 void ClosestNumbers(const std::vector<std::vector<int>>& in,
       std::vector<int>& out);
 void SortIncDecPairs(std::vector<int>& data);
@@ -105,4 +198,4 @@ int NextPrimeInSieve(std::vector<int>& sieve, int N);
 void AddSubPrimesInSieve(std::vector<int>& sieve);
 std::vector<int> FindAllSubPrimes(int N, std::vector<int>& P, std::vector<int>& Q);
 }
-#endif /* MAXNOY_ARRAYS_H_ */
+#endif /* ARRAYS_H_ */

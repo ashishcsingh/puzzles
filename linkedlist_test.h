@@ -5,11 +5,11 @@
  *      Author: acs
  */
 
-#ifndef MAXNOY_LINKEDLIST_TEST_H_
-#define MAXNOY_LINKEDLIST_TEST_H_
+#ifndef LINKEDLIST_TEST_H_
+#define LINKEDLIST_TEST_H_
 
 namespace linkedlist {
 void Test_LinkedLists();
 }
 
-#endif /* MAXNOY_LINKEDLIST_TEST_H_ */
+#endif /* LINKEDLIST_TEST_H_ */

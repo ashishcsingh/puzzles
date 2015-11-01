@@ -1322,6 +1322,7 @@ int MinPerimeterForArea(int area) {
    }
 }
 
+
 /*
  * What: Count divisible factors
  * How: 8 has 1, 2, 4, 8

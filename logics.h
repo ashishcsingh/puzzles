@@ -5,8 +5,8 @@
  *      Author: acs
  */
 
-#ifndef _MAXNOY_LOGICS_H
-#define _MAXNOY_LOGICS_H
+#ifndef _LOGICS_H
+#define _LOGICS_H
 
 namespace logics {
 int GCD(int a, int b);

@@ -5,11 +5,11 @@
  *      Author: acs
  */
 
-#ifndef MAXNOY_LOGICS_TEST_H_
-#define MAXNOY_LOGICS_TEST_H_
+#ifndef LOGICS_TEST_H_
+#define LOGICS_TEST_H_
 
 namespace logics {
 void Test_Logics();
 }
 
-#endif /* MAXNOY_LOGICS_TEST_H_ */
+#endif /* LOGICS_TEST_H_ */

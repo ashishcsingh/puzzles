@@ -508,6 +508,19 @@ void Test_FindMissingNum() {
    cout << "Done Test_FindMissingNum()" << endl;
 }
 
+
+void Test_Queue_Round() {
+   cout << "Start Test_Queue_Round()" << endl;
+   QueueRound q(100);
+   const char *c = {"Data to copy"};
+   q.Enque(c, 12);
+   char* d = new char[13];
+   q.Deque(d, 12);
+   d[12] = '\0';
+   cout<<d<<endl;
+   cout << "Done Test_Queue_Round()" << endl;
+}
+
 void Test_CounterWithMax() {
    cout << "Start Test_CounterWithMax()" << endl;
    vector<int> data {1,3,6,4,1,2};
@@ -609,6 +622,7 @@ void Test_Arrays() {
    Test_MinPerimeterForArea();
    Test_CountFactors();
    Test_FindAllSubPrimes();
+   Test_Queue_Round();
 }
 }
 

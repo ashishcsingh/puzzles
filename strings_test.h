@@ -5,11 +5,11 @@
  *      Author: acs
  */
 
-#ifndef MAXNOY_STRINGS_TEST_H_
-#define MAXNOY_STRINGS_TEST_H_
+#ifndef STRINGS_TEST_H_
+#define STRINGS_TEST_H_
 
 namespace strings {
 void Test_Strings();
 }
 
-#endif /* MAXNOY_STRINGS_TEST_H_ */
+#endif /* STRINGS_TEST_H_ */
