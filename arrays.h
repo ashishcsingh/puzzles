@@ -14,6 +14,7 @@
 #include <new>
 #include <iostream>
 #include <cstring>
+#include <cstdlib>
 
 namespace arrays {
 int FindMissingNumber(int array[], int arrayLength, int length);
@@ -174,6 +175,46 @@ protected:
    template<typename T>
    T min(T a, T b) {
       return (a < b)? a: b;
+   }
+};
+
+/*
+ * What: 2D array
+ * How: Using vectors
+ */
+template<typename T>
+class Array2D {
+   std::vector<std::vector<T>> data_;
+   unsigned size_;
+public:
+   Array2D(unsigned size) : size_(size) {
+      for(unsigned i = 0; i < size_; ++i) {
+         data_.push_back(std::vector<T>(size_, 0));
+      }
+   }
+   std::vector<T>& operator[](unsigned i) {
+      return data_[i];
+   }
+};
+
+/*
+ * What: Two dimensional vector using C style
+ * How: Total data will contain size * (T*) and size * T
+ *      First size will be header.
+ */
+template<typename T>
+class Array2DC {
+   T** header_;
+   unsigned size_;
+public:
+   Array2DC(unsigned size) : size_(size) {
+      header_ = (T**) malloc(size * sizeof(T*));
+      for(unsigned i = 0; i < size; ++i) {
+         *(header_ + i) = (T*) malloc(size * sizeof(T));
+      }
+   }
+   T* operator[](unsigned i) {
+      return *(header_ + i);
    }
 };
 

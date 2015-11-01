@@ -575,6 +575,21 @@ void Test_FindAllSubPrimes() {
    cout << endl<<"Done Test_FindAllSubPrimes()" << endl;
 }
 
+void Test_Array2D() {
+   cout << "Start Test_Array2D()" << endl;
+   Array2D<int> a(10);
+   a[4][8] = 10;
+   cout<<a[4][8]<<endl;
+   cout << "Done Test_Array2D()" << endl;
+}
+
+void Test_Array2DC() {
+   cout << "Start Test_Array2DC()" << endl;
+   Array2DC<int> a(10);
+   a[4][8] = 10;
+   cout<<a[4][8]<<endl;
+   cout << "Done Test_Array2DC()" << endl;
+}
 
 void Test_Arrays() {
 #ifdef TEST_DONE
@@ -623,6 +638,8 @@ void Test_Arrays() {
    Test_CountFactors();
    Test_FindAllSubPrimes();
    Test_Queue_Round();
+   Test_Array2D();
+   Test_Array2DC();
 }
 }
 
