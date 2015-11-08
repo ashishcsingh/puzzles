@@ -457,6 +457,27 @@ void PostOrder(BNode* node) {
 }
 
 /*
+ * What: IsSameTree
+ * How: Base case:
+ *      Null or both children null return true
+ *      If left or right has different data then root
+ *          then return false.
+ *      return AND of left and right recursion
+ */
+bool IsSameTree(BNode* node) {
+   if (!node || (!node->left_ && !node->right_)) {
+      return true;
+   }
+   if (node->left_ && (node->data_ != node->left_->data_)) {
+      return false;
+   }
+   if (node->right_ && (node->data_ != node->right_->data_)) {
+      return false;
+   }
+   return IsSameTree(node->left_) && IsSameTree(node->right_);
+}
+
+/*
  * Finds the minimum width
  * By comparing the (left path - 1) and (right path + 1)
  */

@@ -12,6 +12,15 @@ namespace graphs {
 
 using namespace std;
 
+/*
+ *               5
+ *            /    \
+ *           1       8
+ *            \
+ *              2
+ *               \
+ *                3
+ */
 void Test_Insert() {
    cout << "Started testing Test_Insert()" << endl;
    BNode* bnode = nullptr;
@@ -464,6 +473,21 @@ void Test_RotateTree() {
    cout << endl<< "Done Test_RotateTree()" << endl;
 }
 
+
+void Test_IsSameTree() {
+   cout << "Started testing Test_IsSameTree()" << endl;
+   BNode* bnode = nullptr;
+   Insert(&bnode, 5);
+   Insert(&bnode, 5);
+   Insert(&bnode, 5);
+   Insert(&bnode, 5);
+   Insert(&bnode, 5);
+   cout<<"Must be true: "<<IsSameTree(bnode)<<endl;
+   Insert(&bnode, 1);
+   cout<<"Must be false: "<<IsSameTree(bnode)<<endl;
+   cout << endl<< "Done Test_IsSameTree()" << endl;
+}
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -497,5 +521,6 @@ void Test_Graphs() {
 #endif
    Test_Dedupe();
    Test_RotateTree();
+   Test_IsSameTree();
 }
 }

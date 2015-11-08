@@ -216,6 +216,12 @@ public:
    T* operator[](unsigned i) {
       return *(header_ + i);
    }
+   ~Array2DC() {
+      for(unsigned i = 0; i < size_; ++i) {
+         delete[] *(header_ + i);
+      }
+      delete[] header_;
+   }
 };
 
 void ClosestNumbers(const std::vector<std::vector<int>>& in,

@@ -73,6 +73,7 @@ bool IsBst(BNode* node);
 bool IsBalanced(BNode* node);
 int Lca(BNode* root, int a, int b);
 bool ChildTree(BNode* parent, BNode* child);
+bool IsSameTree(BNode* node);
 
 //Node with parent_
 void InsertD(DNode** root, int data);

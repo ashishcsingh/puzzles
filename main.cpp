@@ -14,9 +14,9 @@ int main() {
    strings::Test_Strings();
    linkedlist::Test_LinkedLists();
 #endif
-   graphs::Test_Graphs();
    hashmaps::Test_HashMaps();
    threads::Test_Threads();
    arrays::Test_Arrays();
+   graphs::Test_Graphs();
    return 0;
 }
