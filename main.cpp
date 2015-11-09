@@ -13,9 +13,9 @@ int main() {
    dynamic::Test_Dynamic();
    strings::Test_Strings();
    linkedlist::Test_LinkedLists();
-#endif
    hashmaps::Test_HashMaps();
    threads::Test_Threads();
+#endif
    arrays::Test_Arrays();
    graphs::Test_Graphs();
    return 0;

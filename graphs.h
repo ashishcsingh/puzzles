@@ -10,6 +10,7 @@
 
 #include <vector>
 #include <string>
+#include <stack>
 #include <memory>
 namespace graphs {
 
@@ -89,6 +90,25 @@ BNode** SortedArrayToBst2(int array[], int length);
 int NextSuccessor(BNode* root, int node);
 std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights,
       int src, int dest);
+
+
+/*
+ * What: In-order traserval
+ * How:  Next() will select next element in BST.
+ */
+class InOrderIterator {
+   std::stack<BNode*> stack_;
+public:
+   void recurseLeft(BNode* BNode);
+   /*
+    * Push current and all elems on left to stack.
+    */
+   InOrderIterator(BNode* BNode);
+   /*
+    * Recursively traverse to-pop right element.
+    */
+   BNode* Next();
+};
 
 // contact_id (int) and associated emails, will return merged contact_ids.
 std::vector<std::vector<int>> Dedupe(

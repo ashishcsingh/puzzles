@@ -1005,5 +1005,33 @@ vector<vector<int>> Dedupe(vector<pair<int,vector<string>>>& contacts) {
    return output;
 }
 
+
+void InOrderIterator::recurseLeft(BNode* BNode) {
+   if (!BNode) {
+      return;
+   }
+   stack_.push(BNode);
+   recurseLeft(BNode->left_);
+}
+
+/*
+ * Push current and all elems on left to stack.
+ */
+InOrderIterator::InOrderIterator(BNode* BNode) {
+   recurseLeft(BNode);
+}
+
+/*
+ * Recursively traverse to-pop right element.
+ */
+BNode* InOrderIterator::Next() {
+   if (stack_.size() == 0) {
+      return nullptr;
+   }
+   BNode* cur = stack_.top();
+   stack_.pop();
+   recurseLeft(cur->right_);
+   return cur;
+}
 }
 

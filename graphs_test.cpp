@@ -488,6 +488,20 @@ void Test_IsSameTree() {
    cout << endl<< "Done Test_IsSameTree()" << endl;
 }
 
+void Test_InOrderIterator() {
+   cout << endl<< "Start Test_InOrderIterator()" << endl;
+   BNode* bnode = nullptr;
+   Insert(&bnode, 5);
+   Insert(&bnode, 1);
+   Insert(&bnode, 2);
+   InOrderIterator itr(bnode);
+   BNode* ptr;
+   while((ptr = itr.Next())) {
+      std::cout<<ptr->data_<<" ";
+   }
+   cout << endl<< "Done Test_InOrderIterator()" << endl;
+}
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -518,9 +532,10 @@ void Test_Graphs() {
    Test_CountNodesInBST();
    Test_Serialize();
    Test_HeapSort();
-#endif
    Test_Dedupe();
    Test_RotateTree();
    Test_IsSameTree();
+#endif
+   Test_InOrderIterator();
 }
 }
