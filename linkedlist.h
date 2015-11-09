@@ -151,5 +151,20 @@ struct NodeWithWeight {
 };
 void PrintSubTreeWeights(const std::list<NodeWithWeight>& nodes);
 
+template<typename T>
+struct SmartPtr {
+   T* ptr_;
+   SmartPtr(T* ptr) : ptr_(ptr) {}
+   ~SmartPtr() {
+      delete ptr_;
+   }
+   T* Get() {
+      return ptr_;
+   }
+   T& operator->() {
+      return *this;
+   }
+};
+
 }
 #endif

@@ -12,6 +12,8 @@
 #include <string>
 #include <stack>
 #include <memory>
+#include <unordered_map>
+
 namespace graphs {
 
 struct BNode {
@@ -127,7 +129,25 @@ struct GNode {
 };
 
 bool PathToNodes(GNode* src, GNode* dest);
-
 int CountNodesInBST(BNode* root, int start, int end);
+
+/*
+ * What: Graph made from vertices
+ */
+struct Vertex {
+   std::vector<Vertex*> edges_;
+   int id_;
+   Vertex(int id) : id_(id) {}
+};
+struct Graph {
+   std::vector<Vertex*> vertices_;
+   ~Graph() {
+      for(auto& v: vertices_) {
+         delete v;
+      }
+   }
+};
+// Clones graph.
+Graph* CloneGraph(Graph& src);
 }
 #endif /* GRAPTH_H */

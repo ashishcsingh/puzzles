@@ -502,6 +502,25 @@ void Test_InOrderIterator() {
    cout << endl<< "Done Test_InOrderIterator()" << endl;
 }
 
+void Test_GraphClone() {
+   cout << endl<< "Start Test_GraphClone()" << endl;
+   Graph src;
+   src.vertices_.push_back(new Vertex(0));
+   src.vertices_.push_back(new Vertex(1));
+   src.vertices_.push_back(new Vertex(2));
+   src.vertices_[0]->edges_.push_back(src.vertices_[1]);
+   src.vertices_[0]->edges_.push_back(src.vertices_[2]);
+   {
+      Graph *dst = CloneGraph(src);
+      assert(dst->vertices_[0]->id_ == 0);
+      assert(dst->vertices_[1]->id_ == 1);
+      assert(dst->vertices_[2]->id_ == 2);
+      assert(dst->vertices_[0]->edges_[0]->id_ == 1);
+      assert(dst->vertices_[0]->edges_[1]->id_ == 2);
+   }
+   cout << endl<< "Done Test_GraphClone()" << endl;
+}
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -537,5 +556,6 @@ void Test_Graphs() {
    Test_IsSameTree();
 #endif
    Test_InOrderIterator();
+   Test_GraphClone();
 }
 }

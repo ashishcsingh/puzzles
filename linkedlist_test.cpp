@@ -305,6 +305,20 @@ void Test_HashMapWithLast() {
    cout << "Done testing Test_HashMapWithLast()" << endl;
 }
 
+void Test_SmartPtr() {
+   cout<<"Start testing Test_SmartPtr()"<<endl;
+   struct Node {
+      ~Node() {
+         cout<<"Destruct"<<endl;
+      }
+   };
+   {
+      SmartPtr<Node> n(new Node);
+   }
+      cout<<"Outside"<<endl;
+      cout<<"Done testing Test_SmartPtr()"<<endl;
+   }
+
 void Test_LinkedLists() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -326,6 +340,7 @@ void Test_LinkedLists() {
    Test_PrintSubTreeWeights();
 #endif
    Test_HashMapWithLast();
+   Test_SmartPtr();
 }
 
 }

@@ -1033,5 +1033,26 @@ BNode* InOrderIterator::Next() {
    recurseLeft(cur->right_);
    return cur;
 }
+
+/*
+ * What: Clones graph
+ * How: Copies all vertex(s)
+ *      And then copies all edges
+ */
+Graph* CloneGraph(Graph& src) {
+   std::unordered_map<Vertex*, Vertex*> map;
+   Graph *dst = new Graph;
+   for(auto& v: src.vertices_) {
+      Vertex *newV = new Vertex(v->id_);
+      map[v] = newV;
+      dst->vertices_.push_back(newV);
+   }
+   for(auto& srcV: src.vertices_) {
+      for(auto& srcE: srcV->edges_) {
+         map[srcV]->edges_.push_back(map[srcE]);
+      }
+   }
+   return dst;
+}
 }
 
