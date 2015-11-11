@@ -31,8 +31,23 @@ void Test_CacheManager() {
    cout << "Done testing Test_CacheManager()" << endl;
 }
 
+
+void Test_TopWords() {
+   cout << "Started testing Test_TopWords()" << endl;
+   vector<string> s {"word", "words", "hello", "hello", "super", "random"};
+   vector<string> o;
+   TopWords(s, o, 2);
+   for(auto& w: o) {
+      cout<<w<<" ";
+   }
+   cout<<endl;
+   cout << "Done testing Test_TopWords()" << endl;
+}
+
+
 void Test_HashMaps() {
    Test_CacheManager();
+   Test_TopWords();
 }
 }
 

@@ -12,6 +12,7 @@
 #include<deque>
 #include<string>
 #include<ostream>
+#include<vector>
 
 #include "log.h"
 
@@ -162,6 +163,10 @@ private:
    static CacheManager *_instance;
 };
 std::ostream& operator<<(std::ostream& os, UserData& ud);
+
+// Finds top count words in book with O(n.log(k)) cost.
+void TopWords(std::vector<std::string>& book, std::vector<std::string>& out, int count);
+
 }
 
 #endif /* HASHMAPS_H_ */

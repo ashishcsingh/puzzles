@@ -12,11 +12,11 @@ int main() {
    logics::Test_Logics();
    dynamic::Test_Dynamic();
    strings::Test_Strings();
-   hashmaps::Test_HashMaps();
    threads::Test_Threads();
 #endif
    arrays::Test_Arrays();
-   graphs::Test_Graphs();
    linkedlist::Test_LinkedLists();
+   hashmaps::Test_HashMaps();
+   graphs::Test_Graphs();
    return 0;
 }

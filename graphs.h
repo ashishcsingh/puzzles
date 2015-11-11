@@ -12,6 +12,7 @@
 #include <string>
 #include <stack>
 #include <memory>
+#include <list>
 #include <unordered_map>
 
 namespace graphs {
@@ -24,6 +25,12 @@ struct BNode {
          data_ { data } {
    }
    ;
+};
+
+struct Node {
+   Node *left{nullptr}, *right{nullptr};
+   char data;
+   Node(char c) : data(c) {}
 };
 
 void RotateTree(BNode* node);
@@ -130,6 +137,8 @@ struct GNode {
 
 bool PathToNodes(GNode* src, GNode* dest);
 int CountNodesInBST(BNode* root, int start, int end);
+//Print path to leaf node.
+void PrintPathToNode(Node *head, std::list<Node*>& path);
 
 /*
  * What: Graph made from vertices

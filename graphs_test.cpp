@@ -521,6 +521,30 @@ void Test_GraphClone() {
    cout << endl<< "Done Test_GraphClone()" << endl;
 }
 
+void Test_PrintPathToNode() {
+   cout << "Start Test_PrintPathToNode()" << endl;
+   Node *a = new Node('A');
+   Node *b = new Node('B');
+   Node *c = new Node('C');
+   Node *d = new Node('D');
+   Node *e = new Node('E');
+   Node *f = new Node('F');
+   a->left = b;
+   a->right = c;
+   b->left = d;
+   d->left = e;
+   e->right = f;
+   list<Node*> list;
+   PrintPathToNode(a, list);
+   delete a;
+   delete b;
+   delete c;
+   delete d;
+   delete e;
+   delete f;
+   cout << "Done Test_PrintPathToNode()" << endl;
+}
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -557,5 +581,6 @@ void Test_Graphs() {
 #endif
    Test_InOrderIterator();
    Test_GraphClone();
+   Test_PrintPathToNode();
 }
 }

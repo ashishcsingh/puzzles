@@ -1054,5 +1054,36 @@ Graph* CloneGraph(Graph& src) {
    }
    return dst;
 }
+
+
+
+/*
+ *  What: Prints path to leaf node
+ *  How: Using DFS keep pushing current node.
+ *       When found leaf then print paths from passed parm.
+ *       Pop current node when done covering left and right nodes.
+ */
+void PrintPathToNode(Node *head, list<Node*>& path) {
+   // Base condition.
+   if (!head) {
+      return;
+   }
+   // Push the current node before printing.
+   path.push_back(head);
+   // Leaf condition.
+   if (!head->left && !head->right) {
+      for (auto& n : path) {
+         cout<<n->data;
+      }
+      cout<<endl;
+      return;
+   }
+   // Using DFS.
+   PrintPathToNode(head->left, path);
+   PrintPathToNode(head->right, path);
+   // Need to pop out the current element.
+   path.pop_back();
+}
+
 }
 
