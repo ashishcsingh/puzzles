@@ -377,6 +377,14 @@ void Test_CountTwos() {
    cout <<  "Done Test_CountTwos" << endl;
 }
 
+void Test_ReverseStringByWords() {
+   cout <<  "Start Test_ReverseStringByWords" << endl;
+   cout<<ReverseStringByWords("Hello World.")<<endl;
+   cout<<ReverseStringByWords("Hello World")<<endl;
+   cout<<ReverseStringByWords("Hello")<<endl;
+   cout <<  "Done Test_ReverseStringByWords" << endl;
+}
+
 void Test_Strings() {
 #ifdef TEST_DONE
    Test_Reverse();
@@ -413,6 +421,7 @@ void Test_Strings() {
    Test_Print123To100();
    Test_BalanceParenthesis();
    Test_CountTwos();
+   Test_ReverseStringByWords();
 }
 
 }

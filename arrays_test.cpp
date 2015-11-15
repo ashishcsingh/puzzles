@@ -603,6 +603,34 @@ void Test_Maximize() {
    cout << "Done Test_Maximize()" << endl;
 }
 
+void Test_MakeAllRowAndColZero() {
+   cout << "Start Test_MakeAllRowAndColZero()" << endl;
+   vector<vector<int>> m;
+   for(int i= 0; i<5; ++i) {
+      m.push_back(vector<int>(5));
+      for(int j= 0; j<5; ++j) {
+         m[i][j] = rand() % 100 + 1;
+      }
+   }
+   m[3][2] = 0;
+   cout<<endl<<"Before: "<<endl;
+   for(auto& r: m) {
+      for(auto& e: r) {
+         cout<<e<<" ";
+      }
+      cout<<endl;
+   }
+   MakeAllRowAndColZero(m);
+   cout<<endl<<"After:"<<endl;
+   for(auto& r: m) {
+      for(auto& e: r) {
+         cout<<e<<" ";
+      }
+      cout<<endl;
+   }
+   cout<<"Done Test_MakeAllRowAndColZero()"<<endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -653,6 +681,7 @@ void Test_Arrays() {
    Test_Array2DC();
 #endif
    Test_Maximize();
+   Test_MakeAllRowAndColZero();
 }
 }
 

@@ -1461,5 +1461,45 @@ void Maximize(vector<int>& arr, vector<int>& rep) {
    }
 }
 
+
+/*
+ * What: Make all cols and rows zero when elem at row,col is zero.
+ *       http://www.careercup.com/question?id=5707928940052480
+ * How:  Identify in first iteration these zero elems
+ *       In second iteration make all cols and row zero.
+ */
+typedef vector<int> TVecInt;
+typedef vector<TVecInt> TMatrix;
+
+void MakeRowZero(TMatrix& m, int row) {
+   for(auto& e: m[row]) {
+      e = 0;
+   }
+}
+
+void MakeColZero(TMatrix& m, int col) {
+   for(int row=0; row<m.size(); ++row) {
+      m[row][col] = 0;
+   }
+}
+void MakeAllRowAndColZero(TMatrix& m) {
+   vector<pair<int,int>> zeroPairs;
+   int row = 0, col = 0;
+   for(auto& r: m) {
+      col = 0;
+      for(auto& e: r) {
+         if(e == 0) {
+            zeroPairs.push_back(make_pair(row, col));
+         }
+         ++col;
+      }
+      ++row;
+   }
+   for(auto& p: zeroPairs) {
+      MakeRowZero(m, p.first);
+      MakeColZero(m, p.second);
+   }
+}
+
 }
 

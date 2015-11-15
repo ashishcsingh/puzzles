@@ -1048,4 +1048,36 @@ void Scribble(std::list<string>& words, const std::vector<char>& alphas) {
    }
 }
 
+/*
+ * What: Reverse the string by retaining the order.
+ *       "Hello world." => "world Hello."
+ * How: Come backward and copy all string.
+ */
+string ReverseStringByWords(const string& src) {
+   int len = src.length() - 1;
+   string dest(len + 1, ' ');
+   int pre, post, d = 0;
+   if (src[len] == '.') {
+      dest[len] = '.';
+      --len;
+   }
+
+   while (len >= 0) {
+      pre = len;
+      while (pre >= 0 && src[pre] != ' ') {
+         --pre;
+      }
+      post = pre;
+      ++pre;
+      while (pre <= len) {
+         dest[d++] = src[pre++];
+      }
+      if (post > 0 ) {
+         dest[d++] = ' ';
+      }
+      len = post - 1;
+   }
+   return dest;
+}
+
 }

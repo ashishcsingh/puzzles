@@ -99,6 +99,10 @@ string Numeronym(const string& str);
 void OrganizeAlphaNumStr(string& str);
 void Scribble(std::list<string>& words, const std::vector<char>& alphas);
 int CountTwos(int k);
+/* Reverse the string by retaining the order.
+ * "Hello world." => "world Hello."
+ */
+std::string ReverseStringByWords(const std::string& src);
 
 }
 #endif /* STRINGS_H_ */

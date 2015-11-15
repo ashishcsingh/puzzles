@@ -246,5 +246,8 @@ void AddSubPrimesInSieve(std::vector<int>& sieve);
 std::vector<int> FindAllSubPrimes(int N, std::vector<int>& P, std::vector<int>& Q);
 // Maximize values in arr by replacing from rep.
 void Maximize(std::vector<int>& arr, std::vector<int>& rep);
+// Make all row,col zero for elem is zero in matrix[][].
+void MakeAllRowAndColZero(std::vector<std::vector<int>>& m);
+
 }
 #endif /* ARRAYS_H_ */
