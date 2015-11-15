@@ -591,6 +591,18 @@ void Test_Array2DC() {
    cout << "Done Test_Array2DC()" << endl;
 }
 
+void Test_Maximize() {
+   cout << "Start Test_Maximize()" << endl;
+   vector<int> arr{3,1,4,5,6};
+   vector<int> rep{1,9,5,2,3};
+   Maximize(arr, rep);
+   for(auto a: arr) {
+      cout<<a<<" ";
+   }
+   cout<<endl;
+   cout << "Done Test_Maximize()" << endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -629,7 +641,6 @@ void Test_Arrays() {
    Test_SortIncDecPairs();
    Test_MergeSort();
    Test_QuickSort();
-#endif
    Test_FindMissingNum();
    Test_CounterWithMax();
    Test_CountUniques();
@@ -640,6 +651,8 @@ void Test_Arrays() {
    Test_Queue_Round();
    Test_Array2D();
    Test_Array2DC();
+#endif
+   Test_Maximize();
 }
 }
 

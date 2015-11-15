@@ -20,6 +20,7 @@
 #include <utility>
 #include <unordered_set>
 #include <cstring>
+#include <algorithm>
 
 namespace arrays {
 using namespace std;
@@ -1423,6 +1424,42 @@ std::vector<int> FindAllSubPrimes(int N, std::vector<int>& P, std::vector<int>& 
    return results;
 }
 
+/*
+ * What: Maximize values in arr by replacing from rep
+ * How:  Sort rep asc
+ *       Copy arr along with index and sort desc
+ *       Replace when elem in arr is smaller than e in sorted rep.
+ * Which:
+ *      http://www.careercup.com/question?id=5131437827162112
+ */
+
+typedef pair<int,int> TPair;
+bool compareAscPair(TPair& p1,TPair& p2) {
+   return p1.first < p2.first;
+}
+
+bool compareDescInt(int a, int b) {
+   return a > b;
+}
+
+void Maximize(vector<int>& arr, vector<int>& rep) {
+   sort(rep.begin(), rep.end(), compareDescInt);
+   vector<TPair> sortedArr;
+   int i = 0;
+   for(auto a: arr) {
+      sortedArr.push_back(make_pair(a, i++));
+   }
+   // Sort descending.
+   sort(sortedArr.begin(), sortedArr.end(), compareAscPair);
+   // Replace in-place smallest elements from biggest rep elements.
+   i = 0;
+   for(auto& p: sortedArr) {
+      if(arr[p.second] < rep[i]) {
+         arr[p.second] = rep[i];
+         i++;
+      }
+   }
+}
 
 }
 

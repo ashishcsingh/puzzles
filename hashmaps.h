@@ -13,7 +13,7 @@
 #include<string>
 #include<ostream>
 #include<vector>
-
+#include<list>
 #include "log.h"
 
 namespace hashmaps {
@@ -166,6 +166,31 @@ std::ostream& operator<<(std::ostream& os, UserData& ud);
 
 // Finds top count words in book with O(n.log(k)) cost.
 void TopWords(std::vector<std::string>& book, std::vector<std::string>& out, int count);
+
+// Phonebook lookup by name and phone.
+
+struct Person {
+   std::string name;
+   std::string phone;
+   Person(const std::string& nameP, const std::string& phoneP) :
+     name(nameP), phone(phoneP) {}
+};
+
+class Phonebook {
+
+private:
+   std::unordered_map<std::string, std::string> mapPhoneToName_;
+   std::unordered_map<std::string, std::string> mapNameToPhone_;
+   std::mutex m_;
+
+public:
+   std::string LookUpByName(const std::string& name);
+   std::string LookUpByPhone(const std::string& phone);
+   void RemovePerson(const Person& person);
+   void AddPerson(const Person& person);
+   Phonebook(const std::list<Person>& people);
+};
+
 
 }
 

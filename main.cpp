@@ -13,10 +13,10 @@ int main() {
    dynamic::Test_Dynamic();
    strings::Test_Strings();
    threads::Test_Threads();
-#endif
-   arrays::Test_Arrays();
    linkedlist::Test_LinkedLists();
-   hashmaps::Test_HashMaps();
+#endif
    graphs::Test_Graphs();
+   hashmaps::Test_HashMaps();
+   arrays::Test_Arrays();
    return 0;
 }

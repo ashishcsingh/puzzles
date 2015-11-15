@@ -244,5 +244,7 @@ void FindAllSubPrimesInSieve(std::vector<int>& sieve);
 int NextPrimeInSieve(std::vector<int>& sieve, int N);
 void AddSubPrimesInSieve(std::vector<int>& sieve);
 std::vector<int> FindAllSubPrimes(int N, std::vector<int>& P, std::vector<int>& Q);
+// Maximize values in arr by replacing from rep.
+void Maximize(std::vector<int>& arr, std::vector<int>& rep);
 }
 #endif /* ARRAYS_H_ */

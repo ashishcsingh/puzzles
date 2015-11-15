@@ -45,9 +45,28 @@ void Test_TopWords() {
 }
 
 
+void Test_Phonebook() {
+   cout << "Started testing Test_Phonebook()" << endl;
+   list<Person> people;
+   people.push_back(Person("Sakshi", "408-121-1212"));
+   people.push_back(Person("Ashish", "508-121-1212"));
+   people.push_back(Person("Girish", "608-121-1212"));
+   Phonebook pb(people);
+   pb.AddPerson(Person("Amita", "708-121-12121"));
+   cout<<"Phone of Ashish : "<< pb.LookUpByName("Ashish")<<endl;
+   cout<<"Phone of Sakshi : "<< pb.LookUpByName("Sakshi")<<endl;
+   cout<<"Name of 408-121-1212 : "<< pb.LookUpByPhone("408-121-1212")<<endl;
+   cout<<"Phone of unknown : " << pb.LookUpByName("Unknown")<<endl;
+   cout << "Done testing Test_Phonebook()" << endl;
+}
+
+
 void Test_HashMaps() {
+#ifdef TEST_DONE
    Test_CacheManager();
    Test_TopWords();
+#endif
+   Test_Phonebook();
 }
 }
 

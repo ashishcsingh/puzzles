@@ -7,6 +7,8 @@
 #include "hashmaps.h"
 #include <ostream>
 #include <queue>
+#include <string>
+#include <mutex>
 
 namespace hashmaps {
 using namespace std;
@@ -66,6 +68,45 @@ void TopWords(vector<string>& book, vector<string>& out, int count) {
       auto itr = pq.top();
       pq.pop();
       out.push_back(itr->first);
+   }
+}
+
+/*
+ * What: Phonebook class organizes phone and name for easy look up
+ * How: Using hashmaps and via thread safe way.
+ */
+string Phonebook::LookUpByName(const string& name) {
+   auto p = mapNameToPhone_.find(name);
+   if (p == mapNameToPhone_.end()) {
+      return "Not found";
+   } else {
+      return p->second;
+   }
+}
+string Phonebook::LookUpByPhone(const string& phone) {
+   auto n = mapPhoneToName_.find(phone);
+   if (n == mapPhoneToName_.end()) {
+      return "Not found";
+   } else {
+      return n->second;
+   }
+}
+void Phonebook::RemovePerson(const Person& person) {
+   lock_guard<mutex> lock(m_);
+   mapNameToPhone_.erase(person.name);
+   mapPhoneToName_.erase(person.phone);
+}
+void Phonebook::AddPerson(const Person& person) {
+   lock_guard<mutex> lock(m_);
+   mapNameToPhone_[person.name] = person.phone;
+   mapPhoneToName_[person.phone] = person.name;
+}
+
+Phonebook::Phonebook(const list<Person>& people) {
+   lock_guard<mutex> lock(m_);
+   for(auto& p : people) {
+      mapNameToPhone_[p.name] = p.phone;
+      mapPhoneToName_[p.phone] = p.name;
    }
 }
 
