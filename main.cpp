@@ -6,6 +6,7 @@
 #include "dynamic_test.h"
 #include "threads_test.h"
 #include "hashmaps_test.h"
+#include "bits_test.h"
 
 int main() {
 #ifdef TEST_DONE
@@ -18,5 +19,6 @@ int main() {
    graphs::Test_Graphs();
    hashmaps::Test_HashMaps();
    arrays::Test_Arrays();
+   bits::Test_Bits();
    return 0;
 }
