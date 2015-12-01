@@ -21,6 +21,7 @@
 #include <unordered_set>
 #include <cstring>
 #include <algorithm>
+#include <queue>
 
 namespace arrays {
 using namespace std;
@@ -1498,6 +1499,58 @@ void MakeAllRowAndColZero(TMatrix& m) {
    for(auto& p: zeroPairs) {
       MakeRowZero(m, p.first);
       MakeColZero(m, p.second);
+   }
+}
+
+
+typedef pair<int,int> TPairInt;
+
+void updateMinMax(int& val, int& min, int& max) {
+   if (val < min) {
+      min = val;
+   }
+   if (val > max) {
+      max = val;
+   }
+}
+
+/*
+ * What: Given N arrays finds range that gets one element from
+ *       each array.
+ * How: 1. Find min range in the first col.
+ *      2. Increment index of the row with the smallest value.
+ *      3. Find min using Min Heap (priority queue).
+ *      4. Update range for the next smallest.
+ */
+void MinRange(vector<vector<int>> arrays, int& min, int& max) {
+   // Initialize datastructures.
+   auto comp = [](TPairInt l, TPairInt r) {
+      return l.first > r.first; };
+   priority_queue<TPairInt,vector<TPairInt>, decltype(comp)> pq(comp);
+   vector<int> minIndex(arrays.size(), 0);
+   TPairInt minElem(0, 0);
+   min = INT_MAX;
+   max = INT_MIN;
+
+   // populate first col in priority_queue
+   for(int i=0; i<arrays.size(); ++i) {
+      pq.push(make_pair(arrays[i][minIndex[i]], i));
+   }
+   for(int i=0; i<arrays.size(); ++i) {
+      updateMinMax(arrays[i][0], min, max);
+   }
+   // Until first array gets exhaused.
+   while(minIndex[minElem.second] < arrays[minElem.second].size()) {
+      minElem = pq.top();
+      pq.pop();
+      ++minIndex[minElem.second];
+      // Push the next val in the same row, thus it increment in sequence.
+      pq.push(make_pair(arrays[minElem.second][minIndex[minElem.second]],
+               minElem.second));
+      // Ensure it fits the range.
+      updateMinMax(minElem.first, min, max);
+      // Set the new min.
+      min = minElem.first;
    }
 }
 

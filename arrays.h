@@ -248,6 +248,7 @@ std::vector<int> FindAllSubPrimes(int N, std::vector<int>& P, std::vector<int>& 
 void Maximize(std::vector<int>& arr, std::vector<int>& rep);
 // Make all row,col zero for elem is zero in matrix[][].
 void MakeAllRowAndColZero(std::vector<std::vector<int>>& m);
-
+//Find minimum range to cover an element from each N rows.
+void MinRange(std::vector<std::vector<int>> arrays, int& min, int& max);
 }
 #endif /* ARRAYS_H_ */

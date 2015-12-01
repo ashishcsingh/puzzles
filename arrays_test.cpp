@@ -631,6 +631,27 @@ void Test_MakeAllRowAndColZero() {
    cout<<"Done Test_MakeAllRowAndColZero()"<<endl;
 }
 
+
+int Test_MinRange() {
+   cout<<"Start Test_MinRange()"<<endl;
+   vector<vector<int>> arrays;
+   for(int i=0; i<5; ++i) {
+      arrays.push_back(vector<int>(5));
+   }
+   cout<<endl<<"Input array : "<<endl;
+   for(int i=0; i<5; ++i) {
+      for(int j=0; j<5; ++j) {
+         arrays[i][j] = (i + 1) * (j + 2) + 1;
+         cout<<arrays[i][j]<<" ";
+      }
+      cout<<endl;
+   }
+   int min, max;
+   MinRange(arrays, min, max);
+   cout<<endl<<"Range "<<min<<","<<max<<endl;
+   cout<<"Done Test_MinRange()"<<endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -682,6 +703,7 @@ void Test_Arrays() {
 #endif
    Test_Maximize();
    Test_MakeAllRowAndColZero();
+   Test_MinRange();
 }
 }
 
