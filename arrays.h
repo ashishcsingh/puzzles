@@ -15,6 +15,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
+#include <queue>
 
 namespace arrays {
 int FindMissingNumber(int array[], int arrayLength, int length);
@@ -250,5 +251,52 @@ void Maximize(std::vector<int>& arr, std::vector<int>& rep);
 void MakeAllRowAndColZero(std::vector<std::vector<int>>& m);
 //Find minimum range to cover an element from each N rows.
 void MinRange(std::vector<std::vector<int>> arrays, int& min, int& max);
+
+// Abstract Heap related classes made from priority_queue.
+template<typename T>
+class Heap {
+public:
+   virtual void Push(const T& data)=0;
+   virtual const T& Top()=0;
+   virtual void Pop()=0;
+   virtual ~Heap() {};
+};
+
+template<typename T>
+class MinHeap : public Heap<T> {
+   struct Comp {
+      bool operator() (const T& l, const T& r) {
+         return l > r;
+      }
+   };
+   std::priority_queue<T, std::vector<T>, Comp> pq_;
+public:
+   virtual void Push(const T& data) {
+      pq_.push(data);
+   }
+   virtual const T& Top() {
+      return pq_.top();
+   }
+   virtual void Pop() {
+      pq_.pop();
+   }
+   virtual ~MinHeap() {}
+};
+
+template<typename T>
+class MaxHeap: public Heap<T> {
+   std::priority_queue<T> pq_;
+public:
+   virtual void Push(const T& data) {
+      pq_.push(data);
+   }
+   virtual const T& Top() {
+      return pq_.top();
+   }
+   virtual void Pop() {
+      pq_.pop();
+   }
+   virtual ~MaxHeap() {}
+};
 }
 #endif /* ARRAYS_H_ */

@@ -632,7 +632,7 @@ void Test_MakeAllRowAndColZero() {
 }
 
 
-int Test_MinRange() {
+void Test_MinRange() {
    cout<<"Start Test_MinRange()"<<endl;
    vector<vector<int>> arrays;
    for(int i=0; i<5; ++i) {
@@ -652,6 +652,32 @@ int Test_MinRange() {
    cout<<"Done Test_MinRange()"<<endl;
 }
 
+
+void Test_Heaps() {
+   cout<<"Start Test_Heaps()"<<endl;
+   // Min Heap testing.
+   unique_ptr<Heap<int>> hmin(new MinHeap<int>);
+   for(int i=0; i<10; ++i) {
+      hmin->Push(i);
+   }
+   cout<<"0 to 9 for minheap is "<<endl;
+   for(int i=0; i<10; ++i) {
+      cout<<hmin->Top()<<" ";
+      hmin->Pop();
+   }
+   // Max Heap testing.
+   unique_ptr<Heap<int>> hmax(new MaxHeap<int>);
+   for(int i=0; i<10; ++i) {
+      hmax->Push(i);
+   }
+   cout<<endl<<"0 to 9 for maxheap is "<<endl;
+   for(int i=0; i<10; ++i) {
+      cout<<hmax->Top()<<" ";
+      hmax->Pop();
+   }
+   cout<<endl;
+   cout<<"Done testing Test_Heaps()"<<endl;
+}
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -704,6 +730,7 @@ void Test_Arrays() {
    Test_Maximize();
    Test_MakeAllRowAndColZero();
    Test_MinRange();
+   Test_Heaps();
 }
 }
 

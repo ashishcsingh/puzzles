@@ -1521,6 +1521,8 @@ void updateMinMax(int& val, int& min, int& max) {
  *      2. Increment index of the row with the smallest value.
  *      3. Find min using Min Heap (priority queue).
  *      4. Update range for the next smallest.
+ *      5. Loop till any array is exhausted.
+ *      Complexity for N * M array = M + N * Log(M)
  */
 void MinRange(vector<vector<int>> arrays, int& min, int& max) {
    // Initialize datastructures.
@@ -1539,7 +1541,7 @@ void MinRange(vector<vector<int>> arrays, int& min, int& max) {
    for(int i=0; i<arrays.size(); ++i) {
       updateMinMax(arrays[i][0], min, max);
    }
-   // Until first array gets exhaused.
+   // Until first array gets exhausted.
    while(minIndex[minElem.second] < arrays[minElem.second].size()) {
       minElem = pq.top();
       pq.pop();
