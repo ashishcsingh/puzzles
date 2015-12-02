@@ -14,11 +14,11 @@ int main() {
    dynamic::Test_Dynamic();
    strings::Test_Strings();
    threads::Test_Threads();
-   linkedlist::Test_LinkedLists();
 #endif
    graphs::Test_Graphs();
    hashmaps::Test_HashMaps();
    arrays::Test_Arrays();
    bits::Test_Bits();
+   linkedlist::Test_LinkedLists();
    return 0;
 }

@@ -168,7 +168,7 @@ void Test_DistanceFromLoop() {
    // Loop start at 3
    node->next_ = head->next_->next_;
    cout << "Distance from head should be 2 : " << DistanceFromLoop(head)
-         << endl;
+               << endl;
    assert(DistanceFromLoop(head) == 2);
    cout << "Done testing Test_DistanceFromLoop()" << endl;
 }
@@ -315,8 +315,8 @@ void Test_SmartPtr() {
    {
       SmartPtr<Node> n(new Node);
    }
-      cout<<"Outside"<<endl;
-      cout<<"Done testing Test_SmartPtr()"<<endl;
+   cout<<"Outside"<<endl;
+   cout<<"Done testing Test_SmartPtr()"<<endl;
 }
 
 void Test_RemoveDuplicates() {
@@ -330,6 +330,30 @@ void Test_RemoveDuplicates() {
    RemoveDuplicates2(node);
    assert(node->next_->next_ == nullptr);
    cout<<"Done testing Test_RemoveDuplicates()"<<endl;
+}
+
+void Test_PartitionList() {
+   cout<<"Start testing Test_PartitionList()"<<endl;
+   Node *node = new Node(1);
+   node->next_ = new Node(8);
+   node->next_->next_ = new Node(3);
+   node->next_->next_->next_ = new Node(6);
+   Node* out = PartitionList(node, 5);
+   assert(out->data_ = 1);
+   assert(out->next_->data_ = 3);
+   assert(out->next_->next_->data_ = 8);
+   assert(out->next_->next_->next_->data_ = 6);
+   cout<<"Done testing Test_PartitionList()"<<endl;
+}
+
+void Test_KthLastElem() {
+   cout<<"Start testing Test_KthLastElem()"<<endl;
+   Node *node = new Node(1);
+   node->next_ = new Node(2);
+   node->next_->next_ = new Node(3);
+   Node *out = KthLastElem(node, 2);
+   assert(out->data_ == 2);
+   cout<<"Done testing Test_KthLastElem()"<<endl;
 }
 
 
@@ -356,6 +380,8 @@ void Test_LinkedLists() {
    Test_HashMapWithLast();
    Test_SmartPtr();
    Test_RemoveDuplicates();
+   Test_PartitionList();
+   Test_KthLastElem();
 }
 
 }

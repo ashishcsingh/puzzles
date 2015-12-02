@@ -636,5 +636,61 @@ void PrintSubTreeWeights(const list<NodeWithWeight>& nodes) {
    }
 }
 
+/*
+ * What: Moves smaller to left and larget to right.
+ * How: Using two list and then merge them.
+ */
+Node* PartitionList(Node *node, int data) {
+   Node *small{nullptr}, *large{nullptr};
+   Node *savedSmall{nullptr}, *savedLarge{nullptr};
+   if(!node) {
+      return nullptr;
+   }
+   while(node) {
+      if(node->data_ <= data) {
+         if(small) {
+            small->next_ = node;
+            small = small->next_;
+         } else {
+            savedSmall = small = node;
+         }
+      } else {
+         if(large) {
+            large->next_ = node;
+            large = large->next_;
+         } else {
+            savedLarge = large = node;
+         }
+      }
+      node = node->next_;
+   }
+   if(savedSmall) {
+      small->next_ = savedLarge;
+      return savedSmall;
+   }
+   return savedLarge;
+}
+
+/*
+ * What: Kth from the last.
+ * How: Use two ptr.
+ *      Iterate serially both.
+ *      When last hits null return first.
+ */
+Node* KthLastElem(Node *node, int k) {
+   Node *ptr = node;
+   for(int i=0; i<k; ++i) {
+      if(!ptr) {
+         return nullptr;
+      }
+      ptr = ptr->next_;
+   }
+   while(ptr) {
+      ptr = ptr->next_;
+      node = node->next_;
+   }
+   return node;
+}
+
 }
 

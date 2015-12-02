@@ -36,6 +36,10 @@ void InsertDataInSortedCircularList(Node** root, int data);
 void RemoveDuplicates1(Node *node);
 // Without any space.
 void RemoveDuplicates2(Node *node);
+// All smaller towards left and larger on right.
+Node* PartitionList(Node *node, int data);
+// Kth from the last.
+Node* KthLastElem(Node *node, int k);
 
 class QueueUsingTwoStacks {
 public:
