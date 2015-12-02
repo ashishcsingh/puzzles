@@ -4,6 +4,7 @@
 #include <stack>
 #include <list>
 #include <unordered_map>
+#include <unordered_set>
 
 namespace linkedlist {
 using namespace std;
@@ -31,6 +32,10 @@ bool StackGrowsUp();
 bool HeapGrowsUp();
 bool IsPalindrom(Node* head);
 void InsertDataInSortedCircularList(Node** root, int data);
+// Using HashMap.
+void RemoveDuplicates1(Node *node);
+// Without any space.
+void RemoveDuplicates2(Node *node);
 
 class QueueUsingTwoStacks {
 public:

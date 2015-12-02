@@ -548,6 +548,48 @@ void GetAllSubChildren(map<int, vector<int>>& parentChildren, int id,
    }
 }
 
+
+/*
+ * What: Removes duplicates and retains order.
+ * How: Using hash_set maintain existence.
+ * Complexity: O(N)
+ */
+void RemoveDuplicates1(Node *node) {
+   unordered_set<int> set;
+   if(!node) {
+      return;
+   }
+   while(node) {
+      set.insert(node->data_);
+      if(node->next_ && set.count(node->next_->data_) > 0) {
+         Node *temp = node->next_;
+         node->next_ = node->next_->next_;
+         delete temp;
+      }
+      node = node->next_;
+   }
+}
+
+/*
+ * What: Removes duplicates and retains order.
+ * How: Without any space.
+ * Complexity: O(N2)
+ */
+void RemoveDuplicates2(Node *node) {
+   while(node) {
+      Node *runner = node;
+      while(runner && runner->next_) {
+         if(node->data_ == runner->next_->data_) {
+            Node *temp = runner->next_;
+            runner->next_ = runner->next_->next_;
+            delete temp;
+         }
+         runner = runner->next_;
+      }
+      node = node->next_;
+   }
+}
+
 /*
  * What: PrintSubTreeWeights
  * http://www.careercup.com/question?id=5648527329853440

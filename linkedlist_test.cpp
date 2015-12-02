@@ -317,7 +317,21 @@ void Test_SmartPtr() {
    }
       cout<<"Outside"<<endl;
       cout<<"Done testing Test_SmartPtr()"<<endl;
-   }
+}
+
+void Test_RemoveDuplicates() {
+   cout<<"Start testing Test_RemoveDuplicates()"<<endl;
+   Node *node = new Node(1);
+   node->next_ = new Node(2);
+   node->next_->next_ = new Node(1);
+   RemoveDuplicates1(node);
+   assert(node->next_->next_ == nullptr);
+   node->next_->next_ = new Node(1);
+   RemoveDuplicates2(node);
+   assert(node->next_->next_ == nullptr);
+   cout<<"Done testing Test_RemoveDuplicates()"<<endl;
+}
+
 
 void Test_LinkedLists() {
 #ifdef TEST_DONE
@@ -341,6 +355,7 @@ void Test_LinkedLists() {
 #endif
    Test_HashMapWithLast();
    Test_SmartPtr();
+   Test_RemoveDuplicates();
 }
 
 }
