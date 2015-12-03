@@ -357,6 +357,43 @@ void Test_KthLastElem() {
 }
 
 
+void Test_DeleteNode() {
+   cout<<"Start testing Test_DeleteNode()"<<endl;
+   Node *node = new Node(1);
+   node->next_ = new Node(2);
+   node->next_->next_ = new Node(3);
+   DeleteNode(node->next_);
+   assert(node->next_->data_ == 3);
+   cout<<"Done testing Test_DeleteNode()"<<endl;
+}
+
+void Test_DetectLoop() {
+   cout<<"Start testing Test_DetectLoop()"<<endl;
+   //1->2->3->4->|
+   //    |-<-<-<-<-
+   Node *node = new Node(1);
+   node->next_ = new Node(2);
+   node->next_->next_ = new Node(3);
+   node->next_->next_->next_ = new Node(4);
+   node->next_->next_->next_ = node->next_;
+   assert(DetectLoop(node));
+   cout<<"Done testing Test_DetectLoop()"<<endl;
+}
+
+void Test_StartLoop() {
+   cout<<"Start testing Test_StartLoop()"<<endl;
+   //1->2->3->4->|
+   //    |-<-<-<-<-
+   Node *node = new Node(1);
+   node->next_ = new Node(2);
+   node->next_->next_ = new Node(3);
+   node->next_->next_->next_ = new Node(4);
+   node->next_->next_->next_ = node->next_;
+   assert(StartLoop(node) == node->next_);
+   cout<<"Done testing Test_StartLoop()"<<endl;
+}
+
+
 void Test_LinkedLists() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -382,6 +419,9 @@ void Test_LinkedLists() {
    Test_RemoveDuplicates();
    Test_PartitionList();
    Test_KthLastElem();
+   Test_DeleteNode();
+   Test_DetectLoop();
+   Test_StartLoop();
 }
 
 }

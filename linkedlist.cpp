@@ -692,5 +692,71 @@ Node* KthLastElem(Node *node, int k) {
    return node;
 }
 
+/*
+ * What: DeleteNode
+ * How: Copy the content of the next
+ *      node and delete the next.
+ */
+void DeleteNode(Node *node) {
+   node->data_ = node->next_->data_;
+   Node *temp = node->next_;
+   node->next_ = node->next_->next_;
+   delete temp;
+}
+
+
+/*
+ * What: Detects a loop
+ * How: Fast and slow pointers
+ *      Fast moving double speed.
+ *      Returns when intersecting.
+ */
+bool DetectLoop(Node* node) {
+   if(!node) {
+      return false;
+   }
+   Node *slow = node, *fast = node->next_;
+   while(fast && fast->next_) {
+      if(fast == slow) {
+         return true;
+      }
+      fast = fast->next_->next_;
+      slow = slow->next_;
+   }
+   return false;
+}
+
+/*
+ * What: Returns Starting point.
+ * How: Find the intersecting point
+ *      Then loop start and intersect ptrs
+ *      sequentially till they meet.
+ *      Return the meet point as start point.
+ *
+ */
+Node* StartLoop(Node* node) {
+   if(!node) {
+      return nullptr;
+   }
+   Node *slow = node, *fast = node;
+   Node *intersect = nullptr;
+   while(fast && fast->next_) {
+      fast = fast->next_->next_;
+      slow = slow->next_;
+      if(fast == slow) {
+         intersect = fast;
+         break;
+      }
+   }
+   if(!intersect) {
+      return nullptr;
+   }
+   Node *start = node;
+   while(start != intersect) {
+      start = start->next_;
+      intersect = intersect->next_;
+   }
+   return start;
+}
 }
 

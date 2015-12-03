@@ -40,6 +40,12 @@ void RemoveDuplicates2(Node *node);
 Node* PartitionList(Node *node, int data);
 // Kth from the last.
 Node* KthLastElem(Node *node, int k);
+// Remove Node* by copying content of the next node.
+void DeleteNode(Node* node);
+// Checks loop.
+bool DetectLoop(Node* node);
+// Returns starting of loop.
+Node* StartLoop(Node* node);
 
 class QueueUsingTwoStacks {
 public:
