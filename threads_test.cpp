@@ -65,7 +65,7 @@ void Test_Racer() {
    cout<<"Done Test_Racer()"<<endl;
 }
 
-typedef tuple<int&, string&> tuple_type;
+typedef tuple<int, string> tuple_type;
 tuple_type promiseTupleData(future<tuple_type>& f) {
    tuple_type t = f.get();
    get<0>(t) += 20;

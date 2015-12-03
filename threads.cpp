@@ -67,7 +67,7 @@ void Racer::race(int id)  {
 }
 
 void Racer::begin(Racer& r)  {
-   for(auto i = 0; i < _numThreads; ++i) {
+   for(unsigned i = 0; i < _numThreads; ++i) {
       _threads.push_back(thread(&Racer::race, &r, i + 1));
    }
    cout<<"Begin by notifying one"<<endl;

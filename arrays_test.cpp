@@ -12,6 +12,7 @@
 #include <initializer_list>
 #include <iostream>
 #include <utility>
+#include <memory>
 
 namespace arrays {
 using namespace std;

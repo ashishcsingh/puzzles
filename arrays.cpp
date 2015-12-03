@@ -1479,7 +1479,7 @@ void MakeRowZero(TMatrix& m, int row) {
 }
 
 void MakeColZero(TMatrix& m, int col) {
-   for(int row=0; row<m.size(); ++row) {
+   for(unsigned int row=0; row<m.size(); ++row) {
       m[row][col] = 0;
    }
 }
@@ -1503,7 +1503,7 @@ void MakeAllRowAndColZero(TMatrix& m) {
 }
 
 
-typedef pair<int,int> TPairInt;
+typedef pair<int,unsigned int> TPairInt;
 
 void updateMinMax(int& val, int& min, int& max) {
    if (val < min) {
@@ -1529,16 +1529,16 @@ void MinRange(vector<vector<int>> arrays, int& min, int& max) {
    auto comp = [](TPairInt l, TPairInt r) {
       return l.first > r.first; };
    priority_queue<TPairInt,vector<TPairInt>, decltype(comp)> pq(comp);
-   vector<int> minIndex(arrays.size(), 0);
+   vector<unsigned int> minIndex(arrays.size(), 0);
    TPairInt minElem(0, 0);
    min = INT_MAX;
    max = INT_MIN;
 
    // populate first col in priority_queue
-   for(int i=0; i<arrays.size(); ++i) {
+   for(unsigned int i=0; i<arrays.size(); ++i) {
       pq.push(make_pair(arrays[i][minIndex[i]], i));
    }
-   for(int i=0; i<arrays.size(); ++i) {
+   for(unsigned int i=0; i<arrays.size(); ++i) {
       updateMinMax(arrays[i][0], min, max);
    }
    // Until first array gets exhausted.

@@ -14,6 +14,7 @@
 #include<ostream>
 #include<vector>
 #include<list>
+#include<mutex>
 #include "log.h"
 
 namespace hashmaps {
