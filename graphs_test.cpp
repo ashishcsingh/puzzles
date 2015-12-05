@@ -545,6 +545,26 @@ void Test_PrintPathToNode() {
    cout << "Done Test_PrintPathToNode()" << endl;
 }
 
+
+void Test_DependencyResolver() {
+   cout << "Start Test_DependencyResolver()" << endl;
+   unordered_map<string, vector<string>> dependencies;
+   //a -> null
+   //b -> a
+   //c -> b
+   dependencies["a"].push_back(string());
+   dependencies["b"].push_back("a");
+   dependencies["c"].push_back("b");
+   DependencyResolver dr(dependencies);
+   const auto& s = dr.GetDependencies("c");
+   // c is dependent on a and b.
+   for(auto c : s) {
+      cout<<c<<" ";
+   }
+   cout<<endl;
+   cout << "Done Test_DependencyResolver()" << endl;
+}
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -582,5 +602,6 @@ void Test_Graphs() {
    Test_InOrderIterator();
    Test_GraphClone();
    Test_PrintPathToNode();
+   Test_DependencyResolver();
 }
 }

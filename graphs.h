@@ -14,6 +14,7 @@
 #include <memory>
 #include <list>
 #include <unordered_map>
+#include <unordered_set>
 
 namespace graphs {
 
@@ -158,5 +159,15 @@ struct Graph {
 };
 // Clones graph.
 Graph* CloneGraph(Graph& src);
+
+
+//Resolve Dependencies.
+class DependencyResolver {
+   std::unordered_map<std::string, std::unordered_set<std::string>> dependencies_;
+public:
+   DependencyResolver(const std::unordered_map<std::string, std::vector<std::string>>& data);
+   const std::unordered_set<std::string>& GetDependencies(const std::string& component);
+};
+
 }
 #endif /* GRAPTH_H */

@@ -15,10 +15,10 @@ int main() {
    strings::Test_Strings();
    threads::Test_Threads();
 #endif
-   graphs::Test_Graphs();
    hashmaps::Test_HashMaps();
    arrays::Test_Arrays();
    bits::Test_Bits();
    linkedlist::Test_LinkedLists();
+   graphs::Test_Graphs();
    return 0;
 }

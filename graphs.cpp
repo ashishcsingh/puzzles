@@ -1085,5 +1085,38 @@ void PrintPathToNode(Node *head, list<Node*>& path) {
    path.pop_back();
 }
 
+
+/*
+ * What: Resolves dependencies between strings.
+ *       A - > null
+ *       B -> A
+ *       C -> B
+ *       Then C is dependent on A and B
+ * How: First :  In an unodered_set keep populating all direct dependencies.
+ *      Second:  Keep placing all direct dependencies
+ *      Complexity : O(N2)
+ */
+DependencyResolver::DependencyResolver(
+      const unordered_map<string, vector<string>>& data) {
+   // First iteration to store all dependencies as is.
+   for(const auto& d: data) {
+      dependencies_[d.first].insert(d.second.begin(), d.second.end());
+   }
+   // Get all dependencies and insert its deep dependencies.
+   for(auto& c: dependencies_) {
+      unordered_set<string> extra;
+      for(auto cdeps : c.second) {
+         extra.insert(dependencies_[cdeps].begin(),
+               dependencies_[cdeps].end());
+      }
+      c.second.insert(extra.begin(), extra.end());
+   }
+}
+
+const unordered_set<string>& DependencyResolver::GetDependencies(const string& component)
+{
+   return dependencies_[component];
+}
+
 }
 
