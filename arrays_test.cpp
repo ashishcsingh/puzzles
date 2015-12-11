@@ -679,6 +679,23 @@ void Test_Heaps() {
    cout<<endl;
    cout<<"Done testing Test_Heaps()"<<endl;
 }
+
+
+void Test_RepeatCounts() {
+   cout<<"Start Test_RepeatCounts()"<<endl;
+   vector<int> repeation {4, 5, 6, 9};
+   RepeatCounts(repeation);
+   cout<<"Done Test_RepeatCounts()"<<endl;
+}
+
+void Test_MaxProfit() {
+   cout<<"Start Test_MaxProfit()"<<endl;
+   vector<int> stocks {4, 6, 1, 9, 3};
+   cout<<MaxProfit(stocks)<<endl;
+   cout<<"Done Test_MaxProfit()"<<endl;
+}
+
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -732,6 +749,8 @@ void Test_Arrays() {
    Test_MakeAllRowAndColZero();
    Test_MinRange();
    Test_Heaps();
+   Test_RepeatCounts();
+   Test_MaxProfit();
 }
 }
 

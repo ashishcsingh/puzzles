@@ -22,6 +22,7 @@
 #include <cstring>
 #include <algorithm>
 #include <queue>
+#include <stack>
 
 namespace arrays {
 using namespace std;
@@ -1554,6 +1555,52 @@ void MinRange(vector<vector<int>> arrays, int& min, int& max) {
       // Set the new min.
       min = minElem.first;
    }
+}
+
+/*
+ * What: Finds duplicate counts.
+ * How: Push into stack and when difference is more than one
+ *      print difference from last to whats expected.
+ * Use: In Windbg using !uniqstack lists duplicate stack count at the end.
+ *      This will find repeation count.
+ */
+void RepeatCounts(vector<int>& repeats) {
+   stack<int> s;
+   for(auto& r : repeats) {
+      s.push(r);
+   }
+   if(s.empty()) {
+      cout << "No duplicates."<<endl;
+   }
+   int cur = s.top(), last = s.top(), top;
+   while(!s.empty()) {
+     top = s.top();
+     s.pop();
+     if (top < cur) {
+        cout<<"Number "<<cur<<" repeated "<< last - cur + 1<<endl;
+        cur = top;
+        last = top;
+     }
+     --cur;
+   }
+   cout<<"Number "<<cur<<" repeated "<< last - cur + 1<<endl;
+}
+
+/*
+ * What: Find max profit from days of stock prices.
+ * How: Using min and profit trace for the max profit.
+ */
+int MaxProfit(vector<int>& stocks) {
+   int min = INT_MAX;
+   int profit = 0;
+   for(auto& s : stocks) {
+      if(min > s) {
+         min = s;
+      } else if(profit < (s - min)) {
+         profit = s - min;
+      }
+   }
+   return profit;
 }
 
 }

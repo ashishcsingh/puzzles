@@ -298,5 +298,9 @@ public:
    }
    virtual ~MaxHeap() {}
 };
+
+void RepeatCounts(std::vector<int>& repeats);
+int MaxProfit(std::vector<int>& stocks);
+
 }
 #endif /* ARRAYS_H_ */

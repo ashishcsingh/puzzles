@@ -16,9 +16,9 @@ int main() {
    threads::Test_Threads();
 #endif
    hashmaps::Test_HashMaps();
-   arrays::Test_Arrays();
    bits::Test_Bits();
    linkedlist::Test_LinkedLists();
    graphs::Test_Graphs();
+   arrays::Test_Arrays();
    return 0;
 }
