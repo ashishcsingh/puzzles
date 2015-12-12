@@ -698,6 +698,13 @@ void Test_MaxProfit() {
    cout<<"Done Test_MaxProfit()"<<endl;
 }
 
+void Test_FindMaxDiffSum() {
+   cout<<"Start Test_FindMaxDiffSum()"<<endl;
+   vector<int> list {5,2,1,3,5,6};
+   cout<<FindMaxDiffSum(list)<<endl;
+   cout<<"Done Test_FindMaxDiffSum()"<<endl;
+}
+
 
 void Test_Arrays() {
 #ifdef TEST_DONE
@@ -754,6 +761,7 @@ void Test_Arrays() {
    Test_Heaps();
    Test_RepeatCounts();
    Test_MaxProfit();
+   Test_FindMaxDiffSum();
 }
 }
 

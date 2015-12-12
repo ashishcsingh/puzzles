@@ -302,6 +302,7 @@ public:
 
 std::vector<std::pair<int,int>> RepeatCounts(std::vector<int>& repeats);
 int MaxProfit(std::vector<int>& stocks);
+int FindMaxDiffSum(const std::vector<int>& list);
 
 }
 #endif /* ARRAYS_H_ */
