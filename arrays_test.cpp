@@ -684,7 +684,10 @@ void Test_Heaps() {
 void Test_RepeatCounts() {
    cout<<"Start Test_RepeatCounts()"<<endl;
    vector<int> repeation {4, 5, 6, 9};
-   RepeatCounts(repeation);
+   auto rc = RepeatCounts(repeation);
+   for(auto& p : rc) {
+      cout<<"Number "<<p.first<<" repeated "<<p.second<<endl;
+   }
    cout<<"Done Test_RepeatCounts()"<<endl;
 }
 

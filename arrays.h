@@ -16,6 +16,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <queue>
+#include <utility>
 
 namespace arrays {
 int FindMissingNumber(int array[], int arrayLength, int length);
@@ -299,7 +300,7 @@ public:
    virtual ~MaxHeap() {}
 };
 
-void RepeatCounts(std::vector<int>& repeats);
+std::vector<std::pair<int,int>> RepeatCounts(std::vector<int>& repeats);
 int MaxProfit(std::vector<int>& stocks);
 
 }

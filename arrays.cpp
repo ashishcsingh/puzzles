@@ -1559,31 +1559,34 @@ void MinRange(vector<vector<int>> arrays, int& min, int& max) {
 
 /*
  * What: Finds duplicate counts.
+ *       For int: 0,1,2,3,4,5
+ *       repeation count: 2,3
+ *       Means: 1 repeated 3 times.
  * How: Push into stack and when difference is more than one
  *      print difference from last to whats expected.
  * Use: In Windbg using !uniqstack lists duplicate stack count at the end.
  *      This will find repeation count.
  */
-void RepeatCounts(vector<int>& repeats) {
-   stack<int> s;
-   for(auto& r : repeats) {
-      s.push(r);
+vector<pair<int,int>> RepeatCounts(vector<int>& repeats) {
+   bool initial = true;
+   int cur = 0, start = 0;
+   vector<pair<int, int>> output;
+   for(auto& val : repeats) {
+     if(initial) {
+        start = val - 1;
+        cur = val;
+        initial = false;
+     } else {
+         if(val > cur) {
+            output.push_back(make_pair(start, cur - start));
+            start = val - 1;
+            cur = val;
+         }
+      }
+      ++cur;
    }
-   if(s.empty()) {
-      cout << "No duplicates."<<endl;
-   }
-   int cur = s.top(), last = s.top(), top;
-   while(!s.empty()) {
-     top = s.top();
-     s.pop();
-     if (top < cur) {
-        cout<<"Number "<<cur<<" repeated "<< last - cur + 1<<endl;
-        cur = top;
-        last = top;
-     }
-     --cur;
-   }
-   cout<<"Number "<<cur<<" repeated "<< last - cur + 1<<endl;
+   output.push_back(make_pair(start, cur - start));
+   return output;
 }
 
 /*
