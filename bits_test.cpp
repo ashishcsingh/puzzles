@@ -32,10 +32,21 @@ void Test_LedBoard() {
 }
 
 
+void Test_FixSixBits() {
+   cout << "Start testing Test_FixSixBits()" << endl;
+   unsigned char dst[2] = {'A','A'};
+   unsigned char src = 'B';
+   FitSixBits(dst, 2, src);
+   cout << dst[0] << dst[1]<<endl;
+   cout << "Done testing Test_FixSixBits()" << endl;
+}
+
+
 void Test_Bits() {
 #ifdef TEST_DONE
 #endif
    Test_LedBoard();
+   Test_FixSixBits();
 }
 }
 

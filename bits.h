@@ -31,5 +31,9 @@ public:
    void DrawRect(TypeUC x1, TypeUC y1, TypeUC x2,
          TypeUC y2);
 };
+
+void FixBits(unsigned char *dstBits, unsigned startBit, unsigned lenBit, unsigned char bits);
+void FitSixBits(unsigned char *buff, unsigned index, unsigned char bits);
+
 }
 #endif /* BITS_H_ */

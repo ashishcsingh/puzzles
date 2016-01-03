@@ -1606,5 +1606,72 @@ int MaxProfit(vector<int>& stocks) {
    return profit;
 }
 
+/*
+ * What: Finds max N elements and returns as vector.
+ * How:  Using minheap capture first N elems and then replace
+ *       smallest among them until exhaustion.
+ *       Store back in reverse order in output vector.
+ */
+vector<int> MaxNElems(const vector<int>& nums, int n) {
+   priority_queue<int,vector<int>,greater<int>> pq;
+   for(auto i : nums) {
+      if(pq.size() < n) {
+         pq.push(i);
+      } else if(pq.top() < i) {
+         pq.pop();
+         pq.push(i);
+      }
+   }
+   // If nums size is smaller than n.
+   n = pq.size();
+   vector<int> out(n);
+   for(int i=n-1; i>=0; --i) {
+      out[i] = pq.top();
+      pq.pop();
+   }
+   return out;
+}
+
+
+/*
+ * What: Finds min N elements and returns as vector.
+ * How:  Using maxheap capture first N elems and then replace
+ *       largest among them until exhaustion.
+ *       Store back in reverse order in output vector.
+ */
+vector<int> MinNElems(const vector<int>& nums, int n) {
+   priority_queue<int> pq;
+   for(auto i : nums) {
+      if(pq.size() < n) {
+         pq.push(i);
+      } else if(pq.top() > i) {
+         pq.pop();
+         pq.push(i);
+      }
+   }
+    // If nums size is smaller than n.
+   n = pq.size();
+   vector<int> out(n);
+   for(int i=n-1; i>=0; --i) {
+      out[i] = pq.top();
+      pq.pop();
+   }
+   return out;
+}
+
+/*
+ *    What: Gets the max product from 3 distinct numbers.
+ *    How:  1. Finds max 3 and min 2 elems using max and min heaps.
+ *          2. a,b,c...e,f returns a * max (d*c, e*f)
+ */
+int MaxThreeProduct(vector<int>& nums) {
+   auto vMax = MaxNElems(nums, 3);
+   auto vMin = MinNElems(nums, 3);
+   // Max of
+   return max({vMax[0] * vMax[1] * vMax[2], //All +
+              vMax[0] * vMin[0] * vMin[1], // + --
+              vMin[0] * vMin[1] * vMin[2]}); // All -
+}
+
 }
 

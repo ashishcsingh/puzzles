@@ -698,6 +698,31 @@ void Test_MaxProfit() {
    cout<<"Done Test_MaxProfit()"<<endl;
 }
 
+void Test_MaxNElems() {
+   cout<<"Start Test_MaxNElems()"<<endl;
+   vector<int> data {1, -4, -5, -3};
+   for(auto i: MaxNElems(data, 3)) {
+      cout<<i<<" ";
+   }
+   cout<<endl<<"Done Test_MaxNElems()"<<endl;
+}
+
+void Test_MinNElems() {
+   cout<<"Start Test_MinNElems()"<<endl;
+   vector<int> data {1, -4, -5, -3};
+   for(auto i: MinNElems(data, 3)) {
+      cout<<i<<" ";
+   }
+   cout<<endl<<"Done Test_MinNElems()"<<endl;
+}
+
+void Test_MaxThreeProduct() {
+   cout<<"Start Test_MaxThreeProduct()"<<endl;
+   vector<int> data {1, -4, -5, -3};
+   cout<<"MaxThreeProduct " <<MaxThreeProduct(data)<<endl;
+   cout<<"Done Test_MaxThreeProduct()"<<endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -753,6 +778,9 @@ void Test_Arrays() {
    Test_Heaps();
    Test_RepeatCounts();
    Test_MaxProfit();
+   Test_MaxThreeProduct();
+   Test_MaxNElems();
+   Test_MinNElems();
 }
 }
 

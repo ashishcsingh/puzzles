@@ -303,6 +303,11 @@ public:
 std::vector<std::pair<int,int>> RepeatCounts(std::vector<int>& repeats);
 int MaxProfit(std::vector<int>& stocks);
 int FindMaxDiffSum(const std::vector<int>& list);
-
+// Finds max N elements and returns in decreasing order.
+std::vector<int> MaxNElems(const std::vector<int>& nums, int n);
+// Finds min N elements and returns in increasing order.
+std::vector<int> MinNElems(const std::vector<int>& nums, int n);
+// Finds max product of 3 ints.
+int MaxThreeProduct(std::vector<int>& nums);
 }
 #endif /* ARRAYS_H_ */
