@@ -15,6 +15,7 @@
 #include<vector>
 #include<list>
 #include<mutex>
+#include<utility>
 #include "log.h"
 
 namespace hashmaps {
@@ -192,6 +193,10 @@ public:
    Phonebook(const std::list<Person>& people);
 };
 
+// Returns list of all numbers that add to sum.
+std::vector<std::pair<int,int>> PairSum(std::vector<int> nums, int sum);
+// Return unique dividers of a num.
+std::vector<std::pair<int,int>> PairUniqueDivider(int num);
 
 }
 

@@ -9,6 +9,7 @@
 #include <queue>
 #include <string>
 #include <mutex>
+#include <unordered_set>
 
 namespace hashmaps {
 using namespace std;
@@ -108,6 +109,41 @@ Phonebook::Phonebook(const list<Person>& people) {
       mapNameToPhone_[p.name] = p.phone;
       mapPhoneToName_[p.phone] = p.name;
    }
+}
+
+
+/*
+ * What: Returns list of all numbers that add to sum.
+ * How:  Using unordered_set capture all numbers.
+ *       Then see if sum-num exists if yes then save.
+ */
+vector<pair<int,int>> PairSum(vector<int> nums, int sum) {
+   unordered_set<int> set(nums.begin(), nums.end());
+   vector<pair<int,int>> result;
+   for(auto i : set) {
+      if(set.count(sum - i) > 0) {
+         result.push_back(make_pair(i, sum - i));
+      }
+   }
+   return result;
+}
+
+/*
+ * What : Return unique dividers of a num.
+ * How:     i: 1 to N check i % n == 0 and
+ *          set.count(i) && set.count(n/i) == 0 then
+ *          insert i and set.insert(n/i) and result.push_back(make_pair(i, n/i))
+ */
+vector<pair<int,int>> PairUniqueDivider(int num) {
+   unordered_set<int> set;
+   vector<pair<int,int>> result;
+   for(int i=1; i<num; ++i) {
+      if(num % i == 0 && set.count(i)==0 && set.count(num/i)==0) {
+         set.insert(i);
+         result.push_back(make_pair(i, num/i));
+      }
+   }
+   return result;
 }
 
 }

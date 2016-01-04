@@ -60,6 +60,24 @@ void Test_Phonebook() {
    cout << "Done testing Test_Phonebook()" << endl;
 }
 
+void Test_PairSum() {
+   cout << "Start testing Test_PairSum()" << endl;
+   vector<int> v{2,4,5,6,7};
+   auto r = PairSum(v, 9);
+   for(auto p : r) {
+      cout<<p.first<<" "<<p.second<<endl;
+   }
+   cout << "Done testing Test_PairSum()" << endl;
+}
+
+void Test_PairUniqueDivider() {
+   cout << "Start testing Test_PairUniqueDivider()" << endl;
+   auto r = PairUniqueDivider(12);
+   for(auto p : r) {
+      cout<<p.first<<" "<<p.second<<endl;
+   }
+   cout << "Done testing Test_PairUniqueDivider()" << endl;
+}
 
 void Test_HashMaps() {
 #ifdef TEST_DONE
@@ -67,6 +85,8 @@ void Test_HashMaps() {
    Test_TopWords();
 #endif
    Test_Phonebook();
+   Test_PairSum();
+   Test_PairUniqueDivider();
 }
 }
 
