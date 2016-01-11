@@ -48,6 +48,19 @@ void Test_FindMaxDiffSum() {
    cout<<"Done Test_FindMaxDiffSum()"<<endl;
 }
 
+
+void Test_IsTreeBalanced() {
+   cout<<"Start Test_IsTreeBalanced()"<<endl;
+   Node b1(1), b2(2), b3(3), b4(4), b5(5), b6(6);
+   b1.left = &b2;
+   b1.right = &b3;
+   b2.left = &b4;
+   b2.right = &b5;
+   b3.right = &b6;
+   cout<<IsBalanced(&b1)<<endl;
+   cout<<"Done Test_IsTreeBalanced()"<<endl;
+}
+
 void Test_Dynamic() {
 #ifdef TEST_DONE
 #else
@@ -55,6 +68,7 @@ void Test_Dynamic() {
    Test_Fibonacci();
    Test_SumOnPath();
    Test_FindMaxDiffSum();
+   Test_IsTreeBalanced();
 }
 
 }

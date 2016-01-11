@@ -171,5 +171,44 @@ int FindMaxDiffSum(const vector<int>& list) {
    return output;
 }
 
+
+
+/*
+ * What: Computes Height of the tree
+ * How: Max of Height(Left node+1) and Height(right node + 1)
+ *      Caches height in the map.
+ */
+int Height(Node* node, int height, unordered_map<Node*, int>& map) {
+   if (node == nullptr) {
+      return height;
+   }
+   auto index = map.find(node);
+   if(index == map.end()) {
+      int result = max(Height(node->left, height + 1, map),
+            Height(node->right, height + 1, map));
+      map[node] = result;
+      return result;
+   } else {
+      return index->second;
+   }
+}
+
+/*
+ * What: Checks of the node is balanced
+ * How: If height difference is more than 1 between left and right
+ *       Or if left or right is not balanced then return false
+ */
+bool IsBalanced(Node* node) {
+   if (node == nullptr) {
+      return true;
+   }
+   unordered_map<Node*, int> map;
+   if ((abs(Height(node->left, 1, map) - Height(node->right, 1, map)) > 1)
+         || !IsBalanced(node->left) || !IsBalanced(node->right)) {
+      return false;
+   }
+   return true;
+}
+
 }
 

@@ -23,6 +23,9 @@ struct Node {
    Node(int dataPar) : data(dataPar) {}
 };
 
+bool IsBalanced(Node* node);
+int Height(Node* node, int height, std::unordered_map<Node*, int>& map);
+
 bool IsSumOnPath1(Node* node, int parentSum, int goalSum);
 // Using DP.
 bool IsSumOnPath2(Node* node, int parentSum, int goalSum, std::unordered_map<Node*,
