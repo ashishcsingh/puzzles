@@ -565,6 +565,27 @@ void Test_DependencyResolver() {
    cout << "Done Test_DependencyResolver()" << endl;
 }
 
+void Test_VNode() {
+   cout << endl<< "Start Test_VNode()" << endl;
+   /*
+    *       1
+    *      / \
+    *     2   3
+    *    /
+    *   4
+    *  /
+    * 5
+    */
+   VNode v1(1), v2(2), v3(3), v4(4), v5(5), v6(6);
+   v1.AddChild(&v2);
+   v1.AddChild(&v3);
+   v2.AddChild(&v4);
+   v4.AddChild(&v5);
+   assert(v1.IsChild(&v5) == true);
+   assert(v1.IsChild(&v6) == false);
+   cout << endl<< "Done Test_VNode()" << endl;
+}
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -603,5 +624,6 @@ void Test_Graphs() {
    Test_GraphClone();
    Test_PrintPathToNode();
    Test_DependencyResolver();
+   Test_VNode();
 }
 }

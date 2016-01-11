@@ -1118,5 +1118,26 @@ const unordered_set<string>& DependencyResolver::GetDependencies(const string& c
    return dependencies_[component];
 }
 
+bool VNode::IsChild(VNode* child) {
+   stack<VNode*> s;
+   unordered_set<VNode*> visited;
+   s.push(this);
+   visited.insert(this);
+   while(!s.empty()) {
+      VNode* cur = s.top();
+      s.pop();
+      // Unvisited inserted into stack.
+      for(auto e: cur->edges) {
+         if(e->id == child->id) {
+            return true;
+         }
+         if(visited.insert(e).second) {
+            s.push(e);
+         }
+      }
+   }
+   return false;
+}
+
 }
 

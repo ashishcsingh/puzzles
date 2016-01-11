@@ -136,6 +136,17 @@ struct GNode {
    int data_ { 0 };
 };
 
+// Graph with flexibility to addChild and checkChild.
+struct VNode {
+   // Public Members.
+   std::vector<VNode*> edges;
+   int id;
+   // Methods.
+   VNode(int newId) : id(newId) {}
+   void AddChild(VNode* child) { edges.push_back(child); }
+   bool IsChild(VNode* child);
+};
+
 bool PathToNodes(GNode* src, GNode* dest);
 int CountNodesInBST(BNode* root, int start, int end);
 //Print path to leaf node.
