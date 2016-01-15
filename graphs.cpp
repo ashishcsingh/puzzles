@@ -1138,6 +1138,62 @@ bool VNode::IsChild(VNode* child) {
    }
    return false;
 }
+/*
+ * What: Gets common ancestor in a binary tree.
+ * How:  Capture path to nodes and then find the
+ *       common element.
+ */
+char CommonAncestor::GetCommonAncestor(char data1, char data2) {
+    list<char> path;
+    data1_ = data1;
+    data2_ = data2;
+    GetPath(root_, path);
+    return LastCommonElem(path1_, path2_);
+ }
+
+/*
+ * What: Captures when the last element differs.
+ * How:  Proceed by saving the common element till
+ *       it differs.
+ */
+ char CommonAncestor::LastCommonElem(std::list<char>& path1, std::list<char>& path2) {
+    auto itr1 = path1.begin();
+    auto itr2 = path2.begin();
+    char result = -1;
+    for(;itr1!=path1.end() && itr2!=path2.end(); ++itr1, ++itr2) {
+       if(*itr1 == *itr2) {
+          result = *itr1;
+       } else {
+          break;
+       }
+    }
+    return result;
+ }
+
+ /*
+  * What: Capture paths to path1_ and path2_
+  *       for data1 and data2.
+  * How:  Keep traversing left and right when done
+  *       pop out the current elem from path on stack.
+  */
+ void CommonAncestor::GetPath(Node* node, list<char>& path) {
+    if(node == nullptr) {
+       return;
+    }
+    if(node->data == data1_) {
+       path1_ = path;
+    }
+    if(node->data == data2_) {
+       path2_ = path;
+    }
+    if(path1_.size() > 0 && path2_.size() > 0) {
+       return;
+    }
+    path.push_back(node->data);
+    GetPath(node->left, path);
+    GetPath(node->right, path);
+    path.pop_back();
+ }
 
 }
 

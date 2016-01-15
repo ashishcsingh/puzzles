@@ -586,6 +586,27 @@ void Test_VNode() {
    cout << endl<< "Done Test_VNode()" << endl;
 }
 
+void Test_CommonAncestor() {
+   cout << endl<< "Start Test_CommonAncestor()" << endl;
+   /*
+    *        1
+    *       / \
+    *      2   3
+    *     / \   \
+    *    4   5   6
+    */
+   Node n1('1'), n2('2'), n3('3'), n4('4'), n5('5'), n6('6');
+   n1.left = &n2;
+   n1.right = &n3;
+   n2.left = &n4;
+   n2.right = &n5;
+   n3.right = &n6;
+
+   CommonAncestor ca(&n1);
+   cout<<ca.GetCommonAncestor('4', '5')<<endl;
+   cout << endl<< "Done Test_CommonAncestor()" << endl;
+}
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -625,5 +646,6 @@ void Test_Graphs() {
    Test_PrintPathToNode();
    Test_DependencyResolver();
    Test_VNode();
+   Test_CommonAncestor();
 }
 }

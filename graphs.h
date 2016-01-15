@@ -171,13 +171,26 @@ struct Graph {
 // Clones graph.
 Graph* CloneGraph(Graph& src);
 
-
 //Resolve Dependencies.
 class DependencyResolver {
    std::unordered_map<std::string, std::unordered_set<std::string>> dependencies_;
 public:
    DependencyResolver(const std::unordered_map<std::string, std::vector<std::string>>& data);
    const std::unordered_set<std::string>& GetDependencies(const std::string& component);
+};
+
+class CommonAncestor {
+public:
+   CommonAncestor(Node* root) { root_ = root; }
+   char GetCommonAncestor(char data1, char data2);
+private:
+   // Methods.
+   char LastCommonElem(std::list<char>& path1, std::list<char>& path2);
+   void GetPath(Node* node, std::list<char>& path);
+   // Members.
+   Node *root_;
+   std::list<char> path1_, path2_;
+   char data1_, data2_;
 };
 
 }
