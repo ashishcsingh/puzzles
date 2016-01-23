@@ -210,5 +210,38 @@ bool IsBalanced(Node* node) {
    return true;
 }
 
+/*
+ * What: Compute Water inside Bar Graph.
+ * How: Compute max from left and right for each elem.
+ *      Then compute Sum of water as min(maxLeft, maxRight) - elem.
+ */
+unsigned ComputeWater(const vector<int>& bar) {
+   vector<pair<int, int>> maxLen(bar.size());
+   int leftMax = 0, rightMax = 0;
+   // Compute max for left side.
+   maxLen[0].first = 0;
+   for(auto i = 0; i < bar.size(); ++i) {
+      if (bar[i] > leftMax) {
+         leftMax = bar[i];
+      }
+      maxLen[i].first = leftMax;
+   }
+   // Compute max for right side.
+   maxLen[bar.size() - 1].second = 0;
+   for(int i = bar.size() - 1; i >= -1; --i) {
+      if (bar[i] > rightMax) {
+         rightMax = bar[i];
+      }
+      maxLen[i].second = rightMax;
+   }
+   int sum = 0;
+   int lowest = 0;
+   for(auto i = 0; i < bar.size(); ++i) {
+      lowest = min(maxLen[i].first, maxLen[i].second);
+      sum += max(lowest - bar[i], 0);
+   }
+   return sum;
+}
+
 }
 

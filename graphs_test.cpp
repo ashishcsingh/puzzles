@@ -607,6 +607,29 @@ void Test_CommonAncestor() {
    cout << endl<< "Done Test_CommonAncestor()" << endl;
 }
 
+
+void Test_StateMapGraph() {
+   cout << endl<< "Start Test_StateMapGraph()" << endl;
+   StateNode ca("california"), nv("nevada"), ore("oregon"), tx("texas");
+   ca.AddConnection(&nv);
+   ca.AddConnection(&ore);
+   nv.AddConnection(&ca);
+
+   vector<StateNode*> vStates;
+   vStates.push_back(&ca);
+   vStates.push_back(&nv);
+   vStates.push_back(&ore);
+   vStates.push_back(&tx);
+
+   vector<string> dic= {"the", "hello", "calore"};
+
+   MapGraph mg(vStates, dic);
+   cout<<"Unit test MatchLength for california with calore: "
+      <<ca.MatchLength("calore")<<endl;
+   cout<<"Longest word "<<mg.FindLongestWord()<<endl;
+   cout << endl<< "Done Test_StateMapGraph()" << endl;
+}
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -647,5 +670,6 @@ void Test_Graphs() {
    Test_DependencyResolver();
    Test_VNode();
    Test_CommonAncestor();
+   Test_StateMapGraph();
 }
 }

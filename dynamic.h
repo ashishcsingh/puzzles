@@ -32,6 +32,8 @@ bool IsSumOnPath2(Node* node, int parentSum, int goalSum, std::unordered_map<Nod
       std::unordered_set<int>>& cache);
 
 int FindMaxDiffSum(const std::vector<int>& list) ;
+unsigned ComputeWater(const std::vector<int>& bar);
+
 }
 
 #endif /* DYNAMIC_H_ */

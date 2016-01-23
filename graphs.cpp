@@ -1195,5 +1195,92 @@ char CommonAncestor::GetCommonAncestor(char data1, char data2) {
     path.pop_back();
  }
 
+ /*
+  * What: States and their connection represents String graph.
+  *       Find the longest valid word that can be made from the
+  *       connecting state names.
+  * How:  Two class, one meant for capturing state name.
+  *       second for map with all states and dictionary for valid names.
+  *       It takes already made states and words.
+  *       Base condition: When state name matches the request return true.
+  *       Progression: sub-string of states and children checked for a match.
+  */
+StateNode::StateNode(const string& name) {
+   name_ = name;
+}
+
+void StateNode::AddConnection(StateNode* conn) {
+   connections_.push_back(conn);
+}
+
+/*
+ * What: return length of matched string with state name.
+ * How: length being the upper bound returned total matched chars.
+ */
+unsigned StateNode::MatchLength(const string& match) {
+   unsigned i = 0;
+   if (match.length() == 0 || name_.length() == 0) {
+      return 0;
+   }
+   while(i < match.length() && match[i] == name_[i]) {
+      ++i;
+   }
+   return i;
+}
+
+vector<StateNode*>& StateNode::GetConnections() {
+   return connections_;
+}
+
+const string& StateNode::GetName() {
+   return name_;
+}
+
+MapGraph::MapGraph(vector<StateNode*>& states, vector<string>& dict):
+   states_(states), dict_(dict) {}
+
+/*
+ * What: If state and connections can make up the word.
+ * How: Check substr and its connections.
+ */
+bool MapGraph::ExistsStartingState(StateNode* state, const string& word) {
+   unsigned matchedLen = state->MatchLength(word);
+   if(matchedLen == word.length()) {
+      return true;
+   }
+   for(unsigned i = 1; i<=matchedLen; ++i) {
+      string leftWord = word.substr(i);
+      for(auto conn: state->GetConnections()) {
+         if(ExistsStartingState(conn, leftWord)) {
+            return true;
+         }
+      }
+   }
+   return false;
+}
+
+bool MapGraph::ExistsAllStates(const string& word) {
+   for(auto state: states_) {
+      if(ExistsStartingState(state, word)) {
+         return true;
+      }
+   }
+   return false;
+}
+
+string MapGraph::FindLongestWord() {
+   string longestWord;
+   unsigned max = 0;
+   for(auto word: dict_) {
+      if(max < word.length() && ExistsAllStates(word)) {
+         if(max < word.length()) {
+            max = word.length();
+            longestWord = word;
+         }
+      }
+   }
+   return longestWord;
+}
+
 }
 

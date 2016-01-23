@@ -61,6 +61,13 @@ void Test_IsTreeBalanced() {
    cout<<"Done Test_IsTreeBalanced()"<<endl;
 }
 
+void Test_BarWater() {
+   cout<<"Start Test_BarWater()"<<endl;
+   vector<int> bar {1, 0, 1, 0, 1};
+   cout<<"Total water "<<ComputeWater(bar)<<endl;
+   cout<<"Done Test_BarWater()"<<endl;
+}
+
 void Test_Dynamic() {
 #ifdef TEST_DONE
 #else
@@ -69,6 +76,7 @@ void Test_Dynamic() {
    Test_SumOnPath();
    Test_FindMaxDiffSum();
    Test_IsTreeBalanced();
+   Test_BarWater();
 }
 
 }

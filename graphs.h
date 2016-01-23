@@ -193,5 +193,38 @@ private:
    char data1_, data2_;
 };
 
+/*
+ * What: States and their connection represents String graph.
+ *       Find the longest valid word that can be made from the
+ *       connecting state names.
+ * How:  Two class, one meant for capturing state name.
+ *       second for map with all states and dictionary for valid names.
+ *       It takes already made states and words.
+ *       Base condition: When state name matches the request return true.
+ *       Progression: sub-string of states and children checked for a match.
+ */
+class StateNode {
+ public:
+   StateNode(const std::string& name);
+   void AddConnection(StateNode* conn);
+   unsigned MatchLength(const std::string& match);
+   std::vector<StateNode*>& GetConnections();
+   const std::string& GetName();
+ private:
+   std::string name_;
+   std::vector<StateNode*> connections_;
+};
+
+class MapGraph {
+   public:
+   MapGraph(std::vector<StateNode*>& states, std::vector<std::string>& dict);
+   std::string FindLongestWord();
+   bool ExistsStartingState(StateNode* state, const std::string& word);
+   bool ExistsAllStates(const std::string& word);
+   private:
+   std::vector<StateNode*>& states_;
+   std::vector<std::string>& dict_;
+};
+
 }
 #endif /* GRAPTH_H */
