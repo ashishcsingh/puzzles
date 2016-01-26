@@ -309,5 +309,10 @@ std::vector<int> MaxNElems(const std::vector<int>& nums, int n);
 std::vector<int> MinNElems(const std::vector<int>& nums, int n);
 // Finds max product of 3 ints.
 int MaxThreeProduct(std::vector<int>& nums);
+// Finds max sum in a range.
+int FindMaxRangeSum(const std::vector<int>& data);
+// Finds all path from src to dst point in 2D.
+void FindAllPath(int startX, int startY, int destX,
+      int destY, std::vector<std::pair<int,int>>& path);
 }
 #endif /* ARRAYS_H_ */

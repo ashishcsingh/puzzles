@@ -723,6 +723,21 @@ void Test_MaxThreeProduct() {
    cout<<"Done Test_MaxThreeProduct()"<<endl;
 }
 
+void Test_FindMaxRangeSum() {
+   cout<<"Start Test_MaxThreeProduct()"<<endl;
+   vector<int> data = {1, 2, 3, 4, -3, 6, 8};
+   cout<<FindMaxRangeSum(data)<<endl;
+   cout<<"Done Test_MaxThreeProduct()"<<endl;
+}
+
+void Test_FindAllPath() {
+   cout<<"Start Test_FindAllPath()"<<endl;
+   vector<pair<int,int>> path;
+   FindAllPath(0, 0, 2, 2, path);
+   cout<<"Start Test_FindAllPath()"<<endl;
+}
+
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -781,6 +796,8 @@ void Test_Arrays() {
    Test_MaxThreeProduct();
    Test_MaxNElems();
    Test_MinNElems();
+   Test_FindMaxRangeSum();
+   Test_FindAllPath();
 }
 }
 

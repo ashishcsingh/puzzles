@@ -1673,5 +1673,58 @@ int MaxThreeProduct(vector<int>& nums) {
               vMin[0] * vMin[1] * vMin[2]}); // All -
 }
 
+
+/*
+ * What: Finds Max sum from a range.
+ * How: Using a sum vector compute maxSum vs 0.
+ */
+int FindMaxRangeSum(const vector<int>& data) {
+   vector<int> sum (data.size());
+   // If invalid data.
+   if (data.size() < 1) {
+      return 0;
+   }
+   // 0 is maxSum for negative values.
+   sum[0] = max(0, data[0]);
+   // MaxSum is sum of all old values.
+   for(int i = 1; i < data.size(); ++i) {
+      sum[i] = max(data[i] + sum[i-1], 0);
+   }
+   int maxSum = 0;
+   // The biggest value in sum range.
+   for(auto s : sum) {
+      maxSum = max(maxSum, s);
+   }
+   return maxSum;
+}
+
+/*
+ * What: Finds all path from src x,y to dest x, y
+ * How: Push into a path vector all the path to dest
+ *       and pop at the end.
+ */
+void FindAllPath(int startX, int startY, int destX,
+      int destY, vector<pair<int,int>>& path) {
+   // Push the current point.
+   path.push_back(make_pair(startX, startY));
+   // Base condition.
+   if (startX == destX && startY == destY) {
+      for (auto& p : path) {
+         cout<<"{"<< p.first << ", "<<p.second<<"} ";
+      }
+      cout<<endl;
+      return;
+   }
+   // Traverse.
+   if (startX < destX) {
+      int xDiff = (startX < destX) ? 1 : -1;
+      FindAllPath(startX + xDiff, startY, destX, destY, path);
+   }
+   if (startY != destY) {
+      int yDiff = (startY < destY) ? 1 : -1;
+      FindAllPath(startX, startY + yDiff, destX, destY, path);
+   }
+   path.pop_back();
+}
 }
 
