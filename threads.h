@@ -15,6 +15,7 @@
 #include <mutex>
 #include <functional>
 #include <thread>
+#include <condition_variable>
 
 namespace threads {
 std::vector<std::string> find_matches( std::string pattern, std::deque<std::string> &backlog);
@@ -33,6 +34,26 @@ public:
    void begin(Racer& r);
    void end();
    Racer(int numThreads);
+};
+
+class Semaphore {
+public:
+   Semaphore(int count = 0) : count_(count) {}
+   inline void Wait() {
+      std::unique_lock<std::mutex> lock(mutex_);
+      cv_.wait(lock, [this]() { return count_ > 0; });
+      --count_;
+   }
+   inline void Notify() {
+      std::unique_lock<std::mutex> lock(mutex_);
+      ++count_;
+      lock.unlock();
+      cv_.notify_one();
+   }
+private:
+   std::condition_variable cv_;
+   std::mutex mutex_;
+   int count_;
 };
 
 }
