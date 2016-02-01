@@ -20,6 +20,31 @@
 
 namespace hashmaps {
 
+
+// Struct for Nodes.
+template<typename K, typename V>
+struct Hashnode {
+   K key;
+   V value;
+   Hashnode *next {nullptr};
+   Hashnode(K k, V v) : key(k), value(v) {}
+};
+
+// Class Hashmap for key and value map.
+template<typename K=int, typename V=std::string>
+class Hashmap {
+public:
+   V Get(K key);
+   void Put(K key, V value);
+   Hashmap(int size = 100);
+   virtual ~Hashmap();
+protected:
+   int Hasher(const K& key) const;
+   int size_;
+   Hashnode<K,V>** map_;
+};
+
+
 struct UserData {
    int data;
    UserData(const UserData& ud) : data(ud.data) {}

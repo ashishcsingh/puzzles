@@ -79,6 +79,19 @@ void Test_PairUniqueDivider() {
    cout << "Done testing Test_PairUniqueDivider()" << endl;
 }
 
+
+void Test_Hashmap() {
+   cout << "Start testing Test_Hashmap()" << endl;
+//    Hashmap<int, string> map;
+//    cout<<"Putting hashmap"<<endl;
+//    map.Put(10, "San Jose");
+//    cout<<"Getting hashmap"<<endl;
+//    cout<<map.Get(10)<<endl;
+    cout << "Done testing Test_Hashmap()" << endl;
+
+}
+
+
 void Test_HashMaps() {
 #ifdef TEST_DONE
    Test_CacheManager();
@@ -87,6 +100,7 @@ void Test_HashMaps() {
    Test_Phonebook();
    Test_PairSum();
    Test_PairUniqueDivider();
+   Test_Hashmap();
 }
 }
 
