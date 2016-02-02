@@ -45,6 +45,125 @@ protected:
 };
 
 
+
+template<typename K, typename V>
+Hashmap<K,V>::Hashmap(int size) : size_(size) {
+    map_ = new Hashnode<K,V>*[size_];
+    for(int i=0; i<size_; ++i) {
+        map_[i] = nullptr;
+    }
+}
+
+template<typename K, typename V>
+V Hashmap<K,V>::Get(K key) {
+    int loc = Hasher(key) % size_;
+    if(map_[loc] == nullptr) {
+        map_[loc] = new Hashnode<K,V>(key, V());
+        return map_[loc]->value;
+    }
+    Hashnode<K,V> *node = map_[loc], *prev = node;
+    while(node!=nullptr) {
+        if(node->key == key) {
+            return node->value;
+        }
+        prev = node;
+        node = node->next;
+    }
+    prev = new Hashnode<K,V>(key, V());
+    return prev->value;
+}
+
+template<typename K, typename V>
+void Hashmap<K,V>::Put(K key, V value) {
+    int loc = Hasher(key) % size_;
+    if(map_[loc] == nullptr) {
+        map_[loc] = new Hashnode<K,V>(key, value);
+        return;
+    }
+    Hashnode<K,V> *node = map_[loc], *prev = node;
+    while(node!=nullptr) {
+        if(node->key == key) {
+            node->value = value;
+            return;
+        }
+        prev = node;
+        node = node->next;
+    }
+    prev = new Hashnode<K,V>(key, value);
+}
+
+template<typename K, typename V>
+Hashmap<K,V>::~Hashmap() {
+    for(int i=0; i<size_; ++i) {
+        Hashnode<K,V> *node = map_[i], *prev = node;
+        while(node!=nullptr) {
+            prev = node;
+            node = node->next;
+            delete prev;
+        }
+    }
+    delete []map_;
+}
+
+template<typename K, typename V>
+int Hashmap<K,V>::Hasher(const K& key) const {
+    return reinterpret_cast<int>(key);
+}
+
+
+/*
+ * What: Generic Set that offers RandomRemove().
+ * How:  Using a vector and unordered_map locate the random loc.
+ */
+template<typename T>
+class SetRandom {
+    std::unordered_map<T, int> map_;
+    std::vector<T> seq_;
+public:
+    bool Add(T t) {
+        if(map_.count(t) > 0) {
+          return false;
+        }
+        seq_.push_back(t);
+        map_[t] = seq_.size() - 1;
+        return true;
+    }
+
+    /*
+     * Keep moving the last elem to deleted loc and update.
+     */
+    bool Remove(T t) {
+        if(map_.count(t) == 0) {
+          return false;
+         }
+         int loc = map_[t];
+         int last = seq_.size() - 1;
+         seq_[loc] = seq_[last];
+         T lastElem = seq_.back();
+         seq_.pop_back();
+         map_[lastElem] = loc;
+         map_.erase(t);
+         return true;
+    }
+    bool RandomRemove() {
+        if(seq_.size() == 0) {
+            return false;
+        }
+        int randomLoc = random() % seq_.size();
+        T remove = seq_[randomLoc];
+        Remove(remove);
+        return true;
+    }
+    bool Exists(T t) {
+       if (map_.count(t) > 0) {
+           return true;
+       } else {
+           return false;
+       }
+    }
+};
+
+
 struct UserData {
    int data;
    UserData(const UserData& ud) : data(ud.data) {}

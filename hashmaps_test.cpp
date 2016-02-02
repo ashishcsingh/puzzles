@@ -8,6 +8,7 @@
 #include "hashmaps.h"
 #include <memory>
 #include <iostream>
+#include <cassert>
 
 namespace hashmaps {
 using namespace std;
@@ -79,16 +80,26 @@ void Test_PairUniqueDivider() {
    cout << "Done testing Test_PairUniqueDivider()" << endl;
 }
 
-
 void Test_Hashmap() {
-   cout << "Start testing Test_Hashmap()" << endl;
-//    Hashmap<int, string> map;
-//    cout<<"Putting hashmap"<<endl;
-//    map.Put(10, "San Jose");
-//    cout<<"Getting hashmap"<<endl;
-//    cout<<map.Get(10)<<endl;
-    cout << "Done testing Test_Hashmap()" << endl;
+	cout << "Start testing Test_Hashmap()" << endl;
+//	Hashmap<int, string> map;
+//	cout << "Putting hashmap" << endl;
+//	map.Put(10, "San Jose");
+//	cout << "Getting hashmap" << endl;
+//	cout << map.Get(10) << endl;
+	cout << "Done testing Test_Hashmap()" << endl;
 
+}
+
+void Test_SetRandomTest() {
+   cout << "Start testing Test_SetRandomTest()" << endl;
+   SetRandom<string> set;
+   set.Add("Ashish");
+   assert(set.Add("Ashish") == false);
+   set.Add("Sakshi");
+   assert(set.Exists("Sakshi") == true);
+   set.RandomRemove();
+   cout << "Done testing Test_SetRandomTest()" << endl;
 }
 
 
@@ -101,6 +112,7 @@ void Test_HashMaps() {
    Test_PairSum();
    Test_PairUniqueDivider();
    Test_Hashmap();
+   Test_SetRandomTest();
 }
 }
 
