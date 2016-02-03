@@ -151,6 +151,8 @@ bool PathToNodes(GNode* src, GNode* dest);
 int CountNodesInBST(BNode* root, int start, int end);
 //Print path to leaf node.
 void PrintPathToNode(Node *head, std::list<Node*>& path);
+// Print flipped level ordering.
+void FlipLevelOrdering(Node* node);
 
 /*
  * What: Graph made from vertices

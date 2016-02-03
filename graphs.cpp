@@ -1282,5 +1282,57 @@ string MapGraph::FindLongestWord() {
    return longestWord;
 }
 
+/*
+ * What: FlipLevelOrdering
+ *
+ *
+ *            A                <-
+ *		 B        C            ->
+ *  D     E       G            <-
+ *    H   I J     K            ->
+ *  OUTPUT: A, B, C, G, E, D, H, I, J, K
+ *
+ */
+void FlipLevelOrdering(Node *root) {
+   if(root == nullptr) {
+      return;
+    }
+    queue<Node*> q;
+    q.push(root);
+    vector<int> v;
+    bool flip = false;
+    while(!q.empty()) {
+    	// Capture the size outside the loop.
+      int size = q.size();
+      v.clear();
+      for(int i=0; i<size; ++i) {
+           Node *node = q.front();
+           q.pop();
+           v.push_back(node->data);
+           if(node->left) {
+             q.push(node->left);
+           }
+           if(node->right) {
+              q.push(node->right);
+           }
+       }
+      // Flip directions.
+       if(flip) {
+         flip = false;
+         for(int i=0; i<v.size(); ++i) {
+            cout<<v[i]<<" ";
+         }
+         cout<<endl;
+        } else {
+        	// Reverse order.
+           flip = true;
+           for(int i=v.size() - 1; i>=0; --i) {
+              cout<<v[i]<<" ";
+           }
+           cout<<endl;
+        }
+    }
+ }
+
 }
 

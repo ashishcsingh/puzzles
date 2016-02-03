@@ -630,6 +630,17 @@ void Test_StateMapGraph() {
    cout << endl<< "Done Test_StateMapGraph()" << endl;
 }
 
+void Test_FlipLevelOrdering() {
+	cout << endl<< "Start Test_StateMapGraph()" << endl;
+	Node n1('a'), n2('b'), n3('c'), n4('d'), n5('e');
+	n1.left = &n2;
+	n1.right = &n3;
+	n2.left = &n4;
+	n3.right = &n5;
+	FlipLevelOrdering(&n1);
+	cout << endl<< "Done Test_StateMapGraph()" << endl;
+}
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -671,5 +682,6 @@ void Test_Graphs() {
    Test_VNode();
    Test_CommonAncestor();
    Test_StateMapGraph();
+   Test_FlipLevelOrdering();
 }
 }
