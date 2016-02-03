@@ -90,6 +90,37 @@ void Test_PromiseTupleData() {
    cout<<"Done Test_Racer()"<<endl;
 }
 
+ReadWriteMutex m_;
+void readFunc() {
+   ReadWriteLock lock(m_, READ);
+   cout<<"Reading and sleeping"<<endl;
+   std::this_thread::sleep_for(std::chrono::seconds(1));
+}
+
+void writeFunc() {
+   ReadWriteLock lock(m_, WRITE);
+   cout<<"Writing and sleeping"<<endl;
+   std::this_thread::sleep_for(std::chrono::seconds(1));
+}
+
+
+void Test_ReadWriteLock() {
+   cout<<"Start Test_ReadWriteLock()"<<endl;
+   thread t[3];
+   // Reader lock for 1 seconds.
+   t[0] = thread(readFunc);
+   std::this_thread::sleep_for(std::chrono::milliseconds(1));
+   // Reader lock for 1 seconds.
+   t[1] = thread(readFunc);
+   std::this_thread::sleep_for(std::chrono::milliseconds(1));
+   // Writer lock for 1 seconds.
+   t[2] = thread(writeFunc);
+   t[0].join();
+   t[1].join();
+   t[2].join();
+   cout<<"Done Test_ReadWriteLock()"<<endl;
+}
+
 void Test_Threads() {
 #ifdef TEST_DONE
    Test_WordSearch();
@@ -97,6 +128,7 @@ void Test_Threads() {
 #endif
    Test_Racer();
    Test_PromiseTupleData();
+   Test_ReadWriteLock();
 }
 }
 
