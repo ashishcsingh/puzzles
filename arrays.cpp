@@ -378,6 +378,27 @@ int MagicNumber(const int data[], int length) {
 }
 
 /*
+ * What: Searches the location where value exists.
+ * How: Find mid value and see if the value can be found there,
+ *      if not then look between left side or right side appropriately.
+ */
+int BinarySearch(const vector<int>& data, int value) {
+    int start = 0, end = data.size() - 1;
+    while(start <= end) {
+       int mid = (start + end) / 2;
+       if (data[mid] == value) {
+          return mid;
+       } else if (data[mid] < value) {
+          start = mid + 1;
+       } else {
+          end = mid - 1;
+       }
+    }
+    return -1;
+}
+
+
+/*
  * What: Finds data[i] == i where data is array of sort data with no rep
  * How:  Using binary search, if data[i] > i then traverse left from start, mid-1
  *       Else traverse on right from mid+1, end

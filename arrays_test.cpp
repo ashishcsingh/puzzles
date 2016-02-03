@@ -734,8 +734,17 @@ void Test_FindAllPath() {
    cout<<"Start Test_FindAllPath()"<<endl;
    vector<pair<int,int>> path;
    FindAllPath(0, 0, 2, 2, path);
-   cout<<"Start Test_FindAllPath()"<<endl;
+   cout<<"Done Test_FindAllPath()"<<endl;
 }
+
+
+void Test_BinarySearch() {
+   cout<<"Start Test_BinarySearch()"<<endl;
+    vector<int> data {1,2,3,4,7,8,9,10};
+    cout<<"Found at position : "<<BinarySearch(data, 17)<<endl;
+    cout<<"Done Test_BinarySearch()"<<endl;
+}
+
 
 
 void Test_Arrays() {
@@ -798,6 +807,7 @@ void Test_Arrays() {
    Test_MinNElems();
    Test_FindMaxRangeSum();
    Test_FindAllPath();
+   Test_BinarySearch();
 }
 }
 

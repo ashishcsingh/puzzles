@@ -314,5 +314,6 @@ int FindMaxRangeSum(const std::vector<int>& data);
 // Finds all path from src to dst point in 2D.
 void FindAllPath(int startX, int startY, int destX,
       int destY, std::vector<std::pair<int,int>>& path);
+int BinarySearch(const std::vector<int>& data, int value);
 }
 #endif /* ARRAYS_H_ */
