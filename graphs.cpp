@@ -1299,7 +1299,7 @@ void FlipLevelOrdering(Node *root) {
     }
     queue<Node*> q;
     q.push(root);
-    vector<int> v;
+    vector<char> v;
     bool flip = false;
     while(!q.empty()) {
     	// Capture the size outside the loop.
