@@ -19,47 +19,47 @@
 namespace graphs {
 
 struct BNode {
-	BNode* left_ { nullptr };
-	BNode* right_ { nullptr };
-	int data_ { 0 };
-	BNode(int data) :
-			data_ { data } {
-	}
-	;
+   BNode* left_ { nullptr };
+   BNode* right_ { nullptr };
+   int data_ { 0 };
+   BNode(int data) :
+         data_ { data } {
+   }
+   ;
 };
 
 struct Node {
-	Node *left { nullptr }, *right { nullptr };
-	char data;
-	Node(char c) :
-			data(c) {
-	}
+   Node *left { nullptr }, *right { nullptr };
+   char data;
+   Node(char c) :
+         data(c) {
+   }
 };
 
 void RotateTree(BNode* node);
 
 struct DNode {
-	DNode* left_ { nullptr };
-	DNode* right_ { nullptr };
-	DNode* parent_ { nullptr };
-	int data_ { 0 };
-	DNode(int data) :
-			data_ { data } {
-	}
-	;
+   DNode* left_ { nullptr };
+   DNode* right_ { nullptr };
+   DNode* parent_ { nullptr };
+   int data_ { 0 };
+   DNode(int data) :
+         data_ { data } {
+   }
+   ;
 };
 
 // To serialize a graph
 struct SerializeNode {
-	std::string string;
-	std::vector<SerializeNode*> child;
+   std::string string;
+   std::vector<SerializeNode*> child;
 };
 
 // Using the following
 struct SerializedNode {
-	std::string string;
-	int id;
-	int parent;
+   std::string string;
+   int id;
+   int parent;
 };
 
 void Serialize(SerializeNode* root, std::vector<SerializedNode>& snodes);
@@ -101,55 +101,55 @@ BNode* BinarySearchInsertion2(int array[], int start, int end);
 BNode** SortedArrayToBst2(int array[], int length);
 int NextSuccessor(BNode* root, int node);
 std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights,
-		int src, int dest);
+      int src, int dest);
 
 /*
  * What: In-order traserval
  * How:  Next() will select next element in BST.
  */
 class InOrderIterator {
-	std::stack<BNode*> stack_;
+   std::stack<BNode*> stack_;
 public:
-	void recurseLeft(BNode* BNode);
-	/*
-	 * Push current and all elems on left to stack.
-	 */
-	InOrderIterator(BNode* BNode);
-	/*
-	 * Recursively traverse to-pop right element.
-	 */
-	BNode* Next();
+   void recurseLeft(BNode* BNode);
+   /*
+    * Push current and all elems on left to stack.
+    */
+   InOrderIterator(BNode* BNode);
+   /*
+    * Recursively traverse to-pop right element.
+    */
+   BNode* Next();
 };
 
 // contact_id (int) and associated emails, will return merged contact_ids.
 std::vector<std::vector<int>> Dedupe(
-		std::vector<std::pair<int, std::vector<std::string>>>& contacts);
+      std::vector<std::pair<int, std::vector<std::string>>>& contacts);
 
 //Graph
 struct GNode {
-	GNode(int data) :
-			data_ { data } {
-	}
-	GNode() {
-	}
-	GNode** neighbors_ { nullptr };
-	int length_ { 0 };
-	int data_ { 0 };
+   GNode(int data) :
+         data_ { data } {
+   }
+   GNode() {
+   }
+   GNode** neighbors_ { nullptr };
+   int length_ { 0 };
+   int data_ { 0 };
 };
 
 // Graph with flexibility to addChild and checkChild.
 struct VNode {
-	// Public Members.
-	std::vector<VNode*> edges;
-	int id;
-	// Methods.
-	VNode(int newId) :
-			id(newId) {
-	}
-	void AddChild(VNode* child) {
-		edges.push_back(child);
-	}
-	bool IsChild(VNode* child);
+   // Public Members.
+   std::vector<VNode*> edges;
+   int id;
+   // Methods.
+   VNode(int newId) :
+         id(newId) {
+   }
+   void AddChild(VNode* child) {
+      edges.push_back(child);
+   }
+   bool IsChild(VNode* child);
 };
 
 bool PathToNodes(GNode* src, GNode* dest);
@@ -163,47 +163,47 @@ void FlipLevelOrdering(Node* node);
  * What: Graph made from vertices
  */
 struct Vertex {
-	std::vector<Vertex*> edges_;
-	int id_;
-	Vertex(int id) :
-			id_(id) {
-	}
+   std::vector<Vertex*> edges_;
+   int id_;
+   Vertex(int id) :
+         id_(id) {
+   }
 };
 struct Graph {
-	std::vector<Vertex*> vertices_;
-	~Graph() {
-		for (auto& v : vertices_) {
-			delete v;
-		}
-	}
+   std::vector<Vertex*> vertices_;
+   ~Graph() {
+      for (auto& v : vertices_) {
+         delete v;
+      }
+   }
 };
 // Clones graph.
 Graph* CloneGraph(Graph& src);
 
 //Resolve Dependencies.
 class DependencyResolver {
-	std::unordered_map<std::string, std::unordered_set<std::string>> dependencies_;
+   std::unordered_map<std::string, std::unordered_set<std::string>> dependencies_;
 public:
-	DependencyResolver(
-			const std::unordered_map<std::string, std::vector<std::string>>& data);
-	const std::unordered_set<std::string>& GetDependencies(
-			const std::string& component);
+   DependencyResolver(
+         const std::unordered_map<std::string, std::vector<std::string>>& data);
+   const std::unordered_set<std::string>& GetDependencies(
+         const std::string& component);
 };
 
 class CommonAncestor {
 public:
-	CommonAncestor(Node* root) {
-		root_ = root;
-	}
-	char GetCommonAncestor(char data1, char data2);
+   CommonAncestor(Node* root) {
+      root_ = root;
+   }
+   char GetCommonAncestor(char data1, char data2);
 private:
-	// Methods.
-	char LastCommonElem(std::list<char>& path1, std::list<char>& path2);
-	void GetPath(Node* node, std::list<char>& path);
-	// Members.
-	Node *root_;
-	std::list<char> path1_, path2_;
-	char data1_, data2_;
+   // Methods.
+   char LastCommonElem(std::list<char>& path1, std::list<char>& path2);
+   void GetPath(Node* node, std::list<char>& path);
+   // Members.
+   Node *root_;
+   std::list<char> path1_, path2_;
+   char data1_, data2_;
 };
 
 /*
@@ -218,25 +218,25 @@ private:
  */
 class StateNode {
 public:
-	StateNode(const std::string& name);
-	void AddConnection(StateNode* conn);
-	unsigned MatchLength(const std::string& match);
-	std::vector<StateNode*>& GetConnections();
-	const std::string& GetName();
+   StateNode(const std::string& name);
+   void AddConnection(StateNode* conn);
+   unsigned MatchLength(const std::string& match);
+   std::vector<StateNode*>& GetConnections();
+   const std::string& GetName();
 private:
-	std::string name_;
-	std::vector<StateNode*> connections_;
+   std::string name_;
+   std::vector<StateNode*> connections_;
 };
 
 class MapGraph {
 public:
-	MapGraph(std::vector<StateNode*>& states, std::vector<std::string>& dict);
-	std::string FindLongestWord();
-	bool ExistsStartingState(StateNode* state, const std::string& word);
-	bool ExistsAllStates(const std::string& word);
+   MapGraph(std::vector<StateNode*>& states, std::vector<std::string>& dict);
+   std::string FindLongestWord();
+   bool ExistsStartingState(StateNode* state, const std::string& word);
+   bool ExistsAllStates(const std::string& word);
 private:
-	std::vector<StateNode*>& states_;
-	std::vector<std::string>& dict_;
+   std::vector<StateNode*>& states_;
+   std::vector<std::string>& dict_;
 };
 
 }

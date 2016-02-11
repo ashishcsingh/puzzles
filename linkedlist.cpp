@@ -25,41 +25,41 @@ using namespace std;
  * 3. *head is now the new node
  */
 void Insert(Node** head, int data) {
-	Node* node = new Node(data);
-	node->next_ = *head;
-	*head = node;
-	return;
+   Node* node = new Node(data);
+   node->next_ = *head;
+   *head = node;
+   return;
 }
 
 /*
  * Print all the nodes starting head
  */
 void Print(Node** head) {
-	if (head == nullptr || *head == nullptr) {
-		return;
-	}
-	Node* node = *head;
-	std::cout << "Printing nodes :";
-	while (node) {
-		std::cout << " " << node->data_;
-		node = node->next_;
-	}
-	std::cout << std::endl;
+   if (head == nullptr || *head == nullptr) {
+      return;
+   }
+   Node* node = *head;
+   std::cout << "Printing nodes :";
+   while (node) {
+      std::cout << " " << node->data_;
+      node = node->next_;
+   }
+   std::cout << std::endl;
 }
 
 /*
  * What: Remove data with val in list
  */
 void DeleteVal(Node** head, int val) {
-	Node *node = *head, *temp;
-	while (node != nullptr) {
-		if (node->next_ && node->next_->data_ == val) {
-			temp = node->next_;
-			node->next_ = node->next_->next_;
-			delete temp;
-		}
-		node = node->next_;
-	}
+   Node *node = *head, *temp;
+   while (node != nullptr) {
+      if (node->next_ && node->next_->data_ == val) {
+         temp = node->next_;
+         node->next_ = node->next_->next_;
+         delete temp;
+      }
+      node = node->next_;
+   }
 }
 /*
  * What: Enque(int a)
@@ -71,7 +71,7 @@ void DeleteVal(Node** head, int val) {
  *
  */
 void QueueUsingTwoStacks::Enque(int e) {
-	enq_.push(e);
+   enq_.push(e);
 }
 
 /*
@@ -81,21 +81,21 @@ void QueueUsingTwoStacks::Enque(int e) {
  *        here.
  */
 int QueueUsingTwoStacks::Deque() {
-	if (deq_.empty()) {
-		if (!enq_.empty()) {
-			for (unsigned i = 0; i < enq_.size(); ++i) {
-				deq_.push(enq_.top());
-				enq_.pop();
-			}
-		}
-	}
-	if (!deq_.empty()) {
-		int ret = deq_.top();
-		deq_.pop();
-		return ret;
-	}
-	cerr << "Queue empty" << endl;
-	return -1;
+   if (deq_.empty()) {
+      if (!enq_.empty()) {
+         for (unsigned i = 0; i < enq_.size(); ++i) {
+            deq_.push(enq_.top());
+            enq_.pop();
+         }
+      }
+   }
+   if (!deq_.empty()) {
+      int ret = deq_.top();
+      deq_.pop();
+      return ret;
+   }
+   cerr << "Queue empty" << endl;
+   return -1;
 }
 
 /*
@@ -112,36 +112,36 @@ int QueueUsingTwoStacks::Deque() {
  */
 
 void Split(Node* head, int pivot, Node** lt, Node** gt) {
-	*lt = nullptr;
-	*gt = nullptr;
-	if (!head) {
-		return;
-	}
-	Node* node = head;
-	Node* lNode = nullptr;
-	Node* gNode = nullptr;
-	while (node != nullptr) {
-		if (node->data_ < pivot) {
-			if (*lt == nullptr) {
-				*lt = node;
-				lNode = node;
-			} else {
-				lNode->next_ = node;
-				lNode = lNode->next_;
-			}
-		} else {
-			if (*gt == nullptr) {
-				*gt = node;
-				gNode = node;
-			} else {
-				gNode->next_ = node;
-				gNode = gNode->next_;
-			}
-		}
-		node = node->next_;
-	}
-	lNode->next_ = nullptr;
-	gNode->next_ = nullptr;
+   *lt = nullptr;
+   *gt = nullptr;
+   if (!head) {
+      return;
+   }
+   Node* node = head;
+   Node* lNode = nullptr;
+   Node* gNode = nullptr;
+   while (node != nullptr) {
+      if (node->data_ < pivot) {
+         if (*lt == nullptr) {
+            *lt = node;
+            lNode = node;
+         } else {
+            lNode->next_ = node;
+            lNode = lNode->next_;
+         }
+      } else {
+         if (*gt == nullptr) {
+            *gt = node;
+            gNode = node;
+         } else {
+            gNode->next_ = node;
+            gNode = gNode->next_;
+         }
+      }
+      node = node->next_;
+   }
+   lNode->next_ = nullptr;
+   gNode->next_ = nullptr;
 }
 
 /*
@@ -151,24 +151,24 @@ void Split(Node* head, int pivot, Node** lt, Node** gt) {
  * 3. Plumbs back the ptr->next_ to the ptr->next_->_next
  */
 bool Delete(Node** head, int deleteMe) {
-	if (head == nullptr || *head == nullptr) {
-		return false;
-	}
-	while ((*head) && (*head)->data_ == deleteMe) {
-		Node* node = *head;
-		*head = (*head)->next_;
-		delete node;
-	}
-	Node* node = *head;
-	//Either *head is nullptr or non null with non deleteMe
-	while (node && node->next_) {
-		if (node->next_->data_ == deleteMe) {
-			Node* temp = node->next_;
-			node->next_ = node->next_->next_;
-			delete temp;
-		}
-	}
-	return true;
+   if (head == nullptr || *head == nullptr) {
+      return false;
+   }
+   while ((*head) && (*head)->data_ == deleteMe) {
+      Node* node = *head;
+      *head = (*head)->next_;
+      delete node;
+   }
+   Node* node = *head;
+   //Either *head is nullptr or non null with non deleteMe
+   while (node && node->next_) {
+      if (node->next_->data_ == deleteMe) {
+         Node* temp = node->next_;
+         node->next_ = node->next_->next_;
+         delete temp;
+      }
+   }
+   return true;
 }
 
 /*
@@ -178,16 +178,16 @@ bool Delete(Node** head, int deleteMe) {
  * 3. Stop at end.
  */
 void Clear(Node** head) {
-	if (head == nullptr || *head == nullptr) {
-		return;
-	}
-	Node* node = *head;
-	while (node != nullptr) {
-		Node* temp = node;
-		node = node->next_;
-		delete temp;
-	}
-	*head = nullptr;
+   if (head == nullptr || *head == nullptr) {
+      return;
+   }
+   Node* node = *head;
+   while (node != nullptr) {
+      Node* temp = node;
+      node = node->next_;
+      delete temp;
+   }
+   *head = nullptr;
 }
 
 /*
@@ -197,46 +197,46 @@ void Clear(Node** head) {
  * 3. If it doesn't then stop
  */
 bool HasCycle(Node* node) {
-	if (node == nullptr || node->next_ == nullptr) {
-		return false;
-	}
-	Node* node1 = node;
-	Node* node2 = node;
-	do {
-		if (node2 == nullptr || node2->next_ == nullptr) {
-			return false;
-		} else {
-			node2 = node2->next_->next_;
-		}
-		node1 = node1->next_;
-	} while (node1 != node2);
-	return true;
+   if (node == nullptr || node->next_ == nullptr) {
+      return false;
+   }
+   Node* node1 = node;
+   Node* node2 = node;
+   do {
+      if (node2 == nullptr || node2->next_ == nullptr) {
+         return false;
+      } else {
+         node2 = node2->next_->next_;
+      }
+      node1 = node1->next_;
+   } while (node1 != node2);
+   return true;
 }
 
 /*
  * Allocate two variables in the stack and compare their addresses
  */
 bool StackGrowsUp() {
-	int a = 5;
-	int b = 6;
-	if (&a < &b) {
-		return true;
-	} else {
-		return false;
-	}
+   int a = 5;
+   int b = 6;
+   if (&a < &b) {
+      return true;
+   } else {
+      return false;
+   }
 }
 
 /*
  * Allocate two variables in the stack and compare their addresses
  */
 bool HeapGrowsUp() {
-	int* a = new int(5);
-	int* b = new int(6);
-	if (a < b) {
-		return true;
-	} else {
-		return false;
-	}
+   int* a = new int(5);
+   int* b = new int(6);
+   if (a < b) {
+      return true;
+   } else {
+      return false;
+   }
 }
 
 /*
@@ -249,20 +249,20 @@ bool HeapGrowsUp() {
  * Returns: nullptr when there is a loop else the middle
  */
 Node* FindMiddle(Node* node) {
-	if (node == nullptr || node->next_ == nullptr) {
-		return nullptr;
-	}
-	Node* node1 = node;
-	Node* node2 = node;
-	do {
-		if (node2 == nullptr || node2->next_ == nullptr) {
-			return node1;
-		} else {
-			node2 = node2->next_->next_;
-		}
-		node1 = node1->next_;
-	} while (node1 != node2);
-	return nullptr;
+   if (node == nullptr || node->next_ == nullptr) {
+      return nullptr;
+   }
+   Node* node1 = node;
+   Node* node2 = node;
+   do {
+      if (node2 == nullptr || node2->next_ == nullptr) {
+         return node1;
+      } else {
+         node2 = node2->next_->next_;
+      }
+      node1 = node1->next_;
+   } while (node1 != node2);
+   return nullptr;
 }
 
 /*
@@ -271,12 +271,12 @@ Node* FindMiddle(Node* node) {
  * How: Iterate till end
  */
 int Length(Node* node) {
-	int len = 0;
-	while (node) {
-		++len;
-		node = node->next_;
-	}
-	return len;
+   int len = 0;
+   while (node) {
+      ++len;
+      node = node->next_;
+   }
+   return len;
 }
 
 /*
@@ -292,73 +292,73 @@ int Length(Node* node) {
  *      9. When both stack-empty and end then return true
  */
 bool IsPalindrom(Node* head) {
-	if (head == nullptr || head->next_ == nullptr) {
-		return true;
-	}
-	Node* first = head;
-	Node* second = head;
-	stack<int> s;
-	do {
-		if (second) {
-			// Progress
-			if (second->next_) {
-				second = second->next_->next_;
-			} else {
-				// Odd break
-				first = first->next_;
-				break;
-			}
-		} else {
-			// Even break
-			break;
-		}
-		s.push(first->data_);
-		first = first->next_;
-	} while (true);
-	// Now check stack with the other half
-	while (true) {
-		// Positive end condition
-		if (first == nullptr && s.empty()) {
-			return true;
-		}
-		// Negative end condition
-		if (first == nullptr || s.empty()) {
-			return false;
-		}
-		// Negative condition
-		if (s.top() != first->data_) {
-			return false;
-		}
-		s.pop();
-		first = first->next_;
-	}
+   if (head == nullptr || head->next_ == nullptr) {
+      return true;
+   }
+   Node* first = head;
+   Node* second = head;
+   stack<int> s;
+   do {
+      if (second) {
+         // Progress
+         if (second->next_) {
+            second = second->next_->next_;
+         } else {
+            // Odd break
+            first = first->next_;
+            break;
+         }
+      } else {
+         // Even break
+         break;
+      }
+      s.push(first->data_);
+      first = first->next_;
+   } while (true);
+   // Now check stack with the other half
+   while (true) {
+      // Positive end condition
+      if (first == nullptr && s.empty()) {
+         return true;
+      }
+      // Negative end condition
+      if (first == nullptr || s.empty()) {
+         return false;
+      }
+      // Negative condition
+      if (s.top() != first->data_) {
+         return false;
+      }
+      s.pop();
+      first = first->next_;
+   }
 }
 
 int SumLinkedList(Node* l1, Node* l2) {
-	int len1 = Length(l1);
-	int len2 = Length(l2);
-	Node* temp1 = l1;
-	Node* temp2 = l2;
-	if (len1 < len2) {
-		for (int i = 0; i < len1; ++i) {
-			temp1 = temp1->next_;
-		}
-		for (int i = 0; i < len2 - len1; ++i) {
-			temp1->next_ = new Node(0);
-			temp1 = temp1->next_;
-		}
-	} else if (len1 > len2) {
-		for (int i = 0; i < len2; ++i) {
-			temp2 = temp2->next_;
-		}
-		for (int i = 0; i < len1 - len2; ++i) {
-			temp2->next_ = new Node(0);
-			temp2 = temp2->next_;
-		}
-	}
-	Reverse(&l1);
-	Reverse(&l2);
-	return SumLinkedListReverse(l1, l2);
+   int len1 = Length(l1);
+   int len2 = Length(l2);
+   Node* temp1 = l1;
+   Node* temp2 = l2;
+   if (len1 < len2) {
+      for (int i = 0; i < len1; ++i) {
+         temp1 = temp1->next_;
+      }
+      for (int i = 0; i < len2 - len1; ++i) {
+         temp1->next_ = new Node(0);
+         temp1 = temp1->next_;
+      }
+   } else if (len1 > len2) {
+      for (int i = 0; i < len2; ++i) {
+         temp2 = temp2->next_;
+      }
+      for (int i = 0; i < len1 - len2; ++i) {
+         temp2->next_ = new Node(0);
+         temp2 = temp2->next_;
+      }
+   }
+   Reverse(&l1);
+   Reverse(&l2);
+   return SumLinkedListReverse(l1, l2);
 }
 
 /*
@@ -366,19 +366,19 @@ int SumLinkedList(Node* l1, Node* l2) {
  * How:    base->next = prev after stepping node, prev
  */
 void Reverse(Node** head) {
-	if (head == nullptr || *head == nullptr) {
-		return;
-	}
-	Node* node = *head;
-	Node *prev = nullptr, *base = nullptr;
-	while (node) {
-		base = node;
-		node = node->next_;
-		// The important action for each iteration
-		base->next_ = prev;
-		prev = base;
-	}
-	*head = prev;
+   if (head == nullptr || *head == nullptr) {
+      return;
+   }
+   Node* node = *head;
+   Node *prev = nullptr, *base = nullptr;
+   while (node) {
+      base = node;
+      node = node->next_;
+      // The important action for each iteration
+      base->next_ = prev;
+      prev = base;
+   }
+   *head = prev;
 }
 
 /*
@@ -391,33 +391,33 @@ void Reverse(Node** head) {
  *      Pop out stack
  */
 int SumLinkedListReverse(Node* l1, Node* l2) {
-	stack<int> s;
-	int sum = 0, carry = 0;
-	while (l1 != nullptr || l2 != nullptr) {
-		sum = carry;
-		carry = 0;
-		if (l1) {
-			sum = l1->data_;
-			l1 = l1->next_;
-		}
-		if (l2) {
-			sum += l2->data_;
-			l2 = l2->next_;
-		}
-		if (sum > 9) {
-			carry = 1;
-			sum = sum % 10;
-		}
-		s.push(sum);
-	}
-	s.push(carry);
-	sum = 0;
-	while (!s.empty()) {
-		sum *= 10;
-		sum += s.top();
-		s.pop();
-	}
-	return sum;
+   stack<int> s;
+   int sum = 0, carry = 0;
+   while (l1 != nullptr || l2 != nullptr) {
+      sum = carry;
+      carry = 0;
+      if (l1) {
+         sum = l1->data_;
+         l1 = l1->next_;
+      }
+      if (l2) {
+         sum += l2->data_;
+         l2 = l2->next_;
+      }
+      if (sum > 9) {
+         carry = 1;
+         sum = sum % 10;
+      }
+      s.push(sum);
+   }
+   s.push(carry);
+   sum = 0;
+   while (!s.empty()) {
+      sum *= 10;
+      sum += s.top();
+      s.pop();
+   }
+   return sum;
 }
 
 /*
@@ -430,43 +430,43 @@ int SumLinkedListReverse(Node* l1, Node* l2) {
  *
  */
 int DistanceFromLoop(Node* head) {
-	if (head == nullptr) {
-		return 0;
-	}
-	Node *slow = head, *fast = head;
-	// Initialize slow and fast with 1 and 2 jumps
-	if (slow) {
-		slow = slow->next_;
-	} else {
-		return 0;
-	}
-	if (fast->next_) {
-		fast = fast->next_->next_;
-	} else {
-		return 0;
-	}
-	// Detect loop
-	while (slow != fast) {
-		if (slow) {
-			slow = slow->next_;
-		} else {
-			return 0;
-		}
-		if (fast && fast->next_) {
-			fast = fast->next_->next_;
-		} else {
-			return 0;
-		}
-	}
-	// Find distance from start
-	slow = head;
-	int k = 0;
-	while (slow != fast) {
-		slow = slow->next_;
-		fast = fast->next_;
-		++k;
-	}
-	return k;
+   if (head == nullptr) {
+      return 0;
+   }
+   Node *slow = head, *fast = head;
+   // Initialize slow and fast with 1 and 2 jumps
+   if (slow) {
+      slow = slow->next_;
+   } else {
+      return 0;
+   }
+   if (fast->next_) {
+      fast = fast->next_->next_;
+   } else {
+      return 0;
+   }
+   // Detect loop
+   while (slow != fast) {
+      if (slow) {
+         slow = slow->next_;
+      } else {
+         return 0;
+      }
+      if (fast && fast->next_) {
+         fast = fast->next_->next_;
+      } else {
+         return 0;
+      }
+   }
+   // Find distance from start
+   slow = head;
+   int k = 0;
+   while (slow != fast) {
+      slow = slow->next_;
+      fast = fast->next_;
+      ++k;
+   }
+   return k;
 }
 
 /*
@@ -477,74 +477,74 @@ int DistanceFromLoop(Node* head) {
  *       when next is bigger and current is smaller insert
  */
 void InsertDataInSortedCircularList(Node** root, int data) {
-	Log(VERBOSE,
-			"[InsertDataInSortedCircularList] To insert " + to_string(data));
-	Node* dataNode = new Node(data);
-	// First element when root is null
-	if (*root == nullptr) {
-		*root = dataNode;
-		dataNode->next_ = dataNode;
-		Log(VERBOSE,
-				"[InsertDataInSortedCircularList] Inserted " + to_string(data)
-						+ " at root");
-		return;
-	}
-	// start has bigger values then insert at start
-	if ((*root)->data_ >= data) {
-		dataNode->next_ = *root;
-		(*root)->next_ = dataNode;
-		*root = dataNode;
-		Log(VERBOSE,
-				"[InsertDataInSortedCircularList] Inserted " + to_string(data)
-						+ " at start");
-		return;
-	}
-	Node* node = *root;
-	while (node != nullptr) {
-		// next is bigger than data and current is smaller then insert between
-		if (node->next_->data_ >= data) {
-			dataNode->next_ = node->next_;
-			node->next_ = dataNode;
-			Log(VERBOSE,
-					"[InsertDataInSortedCircularList] Inserted " + to_string(data)
-							+ " between ");
-			return;
-		} else if (node->next_ == *root) {
-			// Insert at the end
-			dataNode->next_ = node->next_;
-			node->next_ = dataNode;
-			Log(VERBOSE,
-					"[InsertDataInSortedCircularList] Inserted " + to_string(data)
-							+ " at end ");
-			return;
-		} else {
-			node = node->next_;
-		}
-	}
-	Log(ERROR, "[InsertDataInSortedCircularList] Loop not found");
+   Log(VERBOSE,
+         "[InsertDataInSortedCircularList] To insert " + to_string(data));
+   Node* dataNode = new Node(data);
+   // First element when root is null
+   if (*root == nullptr) {
+      *root = dataNode;
+      dataNode->next_ = dataNode;
+      Log(VERBOSE,
+            "[InsertDataInSortedCircularList] Inserted " + to_string(data)
+                  + " at root");
+      return;
+   }
+   // start has bigger values then insert at start
+   if ((*root)->data_ >= data) {
+      dataNode->next_ = *root;
+      (*root)->next_ = dataNode;
+      *root = dataNode;
+      Log(VERBOSE,
+            "[InsertDataInSortedCircularList] Inserted " + to_string(data)
+                  + " at start");
+      return;
+   }
+   Node* node = *root;
+   while (node != nullptr) {
+      // next is bigger than data and current is smaller then insert between
+      if (node->next_->data_ >= data) {
+         dataNode->next_ = node->next_;
+         node->next_ = dataNode;
+         Log(VERBOSE,
+               "[InsertDataInSortedCircularList] Inserted " + to_string(data)
+                     + " between ");
+         return;
+      } else if (node->next_ == *root) {
+         // Insert at the end
+         dataNode->next_ = node->next_;
+         node->next_ = dataNode;
+         Log(VERBOSE,
+               "[InsertDataInSortedCircularList] Inserted " + to_string(data)
+                     + " at end ");
+         return;
+      } else {
+         node = node->next_;
+      }
+   }
+   Log(ERROR, "[InsertDataInSortedCircularList] Loop not found");
 }
 
 /*
  * What: Gets all leaf ids populated in children
  */
 void GetAllSubChildren(map<int, vector<int>>& parentChildren, int id,
-		set<int>& children) {
-	children.insert(id);
-	children.insert(parentChildren[id].begin(), parentChildren[id].end());
-	Log(VERBOSE, "[GetAllSubChildren] Processing " + to_string(id));
-	for (auto i : children) {
-		if (parentChildren.count(i) > 0) {
-			vector<int>& grandChildren = parentChildren[i];
-			for (auto gChild : grandChildren) {
-				if (children.count(gChild) == 0) {
-					Log(VERBOSE,
-							"[GetAllSubChildren] Processing grand of "
-									+ to_string(gChild));
-					GetAllSubChildren(parentChildren, gChild, children);
-				}
-			}
-		}
-	}
+      set<int>& children) {
+   children.insert(id);
+   children.insert(parentChildren[id].begin(), parentChildren[id].end());
+   Log(VERBOSE, "[GetAllSubChildren] Processing " + to_string(id));
+   for (auto i : children) {
+      if (parentChildren.count(i) > 0) {
+         vector<int>& grandChildren = parentChildren[i];
+         for (auto gChild : grandChildren) {
+            if (children.count(gChild) == 0) {
+               Log(VERBOSE,
+                     "[GetAllSubChildren] Processing grand of "
+                           + to_string(gChild));
+               GetAllSubChildren(parentChildren, gChild, children);
+            }
+         }
+      }
+   }
 }
 
 /*
@@ -553,19 +553,19 @@ void GetAllSubChildren(map<int, vector<int>>& parentChildren, int id,
  * Complexity: O(N)
  */
 void RemoveDuplicates1(Node *node) {
-	unordered_set<int> set;
-	if (!node) {
-		return;
-	}
-	while (node) {
-		set.insert(node->data_);
-		if (node->next_ && set.count(node->next_->data_) > 0) {
-			Node *temp = node->next_;
-			node->next_ = node->next_->next_;
-			delete temp;
-		}
-		node = node->next_;
-	}
+   unordered_set<int> set;
+   if (!node) {
+      return;
+   }
+   while (node) {
+      set.insert(node->data_);
+      if (node->next_ && set.count(node->next_->data_) > 0) {
+         Node *temp = node->next_;
+         node->next_ = node->next_->next_;
+         delete temp;
+      }
+      node = node->next_;
+   }
 }
 
 /*
@@ -574,18 +574,18 @@ void RemoveDuplicates1(Node *node) {
  * Complexity: O(N2)
  */
 void RemoveDuplicates2(Node *node) {
-	while (node) {
-		Node *runner = node;
-		while (runner && runner->next_) {
-			if (node->data_ == runner->next_->data_) {
-				Node *temp = runner->next_;
-				runner->next_ = runner->next_->next_;
-				delete temp;
-			}
-			runner = runner->next_;
-		}
-		node = node->next_;
-	}
+   while (node) {
+      Node *runner = node;
+      while (runner && runner->next_) {
+         if (node->data_ == runner->next_->data_) {
+            Node *temp = runner->next_;
+            runner->next_ = runner->next_->next_;
+            delete temp;
+         }
+         runner = runner->next_;
+      }
+      node = node->next_;
+   }
 }
 
 /*
@@ -594,44 +594,44 @@ void RemoveDuplicates2(Node *node) {
  * How: Using map<int,vector<int>> build parentChildren hierarchy
  */
 void PrintSubTreeWeights(const list<NodeWithWeight>& nodes) {
-	// Populate parent to children relation
-	Log(VERBOSE,
-			"[PrintSubTreeWeights] Nodes with length " + to_string(nodes.size()));
-	map<int, vector<int>> parentChildren;
-	for (auto& node : nodes) {
-		parentChildren[node.parent_].push_back(node.id_);
-	}
-	Log(VERBOSE,
-			"[PrintSubTreeWeights] Map with length "
-					+ to_string(parentChildren.size()));
-	// For each node get all its subtrees' id
-	for (auto& node : nodes) {
-		set<int> children;
-		Log(VERBOSE, "[PrintSubTreeWeights] Getting children"
-				" for id " + to_string(node.id_));
-		// Getting all children
-		GetAllSubChildren(parentChildren, node.id_, children);
-		children.insert(node.id_);
-		Log(VERBOSE,
-				"[PrintSubTreeWeights] Got " + to_string(children.size())
-						+ " children"
-								" for id " + to_string(node.id_));
-		int weight = 0;
-		// Then get weight of each sub children
-		for (auto id : children) {
-			// Get weight by looping into nodes
-			for (auto& nodeI : nodes) {
-				if (nodeI.id_ == id) {
-					weight += nodeI.weight_;
-					Log(VERBOSE,
-							"[PrintSubTreeWeights] Got weight"
-									" for id " + to_string(nodeI.weight_) + " for "
-									+ to_string(nodeI.id_));
-				}
-			}
-		}
-		cout << "Node : " << node.id_ << " sub-tree weight: " << weight << endl;
-	}
+   // Populate parent to children relation
+   Log(VERBOSE,
+         "[PrintSubTreeWeights] Nodes with length " + to_string(nodes.size()));
+   map<int, vector<int>> parentChildren;
+   for (auto& node : nodes) {
+      parentChildren[node.parent_].push_back(node.id_);
+   }
+   Log(VERBOSE,
+         "[PrintSubTreeWeights] Map with length "
+               + to_string(parentChildren.size()));
+   // For each node get all its subtrees' id
+   for (auto& node : nodes) {
+      set<int> children;
+      Log(VERBOSE, "[PrintSubTreeWeights] Getting children"
+            " for id " + to_string(node.id_));
+      // Getting all children
+      GetAllSubChildren(parentChildren, node.id_, children);
+      children.insert(node.id_);
+      Log(VERBOSE,
+            "[PrintSubTreeWeights] Got " + to_string(children.size())
+                  + " children"
+                        " for id " + to_string(node.id_));
+      int weight = 0;
+      // Then get weight of each sub children
+      for (auto id : children) {
+         // Get weight by looping into nodes
+         for (auto& nodeI : nodes) {
+            if (nodeI.id_ == id) {
+               weight += nodeI.weight_;
+               Log(VERBOSE,
+                     "[PrintSubTreeWeights] Got weight"
+                           " for id " + to_string(nodeI.weight_) + " for "
+                           + to_string(nodeI.id_));
+            }
+         }
+      }
+      cout << "Node : " << node.id_ << " sub-tree weight: " << weight << endl;
+   }
 }
 
 /*
@@ -639,34 +639,34 @@ void PrintSubTreeWeights(const list<NodeWithWeight>& nodes) {
  * How: Using two list and then merge them.
  */
 Node* PartitionList(Node *node, int data) {
-	Node *small { nullptr }, *large { nullptr };
-	Node *savedSmall { nullptr }, *savedLarge { nullptr };
-	if (!node) {
-		return nullptr;
-	}
-	while (node) {
-		if (node->data_ <= data) {
-			if (small) {
-				small->next_ = node;
-				small = small->next_;
-			} else {
-				savedSmall = small = node;
-			}
-		} else {
-			if (large) {
-				large->next_ = node;
-				large = large->next_;
-			} else {
-				savedLarge = large = node;
-			}
-		}
-		node = node->next_;
-	}
-	if (savedSmall) {
-		small->next_ = savedLarge;
-		return savedSmall;
-	}
-	return savedLarge;
+   Node *small { nullptr }, *large { nullptr };
+   Node *savedSmall { nullptr }, *savedLarge { nullptr };
+   if (!node) {
+      return nullptr;
+   }
+   while (node) {
+      if (node->data_ <= data) {
+         if (small) {
+            small->next_ = node;
+            small = small->next_;
+         } else {
+            savedSmall = small = node;
+         }
+      } else {
+         if (large) {
+            large->next_ = node;
+            large = large->next_;
+         } else {
+            savedLarge = large = node;
+         }
+      }
+      node = node->next_;
+   }
+   if (savedSmall) {
+      small->next_ = savedLarge;
+      return savedSmall;
+   }
+   return savedLarge;
 }
 
 /*
@@ -676,18 +676,18 @@ Node* PartitionList(Node *node, int data) {
  *      When last hits null return first.
  */
 Node* KthLastElem(Node *node, int k) {
-	Node *ptr = node;
-	for (int i = 0; i < k; ++i) {
-		if (!ptr) {
-			return nullptr;
-		}
-		ptr = ptr->next_;
-	}
-	while (ptr) {
-		ptr = ptr->next_;
-		node = node->next_;
-	}
-	return node;
+   Node *ptr = node;
+   for (int i = 0; i < k; ++i) {
+      if (!ptr) {
+         return nullptr;
+      }
+      ptr = ptr->next_;
+   }
+   while (ptr) {
+      ptr = ptr->next_;
+      node = node->next_;
+   }
+   return node;
 }
 
 /*
@@ -696,10 +696,10 @@ Node* KthLastElem(Node *node, int k) {
  *      node and delete the next.
  */
 void DeleteNode(Node *node) {
-	node->data_ = node->next_->data_;
-	Node *temp = node->next_;
-	node->next_ = node->next_->next_;
-	delete temp;
+   node->data_ = node->next_->data_;
+   Node *temp = node->next_;
+   node->next_ = node->next_->next_;
+   delete temp;
 }
 
 /*
@@ -709,18 +709,18 @@ void DeleteNode(Node *node) {
  *      Returns when intersecting.
  */
 bool DetectLoop(Node* node) {
-	if (!node) {
-		return false;
-	}
-	Node *slow = node, *fast = node->next_;
-	while (fast && fast->next_) {
-		if (fast == slow) {
-			return true;
-		}
-		fast = fast->next_->next_;
-		slow = slow->next_;
-	}
-	return false;
+   if (!node) {
+      return false;
+   }
+   Node *slow = node, *fast = node->next_;
+   while (fast && fast->next_) {
+      if (fast == slow) {
+         return true;
+      }
+      fast = fast->next_->next_;
+      slow = slow->next_;
+   }
+   return false;
 }
 
 /*
@@ -732,28 +732,28 @@ bool DetectLoop(Node* node) {
  *
  */
 Node* StartLoop(Node* node) {
-	if (!node) {
-		return nullptr;
-	}
-	Node *slow = node, *fast = node;
-	Node *intersect = nullptr;
-	while (fast && fast->next_) {
-		fast = fast->next_->next_;
-		slow = slow->next_;
-		if (fast == slow) {
-			intersect = fast;
-			break;
-		}
-	}
-	if (!intersect) {
-		return nullptr;
-	}
-	Node *start = node;
-	while (start != intersect) {
-		start = start->next_;
-		intersect = intersect->next_;
-	}
-	return start;
+   if (!node) {
+      return nullptr;
+   }
+   Node *slow = node, *fast = node;
+   Node *intersect = nullptr;
+   while (fast && fast->next_) {
+      fast = fast->next_->next_;
+      slow = slow->next_;
+      if (fast == slow) {
+         intersect = fast;
+         break;
+      }
+   }
+   if (!intersect) {
+      return nullptr;
+   }
+   Node *start = node;
+   while (start != intersect) {
+      start = start->next_;
+      intersect = intersect->next_;
+   }
+   return start;
 }
 }
 

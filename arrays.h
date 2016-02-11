@@ -36,17 +36,17 @@ char GetCharForNumber(int, int);
 void GeneratePhoneNumbers(int* numbers, int length);
 int KLargestElementNxN(const std::vector<std::vector<int>>& matrix, int k);
 int GetMinElemNxN(const std::vector<std::vector<int>>& matrix,
-		std::vector<int>& colCtr);
+      std::vector<int>& colCtr);
 int MagicNumber(const int data[], int length);
 int MagicNumberWithDup(const int data[], int length);
 std::vector<std::vector<int>> Subsets(const std::vector<int> set);
 std::vector<std::string> Permutations(const std::string& s);
 std::vector<std::string> BuildParenthesis(int count);
 void PrintScreen(std::vector<std::vector<int>>&, unsigned x, unsigned y,
-		int color);
+      int color);
 const static int MAX_QUEENS = 8;
 void EightQueens(int row, std::vector<int>& col,
-		std::vector<std::vector<int>>& results);
+      std::vector<std::vector<int>>& results);
 void MergeSortLargeAToB(int A[], int lenA, int B[], int lenB);
 void MergeSortedArrays(int data[], int start1, int end1, int start2, int end2);
 int Partition(int data[], int start, int end);
@@ -57,20 +57,20 @@ int FindInRotatedSortedArray(int[], int start, int end, int find);
 int ReverseNum(int x);
 void Merge(int A[], int m, int B[], int n);
 void KMaxRepeatedElements(const std::vector<int>& input, int k,
-		std::vector<int>& out);
+      std::vector<int>& out);
 struct Point {
-	int x, y, z;
+   int x, y, z;
 };
 void KShortestDistance(const std::vector<Point>& points, int k,
-		std::vector<Point>& out);
+      std::vector<Point>& out);
 void PairSumClosestToZero(std::vector<int>& input, std::pair<int, int>& output);
 void GetEmployeesForManager(std::vector<std::pair<int, int> >& employeeManagers,
-		int manager, std::vector<int>& reporteeDirect,
-		std::vector<int>& reporteeIndirect);
+      int manager, std::vector<int>& reporteeDirect,
+      std::vector<int>& reporteeIndirect);
 void EvenIndicesAsMax(std::vector<int>& input);
 void NegativePositiveOrganizer(std::vector<int>& input);
 std::vector<int> ShortestPathDjkstras(std::vector<std::vector<int>>& weights,
-		int src, int dest);
+      int src, int dest);
 int FindMaxSumInRange(std::vector<int>& data);
 void PrintDigonalMatrix(std::vector<std::vector<int> >& data);
 int Median(int a, int b, int c);
@@ -80,15 +80,15 @@ int MaxRepeatVal(const std::vector<int>& data);
 
 class QueueUsingArray {
 public:
-	bool Enqueue(int data);
-	int Dequeue();
-	~QueueUsingArray();
-	QueueUsingArray(int length);
+   bool Enqueue(int data);
+   int Dequeue();
+   ~QueueUsingArray();
+   QueueUsingArray(int length);
 private:
-	std::mutex mutex_;
-	int* data_ { nullptr };
-	int front_ { 0 }, back_ { 0 };
-	int length_ { 0 };
+   std::mutex mutex_;
+   int* data_ { nullptr };
+   int front_ { 0 }, back_ { 0 };
+   int length_ { 0 };
 };
 
 /*
@@ -102,85 +102,85 @@ private:
  *      Split case is when some data can be copied around.
  */
 class QueueRound {
-	char* data_;
-	unsigned length_;
-	unsigned start_;
-	unsigned size_;
+   char* data_;
+   unsigned length_;
+   unsigned start_;
+   unsigned size_;
 public:
-	QueueRound(unsigned size) :
-			length_(0), start_(0), size_(size) {
-		try {
-			data_ = new char[size_];
-		} catch (std::bad_alloc& ba) {
-			std::cerr << "Failed to allocate memory " << ba.what();
-		}
-	}
-	unsigned Enque(const char * src, unsigned size) {
-		if (size == 0 || size_ == 0 || start_ == length_ + 1) {
-			return 0;
-		}
-		unsigned first = 0;
-		if (start_ < length_) {
-			// start_ ... length_ ... size_
-			first = min(size, size_ - length_);
-			std::memcpy(data_ + length_, src, first);
-			length_ += first;
-			length_ %= size_;
-			// Split case
-			if (first < size) {
-				unsigned second = min(size - first, start_);
-				std::memcpy(data_, src + first, second);
-				length_ += second;
-				length_ %= size_;
-				return first + second;
-			}
-			return first;
-		} else {
-			// length_ ... start_ ... size_
-			first = min(size, length_ - start_ - 1);
-			std::memcpy(data_ + length_, src, first);
-			length_ += first;
-			length_ %= size_;
-			return first;
-		}
-	}
-	;
+   QueueRound(unsigned size) :
+         length_(0), start_(0), size_(size) {
+      try {
+         data_ = new char[size_];
+      } catch (std::bad_alloc& ba) {
+         std::cerr << "Failed to allocate memory " << ba.what();
+      }
+   }
+   unsigned Enque(const char * src, unsigned size) {
+      if (size == 0 || size_ == 0 || start_ == length_ + 1) {
+         return 0;
+      }
+      unsigned first = 0;
+      if (start_ < length_) {
+         // start_ ... length_ ... size_
+         first = min(size, size_ - length_);
+         std::memcpy(data_ + length_, src, first);
+         length_ += first;
+         length_ %= size_;
+         // Split case
+         if (first < size) {
+            unsigned second = min(size - first, start_);
+            std::memcpy(data_, src + first, second);
+            length_ += second;
+            length_ %= size_;
+            return first + second;
+         }
+         return first;
+      } else {
+         // length_ ... start_ ... size_
+         first = min(size, length_ - start_ - 1);
+         std::memcpy(data_ + length_, src, first);
+         length_ += first;
+         length_ %= size_;
+         return first;
+      }
+   }
+   ;
 
-	unsigned Deque(char * dst, unsigned size) {
-		if (size == 0 || size_ == 0 || start_ == length_) {
-			return 0;
-		}
-		unsigned first = 0;
-		if (start_ < length_) {
-			// 0 ... start_ ... length_ .. size_
-			first = min(size, length_ - start_);
-			std::memcpy(dst, data_ + start_, first);
-			start_ += first;
-			start_ %= size_;
-			return first;
-		} else {
-			// 0 ... length_ ... start_ ... size_
-			first = min(size, size_ - start_);
-			std::memcpy(dst, data_ + start_, first);
-			start_ += first;
-			start_ %= size_;
-			// Split case.
-			if (first < size) {
-				unsigned second = min(size - first, start_ - length_ - 1);
-				std::memcpy(dst, data_, second);
-				start_ += second;
-				start_ %= size_;
-				return first + second;
-			}
-			return first;
-		}
-	}
-	;
+   unsigned Deque(char * dst, unsigned size) {
+      if (size == 0 || size_ == 0 || start_ == length_) {
+         return 0;
+      }
+      unsigned first = 0;
+      if (start_ < length_) {
+         // 0 ... start_ ... length_ .. size_
+         first = min(size, length_ - start_);
+         std::memcpy(dst, data_ + start_, first);
+         start_ += first;
+         start_ %= size_;
+         return first;
+      } else {
+         // 0 ... length_ ... start_ ... size_
+         first = min(size, size_ - start_);
+         std::memcpy(dst, data_ + start_, first);
+         start_ += first;
+         start_ %= size_;
+         // Split case.
+         if (first < size) {
+            unsigned second = min(size - first, start_ - length_ - 1);
+            std::memcpy(dst, data_, second);
+            start_ += second;
+            start_ %= size_;
+            return first + second;
+         }
+         return first;
+      }
+   }
+   ;
 protected:
-	template<typename T>
-	T min(T a, T b) {
-		return (a < b) ? a : b;
-	}
+   template<typename T>
+   T min(T a, T b) {
+      return (a < b) ? a : b;
+   }
 };
 
 /*
@@ -189,18 +189,18 @@ protected:
  */
 template<typename T>
 class Array2D {
-	std::vector<std::vector<T>> data_;
-	unsigned size_;
+   std::vector<std::vector<T>> data_;
+   unsigned size_;
 public:
-	Array2D(unsigned size) :
-			size_(size) {
-		for (unsigned i = 0; i < size_; ++i) {
-			data_.push_back(std::vector<T>(size_, 0));
-		}
-	}
-	std::vector<T>& operator[](unsigned i) {
-		return data_[i];
-	}
+   Array2D(unsigned size) :
+         size_(size) {
+      for (unsigned i = 0; i < size_; ++i) {
+         data_.push_back(std::vector<T>(size_, 0));
+      }
+   }
+   std::vector<T>& operator[](unsigned i) {
+      return data_[i];
+   }
 };
 
 /*
@@ -210,29 +210,29 @@ public:
  */
 template<typename T>
 class Array2DC {
-	T** header_;
-	unsigned size_;
+   T** header_;
+   unsigned size_;
 public:
-	Array2DC(unsigned size) :
-			size_(size) {
-		header_ = (T**) malloc(size * sizeof(T*));
-		for (unsigned i = 0; i < size; ++i) {
-			*(header_ + i) = (T*) malloc(size * sizeof(T));
-		}
-	}
-	T* operator[](unsigned i) {
-		return *(header_ + i);
-	}
-	~Array2DC() {
-		for (unsigned i = 0; i < size_; ++i) {
-			delete[] *(header_ + i);
-		}
-		delete[] header_;
-	}
+   Array2DC(unsigned size) :
+         size_(size) {
+      header_ = (T**) malloc(size * sizeof(T*));
+      for (unsigned i = 0; i < size; ++i) {
+         *(header_ + i) = (T*) malloc(size * sizeof(T));
+      }
+   }
+   T* operator[](unsigned i) {
+      return *(header_ + i);
+   }
+   ~Array2DC() {
+      for (unsigned i = 0; i < size_; ++i) {
+         delete[] *(header_ + i);
+      }
+      delete[] header_;
+   }
 };
 
 void ClosestNumbers(const std::vector<std::vector<int>>& in,
-		std::vector<int>& out);
+      std::vector<int>& out);
 void SortIncDecPairs(std::vector<int>& data);
 // unorderd number, with one repeating, then find missing.
 int FindMissingNum(std::vector<int>& data);
@@ -251,7 +251,7 @@ void FindAllSubPrimesInSieve(std::vector<int>& sieve);
 int NextPrimeInSieve(std::vector<int>& sieve, int N);
 void AddSubPrimesInSieve(std::vector<int>& sieve);
 std::vector<int> FindAllSubPrimes(int N, std::vector<int>& P,
-		std::vector<int>& Q);
+      std::vector<int>& Q);
 // Maximize values in arr by replacing from rep.
 void Maximize(std::vector<int>& arr, std::vector<int>& rep);
 // Make all row,col zero for elem is zero in matrix[][].
@@ -263,51 +263,51 @@ void MinRange(std::vector<std::vector<int>> arrays, int& min, int& max);
 template<typename T>
 class Heap {
 public:
-	virtual void Push(const T& data)=0;
-	virtual const T& Top()=0;
-	virtual void Pop()=0;
-	virtual ~Heap() {
-	}
-	;
+   virtual void Push(const T& data)=0;
+   virtual const T& Top()=0;
+   virtual void Pop()=0;
+   virtual ~Heap() {
+   }
+   ;
 };
 
 template<typename T>
 class MinHeap: public Heap<T> {
-	struct Comp {
-		bool operator()(const T& l, const T& r) {
-			return l > r;
-		}
-	};
-	std::priority_queue<T, std::vector<T>, Comp> pq_;
+   struct Comp {
+      bool operator()(const T& l, const T& r) {
+         return l > r;
+      }
+   };
+   std::priority_queue<T, std::vector<T>, Comp> pq_;
 public:
-	virtual void Push(const T& data) {
-		pq_.push(data);
-	}
-	virtual const T& Top() {
-		return pq_.top();
-	}
-	virtual void Pop() {
-		pq_.pop();
-	}
-	virtual ~MinHeap() {
-	}
+   virtual void Push(const T& data) {
+      pq_.push(data);
+   }
+   virtual const T& Top() {
+      return pq_.top();
+   }
+   virtual void Pop() {
+      pq_.pop();
+   }
+   virtual ~MinHeap() {
+   }
 };
 
 template<typename T>
 class MaxHeap: public Heap<T> {
-	std::priority_queue<T> pq_;
+   std::priority_queue<T> pq_;
 public:
-	virtual void Push(const T& data) {
-		pq_.push(data);
-	}
-	virtual const T& Top() {
-		return pq_.top();
-	}
-	virtual void Pop() {
-		pq_.pop();
-	}
-	virtual ~MaxHeap() {
-	}
+   virtual void Push(const T& data) {
+      pq_.push(data);
+   }
+   virtual const T& Top() {
+      return pq_.top();
+   }
+   virtual void Pop() {
+      pq_.pop();
+   }
+   virtual ~MaxHeap() {
+   }
 };
 
 std::vector<std::pair<int, int>> RepeatCounts(std::vector<int>& repeats);
@@ -323,7 +323,7 @@ int MaxThreeProduct(std::vector<int>& nums);
 int FindMaxRangeSum(const std::vector<int>& data);
 // Finds all path from src to dst point in 2D.
 void FindAllPath(int startX, int startY, int destX, int destY,
-		std::vector<std::pair<int, int>>& path);
+      std::vector<std::pair<int, int>>& path);
 int BinarySearch(const std::vector<int>& data, int value);
 }
 #endif /* ARRAYS_H_ */
