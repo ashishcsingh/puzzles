@@ -14,5 +14,4 @@ namespace threads {
 void Test_Threads();
 }
 
-
 #endif /* THREADS_TEST_H_ */

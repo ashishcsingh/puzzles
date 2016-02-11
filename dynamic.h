@@ -18,9 +18,11 @@ int FibonacciDynamic(int val);
 int FibonacciOptimal(int val);
 
 struct Node {
-   Node *left {nullptr}, *right{nullptr};
-   int data;
-   Node(int dataPar) : data(dataPar) {}
+	Node *left { nullptr }, *right { nullptr };
+	int data;
+	Node(int dataPar) :
+			data(dataPar) {
+	}
 };
 
 bool IsBalanced(Node* node);
@@ -28,10 +30,10 @@ int Height(Node* node, int height, std::unordered_map<Node*, int>& map);
 
 bool IsSumOnPath1(Node* node, int parentSum, int goalSum);
 // Using DP.
-bool IsSumOnPath2(Node* node, int parentSum, int goalSum, std::unordered_map<Node*,
-      std::unordered_set<int>>& cache);
+bool IsSumOnPath2(Node* node, int parentSum, int goalSum,
+		std::unordered_map<Node*, std::unordered_set<int>>& cache);
 
-int FindMaxDiffSum(const std::vector<int>& list) ;
+int FindMaxDiffSum(const std::vector<int>& list);
 unsigned ComputeWater(const std::vector<int>& bar);
 
 }

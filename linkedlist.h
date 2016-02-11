@@ -183,7 +183,6 @@ struct SmartPtr {
 	}
 };
 
-
 /*
  * What: Generic LinkedList Node class that does
  *       Push_front, Push_back, Remove, Remove_all

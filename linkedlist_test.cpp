@@ -412,38 +412,38 @@ void Test_LinkedListGeneric() {
 		cout << *i << " ";
 	}
 	cout << endl;
-	cout<<"Done testing Test_LinkedListGeneric()"<<endl;
+	cout << "Done testing Test_LinkedListGeneric()" << endl;
 }
 
 void Test_LinkedLists() {
 #ifdef TEST_DONE
-Test_Insert();
-Test_Delete();
-Test_Clear();
-Test_Split();
-Test_HasCycle();
-Test_FindMiddle();
-Test_Queue();
-Test_StackGrowsUp();
-Test_HeapGrowsUp();
-Test_DistanceFromLoop();
-Test_SumLinkedListReverse();
-Test_Reverse();
-Test_SumLinkedList();
-Test_IsPalindrom();
-Test_QueueUsingTwoStacks();
-Test_InsertDataInSortedCircularList();
-Test_PrintSubTreeWeights();
+	Test_Insert();
+	Test_Delete();
+	Test_Clear();
+	Test_Split();
+	Test_HasCycle();
+	Test_FindMiddle();
+	Test_Queue();
+	Test_StackGrowsUp();
+	Test_HeapGrowsUp();
+	Test_DistanceFromLoop();
+	Test_SumLinkedListReverse();
+	Test_Reverse();
+	Test_SumLinkedList();
+	Test_IsPalindrom();
+	Test_QueueUsingTwoStacks();
+	Test_InsertDataInSortedCircularList();
+	Test_PrintSubTreeWeights();
 #endif
-Test_HashMapWithLast();
-Test_SmartPtr();
-Test_RemoveDuplicates();
-Test_PartitionList();
-Test_KthLastElem();
-Test_DeleteNode();
-Test_DetectLoop();
-Test_StartLoop();
-Test_LinkedListGeneric();
+	Test_HashMapWithLast();
+	Test_SmartPtr();
+	Test_RemoveDuplicates();
+	Test_PartitionList();
+	Test_KthLastElem();
+	Test_DeleteNode();
+	Test_DetectLoop();
+	Test_StartLoop();
+	Test_LinkedListGeneric();
 }
 
 }
