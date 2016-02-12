@@ -737,6 +737,19 @@ void Test_BinarySearch() {
    cout << "Done Test_BinarySearch()" << endl;
 }
 
+void Test_GetNElemsFromTwoArrays() {
+   cout << "Start Test_GetNElemsFromTwoArrays()" << endl;
+   vector<int> a{4,5,6,7,9};
+   vector<int> b{3,7,9,10};
+   vector<int> result = GetNElemsFromTwoArrays(a, b, 6, 5);
+
+   for(auto e: result) {
+      cout<<e<<" ";
+   }
+   cout<<endl<<"Done Test_GetNElemsFromTwoArrays()" << endl;
+}
+
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -798,6 +811,7 @@ void Test_Arrays() {
    Test_FindMaxRangeSum();
    Test_FindAllPath();
    Test_BinarySearch();
+   Test_GetNElemsFromTwoArrays();
 }
 }
 

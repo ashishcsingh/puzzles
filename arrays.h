@@ -325,5 +325,8 @@ int FindMaxRangeSum(const std::vector<int>& data);
 void FindAllPath(int startX, int startY, int destX, int destY,
       std::vector<std::pair<int, int>>& path);
 int BinarySearch(const std::vector<int>& data, int value);
+// Get count numbers in increasing order from two arrays.
+std::vector<int> GetNElemsFromTwoArrays(std::vector<int>& a,
+      std::vector<int>& b, int start, int count);
 }
 #endif /* ARRAYS_H_ */

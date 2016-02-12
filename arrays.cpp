@@ -1740,5 +1740,49 @@ void FindAllPath(int startX, int startY, int destX, int destY,
    }
    path.pop_back();
 }
+
+/*
+ * What: Get count elems from two sorted arrays
+ *       that are greater than start.
+ * How:  First locate the starting points in each array.
+ *       Then copy elms like merge sort.
+ */
+std::vector<int> GetNElemsFromTwoArrays(std::vector<int>& a,
+      std::vector<int>& b, int start, int count) {
+   vector<int> result;
+   int locA = 0, locB = 0;
+   // Locate starting point in array A.
+   for(; locA < a.size(); ++locA) {
+      if(a[locA] > start) {
+         break;
+      }
+   }
+   // Locate starting point in array B.
+   for(; locB < a.size(); ++locB) {
+      if(b[locB] > start) {
+         break;
+      }
+   }
+   // Copy all count elms from A and B.
+   while (count > 0 && locA < a.size() && locB < b.size()) {
+      if(a[locA] < b[locB]) {
+         result.push_back(a[locA]);
+         ++locA;
+      } else {
+         result.push_back(b[locB]);
+         ++locB;
+      }
+      --count;
+   }
+   for(;locA < a.size() && count > 0; ++locA) {
+      result.push_back(a[locA]);
+      --count;
+   }
+   for(;locB < b.size() && count > 0; ++locB) {
+      result.push_back(b[locB]);
+      --count;
+   }
+   return result;
+}
 }
 
