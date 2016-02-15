@@ -6,6 +6,7 @@
 #include <sstream>
 #include <cstring>
 #include <algorithm>
+#include <unordered_map>
 
 #include "log.h"
 
@@ -1074,6 +1075,35 @@ string ReverseStringByWords(const string& src) {
       len = post - 1;
    }
    return dest;
+}
+
+/*
+ * What: Max length of substring with no dup.
+ * How:  Count occurrences and then between 1s find the longest stretch.
+ */
+int MaxSubStringNoDupSize(const std::string& str) {
+   unordered_map<char, int> map;
+   // count occurence.
+   for (auto c : str) {
+      ++map[c];
+   }
+   // find longest 1s in counts.
+   int max = 0, size = 0;
+   for (auto c : str) {
+      if (map[c] == 1) {
+         ++size;
+      } else {
+         if (size > max) {
+            max = size;
+            size = 0;
+         }
+      }
+   }
+   if (size > max) {
+      max = size;
+      size = 0;
+   }
+   return max;
 }
 
 }

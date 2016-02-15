@@ -385,6 +385,13 @@ void Test_ReverseStringByWords() {
    cout << "Done Test_ReverseStringByWords" << endl;
 }
 
+void Test_MaxLenSubStrNoDup() {
+   cout << "Start Test_MaxLenSubStrNoDup" << endl;
+   string str{"abcdefga"};
+   cout<<MaxSubStringNoDupSize(str)<<endl;
+   cout << "Done Test_MaxLenSubStrNoDup" << endl;
+}
+
 void Test_Strings() {
 #ifdef TEST_DONE
    Test_Reverse();
@@ -422,6 +429,7 @@ void Test_Strings() {
    Test_BalanceParenthesis();
    Test_CountTwos();
    Test_ReverseStringByWords();
+   Test_MaxLenSubStrNoDup();
 }
 
 }

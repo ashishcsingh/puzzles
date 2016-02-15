@@ -1784,5 +1784,48 @@ std::vector<int> GetNElemsFromTwoArrays(std::vector<int>& a,
    }
    return result;
 }
+
+/*
+ * What: If two arrays form the same BST.
+ * How: Compare first elm as root then all smalls and bigs then
+ *      first elm must be in the same order for both arrays.
+ */
+bool BstCompare(const vector<int>& a, const vector<int>& b) {
+   if (a.size() != b.size() || a.size() < 1 || a.size() < 1) {
+      return false;
+   }
+   if (a[0] != b[0]) {
+      return false;
+   }
+   vector<int> aSmall, aBig, bSmall, bBig;
+   for (unsigned i = 1; i < a.size(); ++i) {
+      if (a[i] < a[0]) {
+         aSmall.push_back(a[i]);
+      } else {
+         aBig.push_back(a[i]);
+      }
+      if (b[i] < b[0]) {
+         bSmall.push_back(b[i]);
+      } else {
+         bBig.push_back(b[i]);
+      }
+   }
+   if (aSmall.size() != bSmall.size() || aBig.size() != bBig.size()) {
+      return false;
+   }
+   // Check order for small elms and large elms.
+   for (unsigned i = 1; i < aSmall.size(); ++i) {
+      if (aSmall[i] != bSmall[i]) {
+         return false;
+      }
+   }
+   for (unsigned i = 1; i < aBig.size(); ++i) {
+      if (aBig[i] != bBig[i]) {
+         return false;
+      }
+   }
+   return true;
+}
+
 }
 

@@ -328,5 +328,7 @@ int BinarySearch(const std::vector<int>& data, int value);
 // Get count numbers in increasing order from two arrays.
 std::vector<int> GetNElemsFromTwoArrays(std::vector<int>& a,
       std::vector<int>& b, int start, int count);
+// Compare two arrays to make same BST.
+bool BstCompare(const std::vector<int>& a, const std::vector<int>& b);
 }
 #endif /* ARRAYS_H_ */

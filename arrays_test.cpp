@@ -750,6 +750,17 @@ void Test_GetNElemsFromTwoArrays() {
 }
 
 
+void Test_BstCompare() {
+   cout << "Start Test_BstCompare()" << endl;
+   vector<int> a{3, 2, 1, 4, 5};
+   vector<int> b{3, 4, 2, 5, 1};
+   assert(BstCompare(a, b) == true);
+   b = {3, 4, 2, 5, 9};
+   assert(BstCompare(a, b) == false);
+   cout<<endl<<"Done Test_BstCompare()" << endl;
+}
+
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -812,6 +823,7 @@ void Test_Arrays() {
    Test_FindAllPath();
    Test_BinarySearch();
    Test_GetNElemsFromTwoArrays();
+   Test_BstCompare();
 }
 }
 
