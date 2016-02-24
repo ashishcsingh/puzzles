@@ -673,7 +673,7 @@ void QuickSort(int data[], int start, int end) {
  */
 void MergeSort(int data[], int start, int end) {
    if (end > start) {
-      int center = (end - start) / 2 + start;
+      int center = (start + end)/2;
       MergeSort(data, start, center);
       MergeSort(data, center + 1, end);
       MergeSortedArrays(data, start, center, center + 1, end);

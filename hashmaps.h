@@ -216,6 +216,7 @@ public:
             _hashMap.erase(lastKey);
          }
          slot->key = key;
+         _hashMap[key] = slot;
          _queue.enqueue(slot);
          Log(VERBOSE, "[CacheManager::Get] New : " + key);
          return slot->ud;
@@ -254,7 +255,7 @@ private:
          if (slot == head) {
             return;
          }
-         // There some head.
+         // There is some head.
          if (head != nullptr) {
             slot->next = head;
             head->prev = slot;
@@ -338,6 +339,43 @@ public:
 std::vector<std::pair<int, int>> PairSum(std::vector<int> nums, int sum);
 // Return unique dividers of a num.
 std::vector<std::pair<int, int>> PairUniqueDivider(int num);
+
+/*
+ * What: Returns random node as Next()
+ *       Can remove and add Node in constant time.
+ * How: Using unordered_map and vector access random content.
+ */
+template<typename T>
+class RandomLoadBalancer {
+private:
+   std::unordered_map<T, int> map_;
+   std::vector<T> seq_;
+public:
+   bool Add(T host) {
+      if(map_.count(host) > 0) {
+         return false;
+      }
+      seq_.push_back(host);
+      map_[host] = seq_.size() - 1;
+      return true;
+   }
+   bool Remove(T host) {
+      if(map_.count(host) == 0) {
+         return false;
+      }
+      T lastElem = seq_.back();
+      int deleteLoc = map_[host];
+      map_[lastElem] = deleteLoc;
+      seq_[deleteLoc] = lastElem;
+      seq_.pop_back();
+      map_.erase(host);
+      return true;
+   }
+   T Next() {
+      int randomLoc = random() % seq_.size();
+      return seq_[randomLoc];
+   }
+};
 
 }
 

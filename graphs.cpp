@@ -60,21 +60,21 @@ BNode* Bfs(BNode* root, int data) {
  * What: RotateTree()
  * How: Rotates tree from right to left.
  * Input
- (0)
- / \
-          /   \
+          (0)
+          / \
+         /   \
        (1)     (2)
- / \     / \
+       / \     / \
      (3) (4) (5) (6)
 
 
- Output
- (0)
- / \
-          /   \
-       (2)     (1)
- / \     / \
-     (6) (5) (4) (3)
+    Output
+             (0)
+             / \
+            /   \
+          (2)     (1)
+          / \     / \
+        (6) (5) (4) (3)
  */
 void RotateTree(BNode* node) {
    if (node == nullptr) {
@@ -1280,7 +1280,7 @@ string MapGraph::FindLongestWord() {
  * What: FlipLevelOrdering
  *
  *
- *            A                <-
+ *         A                <-
  *		 B        C            ->
  *  D     E       G            <-
  *    H   I J     K            ->

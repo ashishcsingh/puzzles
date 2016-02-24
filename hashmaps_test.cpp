@@ -101,6 +101,23 @@ void Test_SetRandomTest() {
    cout << "Done testing Test_SetRandomTest()" << endl;
 }
 
+void Test_RandomLoadBalancer() {
+   cout << "Start testing Test_RandomLoadBalancer()" << endl;
+   RandomLoadBalancer<string> lb;
+   lb.Add("10.20.30.1");
+   lb.Add("10.20.30.2");
+   lb.Add("10.20.30.3");
+   lb.Add("10.20.30.4");
+   lb.Add("10.20.30.5");
+   lb.Remove("10.20.30.3");
+
+   for(int i=0; i<10; ++i) {
+      cout<<lb.Next()<<endl;
+   }
+
+   cout << "Done testing Test_RandomLoadBalancer()" << endl;
+}
+
 void Test_HashMaps() {
 #ifdef TEST_DONE
    Test_CacheManager();
@@ -111,6 +128,7 @@ void Test_HashMaps() {
    Test_PairUniqueDivider();
    Test_Hashmap();
    Test_SetRandomTest();
+   Test_RandomLoadBalancer();
 }
 }
 
