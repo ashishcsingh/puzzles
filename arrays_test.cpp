@@ -768,6 +768,14 @@ void Test_CoinDenom() {
    cout << "Done Test_CoinDenom()" << endl;
 }
 
+void Test_MatchCommon() {
+   cout << "Start Test_MatchCommon()" << endl;
+   vector<int> a{1,2,3,5,10};
+   vector<int> b{4,5,11,12,13,15};
+   cout<<MatchCommon(a, b)<<endl;
+   cout << "Done Test_MatchCommon()" << endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -832,6 +840,7 @@ void Test_Arrays() {
    Test_GetNElemsFromTwoArrays();
    Test_BstCompare();
    Test_CoinDenom();
+   Test_MatchCommon();
 }
 }
 

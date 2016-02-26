@@ -1868,5 +1868,23 @@ int LowestCoinsDenom(const vector<int> coins, int value, int startCoinIndex) {
    return min;
 }
 
+/*
+ * What: Returns common elem between a and b sorted arrays.
+ * How: Using merge sort strategy find the common in O(n)
+ */
+int MatchCommon(const vector<int>& a, const vector<int>& b) {
+   int ai = 0, bi = 0;
+   while (ai < a.size() && bi < b.size()) {
+      if (a[ai] == b[bi]) {
+         return a[ai];
+      }
+      if (a[ai] < b[bi]) {
+         ++ai;
+      } else {
+         ++bi;
+      }
+   }
+   return -1;
+}
 }
 

@@ -334,5 +334,7 @@ bool BstCompare(const std::vector<int>& a, const std::vector<int>& b);
 int LowestCoinsDenom(const std::vector<int> coins, int value, int startCoinIndex);
 // Count total count of coins used to match value.
 int TotalCoinsDenom(const std::vector<int> coins, int value, int startCoinIndex);
+// Find the common elem in two sorted arrays return -1 when not found.
+int MatchCommon(const std::vector<int>& a, const std::vector<int>& b);
 }
 #endif /* ARRAYS_H_ */
