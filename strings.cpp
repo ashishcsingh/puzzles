@@ -7,7 +7,7 @@
 #include <cstring>
 #include <algorithm>
 #include <unordered_map>
-
+#include <unordered_set>
 #include "log.h"
 
 namespace strings {
@@ -1102,6 +1102,26 @@ int MaxSubStringNoDupSize(const std::string& str) {
    if (size > max) {
       max = size;
       size = 0;
+   }
+   return max;
+}
+
+/*
+ * What: Finds the longest str with unique chars.
+ * How: whenever existing char found reset count.
+ */
+int LongestUniqueString(const string& str) {
+   unordered_set<char> set;
+   int max = INT_MIN, cur;
+   for(auto c: str) {
+      if(set.count(c)) {
+         if(max < cur) {
+            max = cur;
+         }
+         cur = 1;
+      }
+      set.insert(c);
+      ++cur;
    }
    return max;
 }

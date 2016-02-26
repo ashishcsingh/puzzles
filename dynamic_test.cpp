@@ -66,6 +66,13 @@ void Test_BarWater() {
    cout << "Done Test_BarWater()" << endl;
 }
 
+void Test_SumMinPaint() {
+   cout<<"Start testing Test_SumMinPaint()"<<endl;
+   vector<vector<int>> paintCost {{1,2,3},{2,1,4},{5,1,4}};
+   cout<<SumMinPaint(paintCost)<<endl;
+   cout<<"Done testing Test_SumMinPaint()"<<endl;
+}
+
 void Test_Dynamic() {
 #ifdef TEST_DONE
 #else
@@ -75,7 +82,7 @@ void Test_Dynamic() {
    Test_FindMaxDiffSum();
    Test_IsTreeBalanced();
    Test_BarWater();
+   Test_SumMinPaint();
 }
-
 }
 

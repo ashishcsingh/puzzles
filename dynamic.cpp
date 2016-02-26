@@ -239,5 +239,43 @@ unsigned ComputeWater(const vector<int>& bar) {
    return sum;
 }
 
+/*
+ * What: Skip passed color for house and find min.
+ */
+int GetMinimumPaintCost(const vector<vector<int>>& cache, int house,
+      int color) {
+   int min = INT_MAX;
+   for (int i = 0; i < cache.size(); ++i) {
+      if (i == color) {
+         continue;
+      }
+      if (min > cache[house][i]) {
+         min = cache[house][i];
+      }
+   }
+   return min;
+}
+
+/*
+ * What: Total minimum cost to paint house.
+ * How: Using dynamic programming make min cost
+ *      for the next house and return the sum.
+ */
+int SumMinPaint(const vector<vector<int>>& cost) {
+   auto cache = cost;
+   for (int house = 1; house < cost.size(); ++house) {
+      for (int color = 0; color < cost.size(); ++color) {
+         cache[color][house] = GetMinimumPaintCost(cache, house - 1, color)
+               + cost[house][color];
+      }
+   }
+   int min = INT_MAX;
+   for (int i = 0; i < cache.size(); ++i) {
+      if (min > cache[cache.size() - 1][i]) {
+         min = cache[cache.size() - 1][i];
+      }
+   }
+   return min;
+}
 }
 

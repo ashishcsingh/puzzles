@@ -35,7 +35,8 @@ bool IsSumOnPath2(Node* node, int parentSum, int goalSum,
 
 int FindMaxDiffSum(const std::vector<int>& list);
 unsigned ComputeWater(const std::vector<int>& bar);
-
+// Total minimum cost to paint house.
+int SumMinPaint(const std::vector<std::vector<int>>& cost);
 }
 
 #endif /* DYNAMIC_H_ */

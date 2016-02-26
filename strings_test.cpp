@@ -392,6 +392,13 @@ void Test_MaxLenSubStrNoDup() {
    cout << "Done Test_MaxLenSubStrNoDup" << endl;
 }
 
+void Test_LongestUniqueString() {
+   cout << "Start Test_LongestUniqueString" << endl;
+   string str("abcdaefg");
+   cout<<LongestUniqueString(str)<<endl;
+   cout << "Start Test_LongestUniqueString" << endl;
+}
+
 void Test_Strings() {
 #ifdef TEST_DONE
    Test_Reverse();
@@ -430,6 +437,7 @@ void Test_Strings() {
    Test_CountTwos();
    Test_ReverseStringByWords();
    Test_MaxLenSubStrNoDup();
+   Test_LongestUniqueString();
 }
 
 }
