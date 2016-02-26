@@ -1827,5 +1827,46 @@ bool BstCompare(const vector<int>& a, const vector<int>& b) {
    return true;
 }
 
+/*
+ * What: Count total count of coins used to match value.
+ * How:  Current call uses only one coin type till exhaustion.
+ *       Left over coins are addressed by next call.
+ */
+int TotalCoinsDenom(const vector<int> coins, int value, int startCoinIndex) {
+   // Check first if illegal conditions.
+   if (value < 0 || startCoinIndex >= coins.size()) {
+      return 0;
+   }
+   // The base condition.
+   if (value == 0) {
+      return 1;
+   }
+   // The current iteration consumes the current coin.
+   int result = 0;
+   while (value >= coins[startCoinIndex]) {
+      value -= coins[startCoinIndex];
+      ++result;
+   }
+   result += TotalCoinsDenom(coins, value, startCoinIndex + 1);
+   return result;
+}
+
+/*
+ * What: Find the lowest sum of coins to match the value.
+ * How:  Sorts the coins and then matches the minimum.
+ */
+int LowestCoinsDenom(const vector<int> coins, int value, int startCoinIndex) {
+   vector<int> coinsCopy = coins;
+   sort(coinsCopy.begin(), coinsCopy.end(), greater<int>());
+   int min = INT_MAX, temp = 0;
+   for (int i = 0; i < coins.size(); ++i) {
+      temp = TotalCoinsDenom(coinsCopy, value, i);
+      if (temp < min) {
+         min = temp;
+      }
+   }
+   return min;
+}
+
 }
 

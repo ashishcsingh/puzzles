@@ -761,6 +761,13 @@ void Test_BstCompare() {
 }
 
 
+void Test_CoinDenom() {
+   cout << "Start Test_CoinDenom()" << endl;
+   vector<int> coins {10,5,1};
+   cout<<LowestCoinsDenom(coins, 21, 0)<<endl;
+   cout << "Done Test_CoinDenom()" << endl;
+}
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -824,6 +831,7 @@ void Test_Arrays() {
    Test_BinarySearch();
    Test_GetNElemsFromTwoArrays();
    Test_BstCompare();
+   Test_CoinDenom();
 }
 }
 

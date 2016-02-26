@@ -330,5 +330,9 @@ std::vector<int> GetNElemsFromTwoArrays(std::vector<int>& a,
       std::vector<int>& b, int start, int count);
 // Compare two arrays to make same BST.
 bool BstCompare(const std::vector<int>& a, const std::vector<int>& b);
+// Find the lowest sum of coins to match the value.
+int LowestCoinsDenom(const std::vector<int> coins, int value, int startCoinIndex);
+// Count total count of coins used to match value.
+int TotalCoinsDenom(const std::vector<int> coins, int value, int startCoinIndex);
 }
 #endif /* ARRAYS_H_ */
