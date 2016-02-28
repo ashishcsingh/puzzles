@@ -385,18 +385,11 @@ void Test_ReverseStringByWords() {
    cout << "Done Test_ReverseStringByWords" << endl;
 }
 
-void Test_MaxLenSubStrNoDup() {
-   cout << "Start Test_MaxLenSubStrNoDup" << endl;
-   string str{"abcdefga"};
-   cout<<MaxSubStringNoDupSize(str)<<endl;
-   cout << "Done Test_MaxLenSubStrNoDup" << endl;
-}
-
-void Test_LongestUniqueString() {
-   cout << "Start Test_LongestUniqueString" << endl;
-   string str("abcdaefg");
-   cout<<LongestUniqueString(str)<<endl;
-   cout << "Start Test_LongestUniqueString" << endl;
+void Test_MaxUniqueSubString() {
+   cout << "Start Test_MaxUniqueSubString" << endl;
+   string str("abcdaefghijklm");
+   cout<<MaxUniqueSubString(str)<<endl;
+   cout << "Start Test_MaxUniqueSubString" << endl;
 }
 
 void Test_Strings() {
@@ -436,8 +429,7 @@ void Test_Strings() {
    Test_BalanceParenthesis();
    Test_CountTwos();
    Test_ReverseStringByWords();
-   Test_MaxLenSubStrNoDup();
-   Test_LongestUniqueString();
+   Test_MaxUniqueSubString();
 }
 
 }

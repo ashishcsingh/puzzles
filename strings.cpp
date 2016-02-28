@@ -1077,51 +1077,28 @@ string ReverseStringByWords(const string& src) {
    return dest;
 }
 
-/*
- * What: Max length of substring with no dup.
- * How:  Count occurrences and then between 1s find the longest stretch.
- */
-int MaxSubStringNoDupSize(const std::string& str) {
-   unordered_map<char, int> map;
-   // count occurence.
-   for (auto c : str) {
-      ++map[c];
-   }
-   // find longest 1s in counts.
-   int max = 0, size = 0;
-   for (auto c : str) {
-      if (map[c] == 1) {
-         ++size;
-      } else {
-         if (size > max) {
-            max = size;
-            size = 0;
-         }
-      }
-   }
-   if (size > max) {
-      max = size;
-      size = 0;
-   }
-   return max;
-}
 
 /*
  * What: Finds the longest str with unique chars.
  * How: whenever existing char found reset count.
  */
-int LongestUniqueString(const string& str) {
+int MaxUniqueSubString(const string& str) {
    unordered_set<char> set;
-   int max = INT_MIN, cur;
-   for(auto c: str) {
+   int max = 0, cur = 0, prev = 0;
+   for(char c: str) {
       if(set.count(c)) {
-         if(max < cur) {
-            max = cur;
+         if(max < cur + prev - 1) {
+            max = cur + prev - 1;
          }
-         cur = 1;
+         prev = cur;
+         cur = 0;
+         set.erase(c);
       }
       set.insert(c);
       ++cur;
+   }
+   if (max < cur + prev - 1) {
+      max = cur + prev - 1;
    }
    return max;
 }

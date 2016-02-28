@@ -103,10 +103,8 @@ int CountTwos(int k);
  * "Hello world." => "world Hello."
  */
 std::string ReverseStringByWords(const std::string& src);
-// Max length of no-dup sub string.
-int MaxSubStringNoDupSize(const std::string& str);
 // Finds the longest unique char string.
-int LongestUniqueString(const string& str);
+int MaxUniqueSubString(const string& str);
 
 }
 #endif /* STRINGS_H_ */
