@@ -36,6 +36,13 @@ struct Node {
    }
 };
 
+struct NodeInt {
+   NodeInt *left, *right;
+  int data;
+  NodeInt(int data=0, NodeInt *left=nullptr, NodeInt *right=nullptr)
+  : left(left), right(right), data(data){}
+};
+
 void RotateTree(BNode* node);
 
 struct DNode {
@@ -158,7 +165,13 @@ int CountNodesInBST(BNode* root, int start, int end);
 void PrintPathToNode(Node *head, std::list<Node*>& path);
 // Print flipped level ordering.
 void FlipLevelOrdering(Node* node);
-
+// Longest path from root.
+void MaxLengthPath(NodeInt *node, std::list<NodeInt*>& maxPath,
+      std::list<NodeInt*>& path, unsigned& maxPathLen);
+//Get all paths from root to leaf.
+void GetAllPaths(NodeInt *NodeInt, std::list<int>& path, std::list<std::list<int>>& allPaths);
+//Get sum of all paths from root to leaf.
+int GetSumAllPaths(NodeInt *root);
 /*
  * What: Graph made from vertices
  */

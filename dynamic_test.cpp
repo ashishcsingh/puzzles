@@ -73,6 +73,15 @@ void Test_SumMinPaint() {
    cout<<"Done testing Test_SumMinPaint()"<<endl;
 }
 
+const int INF = INT_MAX - 1;
+void Test_MinCoinCountingDp() {
+   cout<<"Start testing Test_MinCoinCountingDp()"<<endl;
+   vector<int> coins {1,5,10};
+   vector<int> cache(22, INF);
+   cout<<MinCoinsDp(21, coins, cache)<<endl;
+   cout<<"Done testing Test_MinCoinCountingDp()"<<endl;
+}
+
 void Test_Dynamic() {
 #ifdef TEST_DONE
 #else
@@ -83,6 +92,7 @@ void Test_Dynamic() {
    Test_IsTreeBalanced();
    Test_BarWater();
    Test_SumMinPaint();
+   Test_MinCoinCountingDp();
 }
 }
 

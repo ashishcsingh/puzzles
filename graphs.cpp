@@ -953,6 +953,7 @@ vector<int> dfs(const int& contact,
       unordered_map<int, vector<string>>& mapContactEmails,
       unordered_set<int>& unvisited) {
    vector<int> connectedContacts;
+   unordered_set<int> contactSet;
    stack<int> s;
    s.push(contact);
    while (!s.empty()) {
@@ -964,11 +965,17 @@ vector<int> dfs(const int& contact,
       //find all the connected.
       for (auto& email : mapContactEmails[current]) {
          for (auto& c : mapEmailContacts[email]) {
+            // Get rid of duplicates.
             if (unvisited.count(c) > 0) {
-               s.push(c);
+               contactSet.insert(c);
             }
          }
       }
+      // Get rid of duplicates.
+      for(auto c: contactSet) {
+         s.push(c);
+      }
+      contactSet.clear();
    }
    return connectedContacts;
 }
@@ -1326,6 +1333,67 @@ void FlipLevelOrdering(Node *root) {
          cout << endl;
       }
    }
+}
+
+/*
+ * What: Finds the longest path from root.
+ * How: Pushing and poping path and checking max length.
+ */
+void MaxLengthPath(NodeInt *node, list<NodeInt*>& maxPath, list<NodeInt*>& path, unsigned& maxPathLen) {
+  if(!node) {
+    return;
+  }
+  path.push_back(node);
+  if(path.size() > maxPathLen) {
+    maxPathLen = path.size();
+    maxPath = path;
+  }
+  MaxLengthPath(node->left, maxPath, path, maxPathLen);
+  MaxLengthPath(node->right, maxPath, path, maxPathLen);
+  path.pop_back();
+}
+
+
+/*
+ * What: Gets all paths from root to leaf.
+ * How: Push and pop and detect and copy path to allPaths.
+ */
+void GetAllPaths(NodeInt *NodeInt, list<int>& path, list<list<int>>& allPaths) {
+   if(!NodeInt) {
+      return;
+   }
+   path.push_back(NodeInt->data);
+   if(NodeInt->left == nullptr && NodeInt->right == nullptr) {
+      allPaths.push_back(path);
+      // Debug.
+      for(auto& n : path) {
+         cout<<n<<" ";
+      }
+      cout<<endl;
+   }
+   GetAllPaths(NodeInt->left, path, allPaths);
+   GetAllPaths(NodeInt->right, path, allPaths);
+   path.pop_back();
+}
+
+/*
+ * What: Get all sums of all paths.
+ */
+int GetSumAllPaths(NodeInt *root) {
+   list<int> path;
+   list<list<int>> allPaths;
+   GetAllPaths(root, path, allPaths);
+   int lSum = 0, gSum = 0, ten = 1;
+   for(auto& p : allPaths) {
+      lSum = 0;
+      ten = 1;
+      for(auto& n: p) {
+         lSum *= 10;
+         lSum += n;
+      }
+      gSum += lSum;
+   }
+   return gSum;
 }
 
 }

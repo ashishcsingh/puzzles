@@ -37,6 +37,8 @@ int FindMaxDiffSum(const std::vector<int>& list);
 unsigned ComputeWater(const std::vector<int>& bar);
 // Total minimum cost to paint house.
 int SumMinPaint(const std::vector<std::vector<int>>& cost);
+// Min counts of coin denomination to meet target
+int MinCoinsDp(int target, const std::vector<int>& coins, std::vector<int>& cache);
 }
 
 #endif /* DYNAMIC_H_ */

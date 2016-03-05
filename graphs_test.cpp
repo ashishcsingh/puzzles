@@ -638,6 +638,34 @@ void Test_FlipLevelOrdering() {
    cout << endl << "Done Test_StateMapGraph()" << endl;
 }
 
+void Test_MaxLengthPath() {
+   cout << endl << "Start Test_MaxLengthPath()" << endl;
+  NodeInt n5(5);
+  NodeInt n4(4);
+  NodeInt n2(2, &n4, &n5);
+  NodeInt n3(3);
+  NodeInt n1(1, &n2, &n3);
+  list<NodeInt*> maxPath;
+  list<NodeInt*> path;
+  unsigned max = 0;
+  MaxLengthPath(&n1, maxPath, path, max);
+  for(auto n : maxPath) {
+    cout<< n->data<<endl;
+  }
+  cout << endl << "Done Test_MaxLengthPath()" << endl;
+}
+
+void Test_GetSumAllPaths() {
+   cout << endl << "Start Test_GetSumAllPaths()" << endl;
+   NodeInt n5(5), n4(4);
+   NodeInt n2(2, &n4, &n5);
+   NodeInt n3(3);
+   NodeInt n1(1, &n2, &n3);
+   auto sum = GetSumAllPaths(&n1);
+   cout<<"Sum: "<<sum<<endl;
+   cout << endl << "Done Test_GetSumAllPaths()" << endl;
+ }
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -680,5 +708,7 @@ void Test_Graphs() {
    Test_CommonAncestor();
    Test_StateMapGraph();
    Test_FlipLevelOrdering();
+   Test_MaxLengthPath();
+   Test_GetSumAllPaths();
 }
 }

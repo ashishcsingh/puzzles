@@ -277,5 +277,29 @@ int SumMinPaint(const vector<vector<int>>& cost) {
    }
    return min;
 }
+
+/*
+ * What: Min counts of coin denomination to meet target
+ * How: Remember the previous results and decrease one coin per move.
+ */
+const int INF = INT_MAX - 1;
+int MinCoinsDp(int target, const vector<int>& coins, vector<int>& cache) {
+   if(target < 0) {
+      return INF;
+   }
+   if(target == 0) {
+      return 0;
+   }
+   if (cache[target] != INF) {
+      return cache[target];
+   }
+   int output = INF;
+   for(int i=0; i<coins.size(); ++i) {
+      output = min(output, MinCoinsDp(target - coins[i], coins, cache) + 1);
+   }
+   cache[target] = output;
+   return output;
+}
+
 }
 
