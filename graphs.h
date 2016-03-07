@@ -172,6 +172,13 @@ void MaxLengthPath(NodeInt *node, std::list<NodeInt*>& maxPath,
 void GetAllPaths(NodeInt *NodeInt, std::list<int>& path, std::list<std::list<int>>& allPaths);
 //Get sum of all paths from root to leaf.
 int GetSumAllPaths(NodeInt *root);
+// Print tree horizontally, leftmost to rightmost.
+void PrintTreeHorizontal(NodeInt *root);
+// Prints the tree in reference to (x,y) cordinates.
+void PrintTree(NodeInt *root);
+// Get Height of a tree.
+int GetHeightTree(NodeInt *node, int height);
+
 /*
  * What: Graph made from vertices
  */

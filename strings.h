@@ -105,6 +105,7 @@ int CountTwos(int k);
 std::string ReverseStringByWords(const std::string& src);
 // Finds the longest unique char string.
 int MaxUniqueSubString(const string& str);
-
+//Top N words
+vector<string> TopNWords(const std::vector<std::string>& words, int count);
 }
 #endif /* STRINGS_H_ */

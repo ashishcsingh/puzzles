@@ -776,6 +776,13 @@ void Test_MatchCommon() {
    cout << "Done Test_MatchCommon()" << endl;
 }
 
+
+void Test_FindMedian() {
+   cout << "Start Test_FindMedian()" << endl;
+   vector<vector<int>> data {{1,2,5,10}, {8,9,11}, {5,7}};
+   cout<<FindMedian(data);
+   cout << "Done Test_FindMedian()" << endl;
+}
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -841,6 +848,7 @@ void Test_Arrays() {
    Test_BstCompare();
    Test_CoinDenom();
    Test_MatchCommon();
+   Test_FindMedian();
 }
 }
 

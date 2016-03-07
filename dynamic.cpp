@@ -8,6 +8,7 @@
 #include "dynamic.h"
 #include <cmath>
 #include <vector>
+#include <string>
 #include <algorithm>
 
 namespace dynamic {
@@ -299,6 +300,75 @@ int MinCoinsDp(int target, const vector<int>& coins, vector<int>& cache) {
    }
    cache[target] = output;
    return output;
+}
+
+/*
+ * What: Count Conversion int to char 121 => 3
+ * How: 121 can be aba, ak, ea
+ */
+int CountDigitToChar(const string& str, int index) {
+   if(str.size() == 0 || index > str.size()) {
+      return 0;
+   }
+   if(str.size() == index) {
+      return 1;
+   }
+   int count = 0;
+   count += CountDigitToChar(str, index + 1);
+   if(index + 1 < str.size() && str[index] <= '2' && str[index + 1] <= '6') {
+      count += CountDigitToChar(str, index + 2);
+   }
+   return count;
+}
+
+/*
+ * What: Check sum exists.
+ * How: Using hashset with # stored as difference.
+ */
+int SumExists(const vector<int>& data, int sum) {
+   unordered_set<int> set;
+   for(auto n: data) {
+      if(set.count(sum - n) > 0) {
+         return n;
+      }
+      set.insert(n);
+   }
+   return 0;
+}
+
+/*
+ * What: Count coin Denoms.
+ * How: Guess move to sub-solution is reduce by current coin.
+ * Complexity is exponential.
+ */
+int TotalCoinDenoms(int target, const vector<int>& coinDenoms, int coinItr) {
+   if(target < 0 || coinItr >= coinDenoms.size()) {
+      return 0;
+   }
+   if(target == 0) {
+      return 1;
+   }
+   int count = 0;
+   for(int i=coinItr; i<coinDenoms.size(); ++i) {
+      count += TotalCoinDenoms(target - coinDenoms[i], coinDenoms, i);
+   }
+   return count;
+}
+
+
+/*
+ * What: Using DP coinDenom
+ * How: For each coin increase permutations.
+ */
+int TotalCoinDenomDP(unsigned target, vector<int>& coins) {
+  vector<int> cache(target + 1, 0);
+  cache[0] = 1;
+  for(auto c: coins) {
+    for(unsigned i=c; i<=target; ++i) {
+      cache[i] += cache[i-c];
+    }
+  }
+  return cache[target];
 }
 
 }

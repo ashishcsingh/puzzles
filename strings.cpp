@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
+#include <queue>
 #include "log.h"
 
 namespace strings {
@@ -1101,6 +1102,44 @@ int MaxUniqueSubString(const string& str) {
       max = cur + prev - 1;
    }
    return max;
+}
+
+typedef pair<int, unordered_map<string, int>::const_iterator> wordItr;
+struct compare {
+   bool operator()(const wordItr& left, const wordItr& right) {
+      return left.first > right.first;
+   }
+};
+
+/*
+ * What: Top N Words from dictionary.
+ * How: Using hashmap to store count,
+ *      then using priority_queue with minheap store K
+ *      max words by keep replacing the smallest on top.
+ */
+vector<string> TopNWords(const vector<string>& words, int count) {
+   unordered_map<string, int> wordMap;
+   for(auto& w: words) {
+      ++wordMap[w];
+   }
+   priority_queue<wordItr, vector<wordItr>, compare> pq;
+   for(auto itr = wordMap.begin(); itr!= wordMap.end(); ++itr) {
+      if(pq.size() < count) {
+         pq.push(make_pair(itr->second, itr));
+      } else {
+         if(pq.top().first < itr->second) {
+            pq.pop();
+            pq.push(make_pair(itr->second, itr));
+         }
+      }
+   }
+   vector<string> output(count);
+   int i = 0;
+   while(!pq.empty()) {
+      output[i++] = pq.top().second->first;
+      pq.pop();
+   }
+   return output;
 }
 
 }

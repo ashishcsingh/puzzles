@@ -392,6 +392,16 @@ void Test_MaxUniqueSubString() {
    cout << "Start Test_MaxUniqueSubString" << endl;
 }
 
+void Test_TopNWords() {
+   cout << "Start Test_TopNWords" << endl;
+   vector<string> words {"air", "boll", "air", "boll", "cat", "dog", "cat"};
+   auto topWords = TopNWords(words, 3);
+   for(auto& w: topWords) {
+      cout<<w<<" ";
+   }
+   cout << "Done Test_TopNWords" << endl;
+}
+
 void Test_Strings() {
 #ifdef TEST_DONE
    Test_Reverse();
@@ -430,6 +440,7 @@ void Test_Strings() {
    Test_CountTwos();
    Test_ReverseStringByWords();
    Test_MaxUniqueSubString();
+   Test_TopNWords();
 }
 
 }

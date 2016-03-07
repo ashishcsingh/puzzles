@@ -666,6 +666,27 @@ void Test_GetSumAllPaths() {
    cout << endl << "Done Test_GetSumAllPaths()" << endl;
  }
 
+void Test_PrintTreeHorizontal() {
+   cout <<"Start PrintTreeHorizontal()" << endl;
+   NodeInt n4(4), n5(5), n6(6), n7(7), n2(2, &n4, &n5), n3(3, &n6, &n7),
+           n1(1, &n2, &n3);
+   PrintTreeHorizontal(&n1);
+   cout <<"Done PrintTreeHorizontal()" << endl;
+}
+
+/*
+ *   1
+ *  2 3
+ * 4 6 7
+ */
+void Test_PrintTree() {
+   cout <<"Start Test_PrintTree()" << endl;
+   NodeInt n4(4), n5(5), n6(6), n7(7), n2(2, &n4, &n5), n3(3, &n6, &n7),
+           n1(1, &n2, &n3);
+   PrintTree(&n1);
+   cout <<"Start Test_PrintTree()" << endl;
+}
+
 void Test_Graphs() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -710,5 +731,7 @@ void Test_Graphs() {
    Test_FlipLevelOrdering();
    Test_MaxLengthPath();
    Test_GetSumAllPaths();
+   Test_PrintTreeHorizontal();
+   Test_PrintTree();
 }
 }

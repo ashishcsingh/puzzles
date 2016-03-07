@@ -39,6 +39,14 @@ unsigned ComputeWater(const std::vector<int>& bar);
 int SumMinPaint(const std::vector<std::vector<int>>& cost);
 // Min counts of coin denomination to meet target
 int MinCoinsDp(int target, const std::vector<int>& coins, std::vector<int>& cache);
+// Count int to char conversion.
+int CountDigitToChar(const std::string& str, int index);
+// Check sum exists.
+int SumExists(const std::vector<int>& data, int sum);
+// Count coin denominations.
+int TotalCoinDenoms(int target, const std::vector<int>& coinDenoms, int coinItr);
+// Count coin denominations using DP.
+int TotalCoinDenomDP(unsigned target, std::vector<int>& coins);
 }
 
 #endif /* DYNAMIC_H_ */

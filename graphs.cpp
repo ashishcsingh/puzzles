@@ -1396,5 +1396,125 @@ int GetSumAllPaths(NodeInt *root) {
    return gSum;
 }
 
+
+/*
+ * What: Sets alignment in cache (int, vector<Node*>)
+ * How: Using BFS and hashmap to track width moves from left to right.
+ */
+void SetAlignment(NodeInt *root, unordered_map<int, vector<int>>& cache,
+      int& minAligned, int& maxAligned) {
+   if(!root) {
+      return;
+   }
+   queue<NodeInt*> q;
+   unordered_map<NodeInt*, int> alignMap;
+   q.push(root);
+   alignMap[root] = 0;
+   while(!q.empty()) {
+      NodeInt* node = q.front();
+      q.pop();
+      // Store nodes in reference to width.
+      cache[alignMap[node]].push_back(node->data);
+      // Also store min and max here.
+      minAligned = min(minAligned, alignMap[node]);
+      maxAligned = max(maxAligned, alignMap[node]);
+      if(node->left) {
+         q.push(node->left);
+         alignMap[node->left] = alignMap[node] - 1;
+      }
+      if(node->right) {
+         q.push(node->right);
+         alignMap[node->right] = alignMap[node] + 1;
+      }
+   }
+}
+
+/*
+ * What: Prints tree from leftmost width to right most width.
+ * How: Using BFS and hashmap to track width moves from left to right.
+ */
+void PrintTreeHorizontal(NodeInt *root) {
+   unordered_map<int, vector<int>> cache;
+   int minAligned = 0, maxAligned = 0;
+   SetAlignment(root, cache, minAligned, maxAligned);
+   for(int i=minAligned; i<=maxAligned; ++i) {
+      for(auto& n: cache[i]) {
+         cout<<n<<" ";
+      }
+   }
+}
+
+
+/*
+ * What: Sets the content in matrix using alignment hashmap.
+ */
+void SetAlignment(NodeInt *root, vector<vector<int>>& matrix, int height) {
+   if(!root) {
+      return;
+   }
+   queue<NodeInt*> q;
+   unordered_map<NodeInt*, pair<int,int>> alignMap;
+   q.push(root);
+   // Alignment stores (x, y).
+   // matrix stores [Y rows][X cols]
+   alignMap[root] = make_pair(height, 0);
+   while(!q.empty()) {
+      NodeInt* node = q.front();
+      q.pop();
+      // Store the current loc (x, y)
+      matrix[alignMap[node].second][alignMap[node].first] = node->data;
+      if(node->left) {
+         q.push(node->left);
+         alignMap[node->left].first = alignMap[node].first - 1;
+         alignMap[node->left].second = alignMap[node].second + 1;
+      }
+      if(node->right) {
+         q.push(node->right);
+         alignMap[node->right].first = alignMap[node].first + 1;
+         alignMap[node->right].second = alignMap[node].second + 1;
+      }
+   }
+}
+
+/*
+ * What: Gets the height of a tree.
+ */
+int GetHeightTree(NodeInt *node, int height) {
+   if(!node) {
+      return height;
+   }
+   return max(GetHeightTree(node->left, height + 1), GetHeightTree(node->right,
+            height + 1));
+}
+
+
+/*
+ * What: Prints the tree by considering its relative positions.
+ * Tree height: 3
+ *   1
+ *  2 3
+ * 4 6 7
+ */
+void PrintTree(NodeInt *root) {
+   int height = GetHeightTree(root, 0);
+   cout<<"Tree height: "<<height<<endl;
+   vector<vector<int>> matrix;
+   for(int i=0; i<height; ++i) {
+      vector<int> row(height * 2, INT_MAX);
+      matrix.push_back(move(row));
+   }
+   SetAlignment(root, matrix, height);
+   for(int i = 0; i<height; ++i) {
+      for(int j = 0; j<height * 2; ++j) {
+         if(matrix[i][j] == INT_MAX) {
+            cout<<" ";
+         } else {
+            cout<<matrix[i][j];
+         }
+      }
+      cout<<endl;
+   }
+}
+
 }
 

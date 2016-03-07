@@ -1886,5 +1886,44 @@ int MatchCommon(const vector<int>& a, const vector<int>& b) {
    }
    return -1;
 }
+
+/*
+ * What: Find next min elm and increment index.
+ */
+int GetMinIncIndex(vector<int>& minIndexArr, const vector<vector<int>>& data) {
+   int minValue = INT_MAX, minIndex = 0;
+   for(unsigned i = 0; i<minIndexArr.size(); ++i) {
+      if(data[i].size() == minIndexArr[i]) {
+         continue;
+      }
+      if(data[i][minIndexArr[i]] < minValue) {
+         minValue = data[i][minIndexArr[i]];
+         minIndex = i;
+      }
+   }
+   return data[minIndex][minIndexArr[minIndex]++];
+}
+
+/*
+ * What: Find median from N sorted arrays.
+ * How: Using a min index tracker array.
+ */
+int FindMedian(const vector<vector<int>>& data) {
+   if(data.size() == 0) {
+      return 0;
+   }
+   int counts = 0;
+   for(auto& arr: data) {
+      counts += arr.size();
+   }
+   int kth = counts / 2;
+   vector<int> minIndexArr(data.size(), 0);
+   int out = 0;
+   for(int i=0; i<kth; ++i) {
+      out = GetMinIncIndex(minIndexArr, data);
+   }
+   return out;
+}
+
 }
 

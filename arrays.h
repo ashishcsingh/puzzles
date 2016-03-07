@@ -336,5 +336,7 @@ int LowestCoinsDenom(const std::vector<int> coins, int value, int startCoinIndex
 int TotalCoinsDenom(const std::vector<int> coins, int value, int startCoinIndex);
 // Find the common elem in two sorted arrays return -1 when not found.
 int MatchCommon(const std::vector<int>& a, const std::vector<int>& b);
+// Find median.
+int FindMedian(const std::vector<std::vector<int>>& data);
 }
 #endif /* ARRAYS_H_ */

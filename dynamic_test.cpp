@@ -82,6 +82,40 @@ void Test_MinCoinCountingDp() {
    cout<<"Done testing Test_MinCoinCountingDp()"<<endl;
 }
 
+void Test_CountDigitToChar() {
+   cout<<"Start testing Test_CountDigitToChar()"<<endl;
+   string str{"121"};
+   cout<<CountDigitToChar(str, 0)<<endl;
+   cout<<"Start testing Test_CountDigitToChar()"<<endl;
+}
+
+void Test_SumExists() {
+   cout<<"Start testing Test_SumExists()"<<endl;
+   vector<int> data {1,2,3,5,6,7,8,10};
+   assert(SumExists(data, 15) > 0);
+   assert(SumExists(data, 13) > 0);
+   assert(SumExists(data, 50) <= 0);
+   cout<<"Done testing Test_SumExists()"<<endl;
+}
+
+void Test_TotalCoinDenomsWithoutDP() {
+   cout<<"Start testing Test_SumExists()"<<endl;
+   vector<int> coins{1,5,10};
+   for(int i=9; i<12; ++i) {
+      cout<<"For target without DP: "<<i<<" "<<TotalCoinDenoms(i, coins, 0)<<endl;
+   }
+   cout<<"Done testing Test_SumExists()"<<endl;
+}
+
+void Test_TotalCoinDenomsWithDP() {
+   cout<<"Start testing Test_SumExists()"<<endl;
+   vector<int> coins{1,5,10};
+   for(int i=9; i<12; ++i) {
+      cout<<"For target with DP: "<<i<<" "<<TotalCoinDenomDP(i, coins)<<endl;
+   }
+   cout<<"Done testing Test_SumExists()"<<endl;
+}
+
 void Test_Dynamic() {
 #ifdef TEST_DONE
 #else
@@ -93,6 +127,10 @@ void Test_Dynamic() {
    Test_BarWater();
    Test_SumMinPaint();
    Test_MinCoinCountingDp();
+   Test_CountDigitToChar();
+   Test_SumExists();
+   Test_TotalCoinDenomsWithoutDP();
+   Test_TotalCoinDenomsWithDP();
 }
 }
 
