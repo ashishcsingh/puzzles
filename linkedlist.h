@@ -46,6 +46,10 @@ void DeleteNode(Node* node);
 bool DetectLoop(Node* node);
 // Returns starting of loop.
 Node* StartLoop(Node* node);
+// DetectLoopNode
+Node* DetectLoopNode(Node* node);
+// RemoveLoop flats loopy linkedList.
+bool RemoveLoop(Node* node);
 
 class QueueUsingTwoStacks {
 public:

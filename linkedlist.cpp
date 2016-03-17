@@ -755,5 +755,44 @@ Node* StartLoop(Node* node) {
    }
    return start;
 }
+
+/*  What: Detects if loop exists and returns node of intersection.
+ *  How:  Runner mechanism.
+ */
+Node* DetectLoopNode(Node *node) {
+   Node *walker = node, *runner = node;
+   while (runner && runner->next_) {
+      runner = runner->next_->next_;
+      walker = walker->next_;
+      if (runner == walker) {
+         return runner;
+      }
+   }
+   return nullptr;
+}
+
+/*  What: Flats the loop in a linkedList if no loop found returns false.
+ *  How:  Uses DetectLoop and then finds the point of loop
+ *        Then inside the loop sets the next of node to null.
+ */
+bool RemoveLoop(Node *node) {
+   Node *loop = DetectLoopNode(node);
+   if (loop == nullptr) {
+      cout << "No loop detected" << endl;
+      return false;
+   }
+   Node *cur = node;
+   while (cur != loop) {
+      cur = cur->next_;
+      loop = loop->next_;
+   }
+   Node *prev = cur;
+   while (prev->next_ != cur) {
+      prev = prev->next_;
+   }
+   prev->next_ = nullptr;
+   return true;
+}
+
 }
 

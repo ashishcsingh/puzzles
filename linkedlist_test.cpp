@@ -415,6 +415,19 @@ void Test_LinkedListGeneric() {
    cout << "Done testing Test_LinkedListGeneric()" << endl;
 }
 
+void Test_RemoveLoop() {
+   cout << "Start testing Test_RemoveLoop()" << endl;
+   Node *node = new Node(1);
+   node->next_ = new Node(2);
+   node->next_->next_ = new Node(3);
+   node->next_->next_->next_ = new Node(4);
+   node->next_->next_->next_->next_ = node->next_->next_;
+   cout<<"Before removal loop" <<node->next_->next_->next_->next_;
+   assert(RemoveLoop(node) == true);
+   cout<<"After removal loop" <<node->next_->next_->next_->next_;
+   cout << "Done testing Test_RemoveLoop()" << endl;
+}
+
 void Test_LinkedLists() {
 #ifdef TEST_DONE
    Test_Insert();
@@ -444,6 +457,7 @@ void Test_LinkedLists() {
    Test_DetectLoop();
    Test_StartLoop();
    Test_LinkedListGeneric();
+   Test_RemoveLoop();
 }
 
 }
