@@ -338,5 +338,34 @@ int TotalCoinsDenom(const std::vector<int> coins, int value, int startCoinIndex)
 int MatchCommon(const std::vector<int>& a, const std::vector<int>& b);
 // Find median.
 int FindMedian(const std::vector<std::vector<int>>& data);
+
+/*
+ * What: StackFromQueue
+ * How: Pop is only different, LIFO means pushing all N-1 back again.
+ */
+template<typename T>
+class StackFromQueue {
+private:
+   std::queue<T> q_;
+public:
+   void Push(T t) {
+      q_.push(t);
+   }
+   T Pop() {
+      // Move content back size-1 times.
+      int pushBack = q_.size() - 1;
+      for(int i=0; i<pushBack; ++i) {
+         int temp = q_.front();
+         q_.pop();
+         q_.push(temp);
+      }
+      int result = q_.front();
+      q_.pop();
+      return result;
+   }
+   bool Empty() {
+      return q_.empty();
+   }
+};
 }
 #endif /* ARRAYS_H_ */

@@ -1312,7 +1312,7 @@ int CountUniques(std::vector<int>& data) {
 int FindMaxSumInRange(vector<int>& data) {
    int maxEnding = 0, maxSlice = 0;
    for (auto& a : data) {
-      maxEnding = max(0, a);
+      maxEnding = max(0, maxEnding + a);
       maxSlice = max(maxEnding, maxSlice);
    }
    return maxSlice;
@@ -1568,8 +1568,6 @@ void MinRange(vector<vector<int>> arrays, int& min, int& max) {
                   minElem.second));
       // Ensure it fits the range.
       updateMinMax(minElem.first, min, max);
-      // Set the new min.
-      min = minElem.first;
    }
 }
 

@@ -783,6 +783,19 @@ void Test_FindMedian() {
    cout<<FindMedian(data);
    cout << "Done Test_FindMedian()" << endl;
 }
+
+void Test_StackFromQueue() {
+   cout << "Start Test_StackFromQueue()" << endl;
+   StackFromQueue<int> s;
+   s.Push(5);
+   s.Push(4);
+   assert(s.Pop() == 4);
+   assert(s.Pop() == 5);
+   assert(s.Empty() == true);
+   cout << "Done Test_StackFromQueue()" << endl;
+}
+
+
 void Test_Arrays() {
 #ifdef TEST_DONE
    Test_FindMissingNumber();
@@ -849,6 +862,7 @@ void Test_Arrays() {
    Test_CoinDenom();
    Test_MatchCommon();
    Test_FindMedian();
+   Test_StackFromQueue();
 }
 }
 

@@ -125,8 +125,9 @@ bool IsSumOnPath2(Node* node, int parentSum, int goalSum,
       //cout<< "Cache hit for goalSum : "<<goalSum<<"@node"<<node->data<<endl;
       return true;
    }
-   cache[node].insert(node->data + parentSum);
+
    if (node->data + parentSum == goalSum) {
+      cache[node].insert(node->data + parentSum);
       return true;
    }
    bool result = IsSumOnPath2(node->left, node->data + parentSum, goalSum,
